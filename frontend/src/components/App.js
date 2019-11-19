@@ -1,110 +1,50 @@
-/*
- It will be the parent component for the other 3. 
- It will also contain the function that handles the API request 
-  and it will have a function that calls the API during the component’s initial render.
-*/
-import React, { useReducer, useEffect } from "react";
-import "../App.css";
-import Header from "./Header";
-import Movie from "./Movie";
+import React, { useReducer, useEffect, useState } from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+  } from 'react-router-dom';
+
 import Search from "./Search";
+import Routes from './Routes';
+import ProductDetail from '../pages/ProductDetail';
+import {category} from "../../data";
 
+function App() {
 
-const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b";
+    const [state, setState] = useState(category);
+    const { id,title,img } = state;
 
-
-const initialState = {
-  loading: true,
-  movies: [],
-  errorMessage: null
-};
-
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "SEARCH_MOVIES_REQUEST":
-      return {
-        ...state,
-        loading: true,
-        errorMessage: null
-      };
-    case "SEARCH_MOVIES_SUCCESS":
-      return {
-        ...state,
-        loading: false,
-        movies: action.payload
-      };
-    case "SEARCH_MOVIES_FAILURE":
-      return {
-        ...state,
-        loading: false,
-        errorMessage: action.error
-      };
-    default:
-      return state;
-  }
-};
-
-
-
-const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-    useEffect(() => {
-    
-        fetch(MOVIE_API_URL)
-            .then(response => response.json())
-            .then(jsonResponse => {
-        
-            dispatch({
-                type: "SEARCH_MOVIES_SUCCESS",
-                payload: jsonResponse.Search
-        	});
-      	});
-  	}, []);
+    console.log('state:',state);
+    // console.log('title:' , state[0].title);
+    // console.log('img : ' + state[0].img);
 
     const search = searchValue => {
-    	dispatch({
-      	type: "SEARCH_MOVIES_REQUEST"
-    	});
-	
-        fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=4a3b711b`)
-      	.then(response => response.json())
-      	.then(jsonResponse => {
-        	if (jsonResponse.Response === "True") {
-          	dispatch({
-                type: "SEARCH_MOVIES_SUCCESS",
-                payload: jsonResponse.Search
-          	});
-        	} else {
-          	dispatch({
-                type: "SEARCH_MOVIES_FAILURE",
-                error: jsonResponse.Error
-          	});
-          }
-      	});
-	  };
-
-    const { movies, errorMessage, loading } = state;
+        console.log(`${searchValue} searching...`);
+        const el = document.getElementById(`${searchValue}`);
+        if (el) {
+            console.log('있음');
+            setState(el);
+           
+        } else {
+            console.log('없음');
+            return(
+                <p>
+                    해당상품이 없습니다
+                </p>
+            )
+        }
+    }
 
     return (
-    <div className="App">
-      <Header text="HOOKED" />
-      <Search search={search} />
-      <p className="App-intro">Sharing a few of our favourite movies</p>
-      <div className="movies">
-        {loading && !errorMessage ? (
-          <span>loading... </span>
-        ) : errorMessage ? (
-          <div className="errorMessage">{errorMessage}</div>
-        ) : (
-          movies.map((movie, index) => (
-            <Movie key={`${index}-${movie.Title}`} movie={movie} />
-          ))
-        )}
-      </div>
-    </div>
-  );
-};
+        <>
+        <h1>온라인 쇼핑몰</h1>
+        
+        <Search search ={search}/>
+
+        <Routes />
+        </>
+    );
+}
 
 export default App;

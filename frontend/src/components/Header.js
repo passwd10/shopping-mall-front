@@ -1,7 +1,7 @@
 /*A simple component that renders the app header and accepts a title prop */
 
 import React from "react";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => (
   <>
@@ -9,6 +9,12 @@ const Header = () => (
 
       <div>
         <ul>
+          <li>
+            <Link to="/">HOME</Link>
+          </li>
+          <li>
+            <Link to="/product/new">+ 상품추가</Link>
+          </li>
           <li>
             <Link to="/category/group/1" id="견과류">견과류</Link>
           </li>
@@ -20,9 +26,6 @@ const Header = () => (
           </li>
           <li>
             <Link to="/category/group/4" id="화장품">화장품</Link>
-          </li>
-          <li>
-            <Link to="/">숨김</Link>
           </li>
         </ul>
       </div>
