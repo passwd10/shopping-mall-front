@@ -1,0 +1,64 @@
+{
+    "category" : [
+        {
+            "group" : [
+                {
+                    "id": 1,
+                    "title": "견과류"
+                },
+                {
+                    "id": 2,
+                    "title": "음료"
+                },{
+                    "id": 3,
+                    "title": "스포츠"
+                },{
+                    "id": 4,
+                    "title": "화장품"
+                },{
+                    "id": 5,
+                    "title": "컴퓨터"
+                }
+            ]
+        }
+    ],
+
+    "product" : [
+        {   
+            "id": 100,
+            "title": "가온 호두",
+            "img": "/../img/nut.jpg",
+            "price" : "10,000원"
+        },
+        {   
+            "id": 101,
+            "title": "건강담은 고소한 견과",
+            "img": "/../img/nut2.jpg",
+            "price" : "15,000원"
+        },
+        {
+            "id": 200,
+            "title": "차",
+            "img": "/../img/tea.jpg",
+            "price" : "10,000원"
+        },
+        {
+            "id": 300,
+            "title": "킥보드",
+            "img": "/../img/kickboard.jpg",
+            "price" : "100,000원"
+        },
+        {
+            "id": 400,
+            "title": "화장품",
+            "img": "/../img/cosmetic.png",
+            "price" : "50,000원"
+        },
+        {
+            "id": 500,
+            "title": "SSD",
+            "img": "/../img/삼성.jpg",
+            "price" : "40,000원"
+        }
+    ]
+}   
