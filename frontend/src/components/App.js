@@ -1,13 +1,7 @@
-import React, { useReducer, useEffect, useState } from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-  } from 'react-router-dom';
+import React, { useState } from "react";
 
 import Search from "./Search";
 import Routes from './Routes';
-import ProductDetail from '../pages/ProductDetail';
 import {category} from "../../data";
 
 function App() {

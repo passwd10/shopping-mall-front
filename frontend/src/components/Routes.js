@@ -5,15 +5,12 @@ import {
     Switch,
 } from 'react-router-dom';
 
-import Nut from '../Category/Nut';
-import Sports from '../Category/Sports';
-import Drink from '../Category/Drink';
-import Home from '../Category/Home';
-import Cosmetic from '../Category/Cosmetic';
+import Home from '../pages/Home';
 
 import ProductDetail from '../pages/ProductDetail'
 import ProductNew from '../pages/ProductNew';
 import Header from './Header';
+import Category from '../pages/Category';
 
 export default () => (
     <Router>
@@ -25,17 +22,8 @@ export default () => (
             <Route path = "/product/:productId">
                 <ProductDetail />
             </Route>
-            <Route path = "/category/group/1" >
-                <Nut /> 
-            </Route>
-            <Route path = "/category/group/2">
-                <Drink />
-            </Route> 
-            <Route path="/category/group/3">
-                <Sports />
-            </Route>
-            <Route path = "/category/group/4">
-                <Cosmetic />
+            <Route path = "/category/group/:groupId">
+                <Category />
             </Route>
             <Route path = "/">
                 <Home />
