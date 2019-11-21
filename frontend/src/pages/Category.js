@@ -17,15 +17,12 @@ function Category() {
                 {state.map(item => {
                     return (item.category == category.title) ?
                         <div key={item.id}>
-                            <h1>
-                                <b>{item.title}</b>
-                                <p>{item.price} 원 </p>
-                            </h1>
-                    
+
                             <Link to={`/product/${item.id}`} id={`${item.id}`}>
-                                <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" />
+                                <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="30%" />
                             </Link>
-                            <p></p>
+                            <h2> {item.title} </h2>
+                            <h3> {item.price} 원 </h3>
                         </div> : null
                 }
                 )

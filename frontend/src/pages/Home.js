@@ -7,15 +7,9 @@ function Home() {
             <div>
                 <h2>쇼핑몰에 오신걸 환영합니다.</h2>
             </div>
-            <h2>상품 종류</h2>
+            <h2>상품 카테고리</h2>
             <div>
                 <ul>
-                    <li>
-                        <Link to="/">HOME</Link>
-                    </li>
-                    <li>
-                        <Link to="/product/new">+ 상품추가</Link>
-                    </li>
                     <li>
                         <Link to="/category/group/1" id="견과류">견과류</Link>
                     </li>
@@ -27,6 +21,9 @@ function Home() {
                     </li>
                     <li>
                         <Link to="/category/group/4" id="화장품">화장품</Link>
+                    </li>
+                    <li>
+                        <Link to="/product/new">+ 상품추가</Link>
                     </li>
                 </ul>
             </div>

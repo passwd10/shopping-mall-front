@@ -16,7 +16,9 @@ const productStore = {
         {"id": 3, "title": "김동곤 명인 티백", "img": "/../img/tea.jpg", "category" : "음료", "detail" :"종류별로 드실 수 있습니다", "price" : "10,000"},
         {"id": 4, "title": "카카오 킥보드", "img": "/../img/kickboard.jpg", "category" : "스포츠", "detail" :"씽씽~", "price" : "100,000"},
         {"id": 5, "title": "비첩 자생 에센스", "img": "/../img/cosmetic.png", "category" : "화장품", "detail" :"피부가 점점 좋아지고있어요", "price" : "50,000"},
-        {"id": 6, "title": "SSD", "img": "/../img/삼성.jpg", "category" : "컴퓨터", "detail" :"", "price" : "40,000"}
+        {"id": 6, "title": "SSD", "img": "/../img/삼성.jpg", "category" : "컴퓨터", "detail" :"", "price" : "40,000"},
+        {"id": 7, "title": "농구공", "img": "/../img/농구공.png", "category" : "스포츠", "detail" :"프로들이 사용하는 농구공입니다.", "price" : "80,000"},
+        
     ],
 
     get products() {
@@ -25,6 +27,10 @@ const productStore = {
     
     getProduct(id) {
         return this.products.find(product => product.id == id);
+    },
+
+    getProductTitle(title) {
+        return this.products.find(product => product.title == title);
     },
 
     get categories() {
@@ -50,10 +56,7 @@ const productStore = {
                 img : DEFAULT_IMAGE,
                 price,
             }
-        ];  
-
-        console.log("products.length : ", this.products.length);    
-        console.log("현재데이터",this._product);
+        ];  ``
     },
 };
 
