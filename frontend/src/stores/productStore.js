@@ -22,11 +22,7 @@ const productStore = {
     get products() {
         return this._product;
     },
-
-    // set products(product) {
-    //     return this.products = _product;
-    // },
-
+    
     getProduct(id) {
         return this.products.find(product => product.id == id);
     },

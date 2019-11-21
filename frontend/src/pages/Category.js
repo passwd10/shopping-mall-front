@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import productStore from '../stores/productStore'
 
-function category() {
+function Category() {
 
     const { groupId } = useParams();
     const category = productStore.getCategoryTitle(groupId);
@@ -21,7 +21,7 @@ function category() {
                                 <b>{item.title}</b>
                                 <p>{item.price} 원 </p>
                             </h1>
-
+                    
                             <Link to={`/product/${item.id}`} id={`${item.id}`}>
                                 <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" />
                             </Link>
@@ -35,4 +35,4 @@ function category() {
     );
 };
 
-export default category;
+export default Category;

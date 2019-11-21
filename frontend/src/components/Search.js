@@ -1,35 +1,34 @@
-/* Contains a form with the input element and the search button, 
-contains functions that handle the input element and resets the field, 
-and also contains a function that calls the search function which is passed as props to it. */
+// 1. 검색버튼을 눌렀을때 해당 검색어가 넘어오는지 확인하기 (검색어가 콘솔창에 찍힘)
+// 2. 검색어가 포함된 새로운 url을 띄워줌
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Search = (props) => {
-  const [searchValue, setSearchValue] = useState("");
-  
-  const handleSearchInputChanges = (e) => { //이벤트가 발생하면 상태 update
-    setSearchValue(e.target.value);
-  }
+import SearchResult from "./SearchResult";
 
-  const resetInputField = () => {   //검색 후 input창 초기화
-    setSearchValue("")
-  }
+function Search() {
+    const [searchValue, setSearchValue] = useState("");
 
-  const callSearchFunction = (e) => {
-    e.preventDefault(); // 이벤트를 취소할 수 있는 경우, 이벤트의 전파를 막지않고 그 이벤트를 취소합니다.
-    props.search(searchValue); 
-    resetInputField();
-  }
+    const checkSearchvalue = async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
 
-  return (
-        <form className = "search">
-            <input value = {searchValue}
-             onChange = {handleSearchInputChanges} // e.target.value 값을 통하여 이벤트 객체에 담겨있는 현재의 텍스트 값을 읽어올 수 있습니다. 즉 상태 update
-              type = "text" 
-              placeholder = "상품 입력"/>
-            <input onClick = {callSearchFunction} type = "submit" value = "검색" />
-        </form>
+        console.log(searchValue);
+
+    }
+
+    return (
+        <>
+            <form name="searchForm" onSubmit={checkSearchvalue}>
+                <input type="text" id="inputSearchValue" placeholder="상품 입력"
+                    onChange={v => setSearchValue(v.target.value)} value={searchValue} />
+                
+                <Link to = {`/search/${searchValue}`}>
+                    <button type="submit" id="search_btn">검색</button>
+                </Link>
+            </form>
+        </>
     );
 }
 
-export default Search;
+export default Search;  
