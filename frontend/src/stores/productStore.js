@@ -18,6 +18,7 @@ const productStore = {
         {"id": 5, "title": "비첩 자생 에센스", "img": "/../img/cosmetic.png", "category" : "화장품", "detail" :"피부가 점점 좋아지고있어요", "price" : "50,000"},
         {"id": 6, "title": "SSD", "img": "/../img/삼성.jpg", "category" : "컴퓨터", "detail" :"", "price" : "40,000"},
         {"id": 7, "title": "농구공", "img": "/../img/농구공.png", "category" : "스포츠", "detail" :"프로들이 사용하는 농구공입니다.", "price" : "80,000"},
+        {"id": 8, "title": "조던 농구화", "img": "/../img/농구화.jpg", "category" : "스포츠", "detail" :"조던 농구화!!!!", "price" : "180,000"},
         
     ],
 

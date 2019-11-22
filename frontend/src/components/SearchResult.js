@@ -5,29 +5,41 @@ import { useParams, Link } from "react-router-dom";
 
 import productStore from '../stores/productStore';
 
-function CantFind(props) {    
+function CantFind(props) {
     return (
         <>
-            <h1>'{props.title}' 검색결과</h1>
+            <h1>'{props.keyword}' 검색결과</h1>
             <h2>해당 상품을 찾을 수 없습니다.</h2>
         </>
     )
 }
 
 function CanFind(props) {
-    const [state, setState] = useState(productStore.products);
+
+    const foundItems = props.items;
+
+    searchCompleted.items = [];
 
     return (
-        <>
-            <h1>'{props.title}' 검색결과</h1>
+        <>    
+            <h1>'{props.keyword}' 검색결과</h1>
+            {foundItems.map(item => 
+                <div key = {item.id}>
+                    <Link to={`/product/${item.id}`} id={`${item.id}`}>
+                        <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="20%" />
+                    </Link>
+                    <h2> {item.title} </h2>
+                    <h3> {item.price} 원 </h3>
+                </div>
+            )}
 
-            <Link to={`/product/${props.id}`} id={`${props.id}`}>
-                <img src={props.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width = "20%"/>
-            </Link>
-            <h2> {props.title} </h2>
-            <h3> {props.price} 원 </h3>
+            
         </>
     )
+}
+
+const searchCompleted = {
+    items: [],
 }
 
 function SearchResult() {
@@ -36,36 +48,20 @@ function SearchResult() {
 
     let isFind = 0;
 
-    const searchCompletedItem = {
-        id: "",
-        title : "",
-        category : "",
-        detail : "",
-        img : "",
-        price : "",
-    }
-    
     state.map(item => {
-        if(keyword == item.title) {
+        if (item.title.indexOf(keyword) != -1) {
             isFind = 1;
-            searchCompletedItem.id = item.id;
-            searchCompletedItem.title = item.title;
-            searchCompletedItem.category = item.category;
-            searchCompletedItem.detail = item.detail;
-            searchCompletedItem.img = item.img;
-            searchCompletedItem.price = item.price;
+            searchCompleted.items = [
+                ...searchCompleted.items,
+                { id: item.id, title: item.title, category: item.category, detail: item.detail, img: item.img, price: item.price }
+            ]
         }
     })
 
-    if(isFind == 1) {
-        return <CanFind id={searchCompletedItem.id}
-                        title={searchCompletedItem.title} 
-                        category={searchCompletedItem.category}
-                        detail={searchCompletedItem.detail}
-                        img={searchCompletedItem.img}
-                        price={searchCompletedItem.price} />
+    if (isFind == 1) {
+        return <CanFind keyword={keyword} items={searchCompleted.items} />
     } else {
-        return <CantFind title={keyword}/>
+        return <CantFind keyword={keyword} />
     }
 }
 
