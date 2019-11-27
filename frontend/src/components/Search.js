@@ -5,17 +5,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import SearchResult from "./SearchResult";
-
 function Search() {
     const [searchValue, setSearchValue] = useState("");
 
     const checkSearchvalue = async (event) => {
         event.preventDefault();
         event.stopPropagation();
-
-        console.log(searchValue);
-
     }
 
     return (
