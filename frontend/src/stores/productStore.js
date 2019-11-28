@@ -19,7 +19,6 @@ const productStore = {
         { 'id': 6, 'title': 'SSD', 'categoryId': '5', 'img': '/../img/삼성.jpg', 'categoryName': '컴퓨터', 'detail': '가볍고 빨라~', 'price': '40000' },
         { 'id': 7, 'title': '농구공', 'categoryId': '3', 'img': '/../img/농구공.png', 'categoryName': '스포츠', 'detail': '프로들이 사용하는 농구공입니다.', 'price': '80000' },
         { 'id': 8, 'title': '조던 농구화', 'categoryId': '3', 'img': '/../img/농구화.jpg', 'categoryName': '스포츠', 'detail': '조던 농구화!!!!', 'price': '180000' },
-
     ],
 
     get products() {
@@ -46,8 +45,29 @@ const productStore = {
                 img: DEFAULT_IMAGE,
                 price,
             }
-        ]; ``
+        ];
     },
 };
+
+export const cartList = {
+    
+    _cartList : [],
+
+    get cartLists() {
+        return this._cartList;
+    },
+    
+    createCartList(title, categoryId, categoryName) {
+        this._cartList = [
+            ...this._cartList,
+            {
+                id: this._cartList.length + 1,
+                title,
+                categoryId,
+                categoryName,
+            }
+        ];
+    }
+}
 
 export default productStore;
