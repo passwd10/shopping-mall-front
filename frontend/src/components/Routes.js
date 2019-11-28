@@ -12,6 +12,7 @@ import ProductNew from '../pages/ProductNew';
 import ProductList from '../pages/ProductList';
 import SearchResult from './SearchResult';
 import AlwaysTop from '../components/AlwaysTop';
+import PurchaseProduct from '../pages/PurchaseProduct';
 
 export default () => (
     <>
@@ -32,6 +33,9 @@ export default () => (
                 </Route>
                 <Route path="/">
                     <Home />
+                </Route>
+                <Route path="/order/purchaseRequest">
+                    <PurchaseProduct />
                 </Route>
             </Switch>
         </Router>
