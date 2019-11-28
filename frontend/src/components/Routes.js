@@ -9,7 +9,7 @@ import Home from '../pages/Home';
 
 import ProductDetail from '../pages/ProductDetail'
 import ProductNew from '../pages/ProductNew';
-import Category from '../pages/Category';
+import ProductList from '../pages/ProductList';
 import SearchResult from './SearchResult';
 import AlwaysTop from '../components/AlwaysTop';
 
@@ -25,7 +25,7 @@ export default () => (
                     <ProductDetail />
                 </Route>
                 <Route path="/category/group/:groupId">
-                    <Category />
+                    <ProductList />
                 </Route>
                 <Route path="/search/:keyword">
                     <SearchResult />
