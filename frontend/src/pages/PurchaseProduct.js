@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import productStore from "../stores/productStore";
+import productStore, { cartList } from "../stores/productStore";
 
-function PurchaseProduct(props) {
-
+function PurchaseProduct() {
     const { productId } = useParams();
-    const product = productStore.getProduct(productId);
+    let products = [];
 
-    console.log(product);
+    if (productId == 999) {   //장바구니에서 불러오기
+        products = cartList.cartLists.filter(product => product.purchase == true);
+    } else {
+        products = [productStore.getProduct(productId)];
+    }
+
+    let resultPrice = 0;
+    products.map(product => resultPrice += Number(product.price));
+    console.log('결제금액', resultPrice);
 
     return (
         <>
@@ -86,36 +93,38 @@ function PurchaseProduct(props) {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td className="td_info">
+                    {products.map(products => 
+                        <tr key={products.id}>
+                            <td className="td_info">
 
-                            <div className="basic_type">
-                                <span className="thum">
-                                    <img src={product.img} width="70" height="70" alt="이미지를 불러올 수 없습니다" />
-                                </span>
+                                <div className="basic_type">
+                                    <span className="thum">
+                                        <img src={products.img} width="70" height="70" alt="이미지를 불러올 수 없습니다" />
+                                    </span>
 
-                                <div className="prd_info">
-                                    <div className="product_title">{product.title}</div>
-                                    <div className="option_qty">1개</div>
+                                    <div className="prd_info">
+                                        <div className="product_title">{products.title}</div>
+                                        <div className="option_qty">1개</div>
 
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
+                            </td>
 
-                        <td className="td_discount">
-                            <span className="price">{product.price}</span><span className="won">원</span>
-                        </td>
-                        <td>
-                            <span className='delivery_price'>무료</span>
-                        </td>
-                                                        
-                    </tr>
-            
-            </tbody>
+                            <td className="td_discount">
+                                <span className="price">{products.price}</span><span className="won">원</span>
+                            </td>
+                            <td>
+                                <span className='delivery_price'>무료</span>
+                            </td>
 
-            <span>최종 결제 가격 : </span><span>{product.price}원 </span>
-            <button>결제하기</button>
-        </div>
+                        </tr>
+                    )}
+
+                </tbody>
+
+                <span>최종 결제 가격 : </span><span>{resultPrice}원 </span>
+                <button>결제하기</button>
+            </div>
         </>
     )
 }
