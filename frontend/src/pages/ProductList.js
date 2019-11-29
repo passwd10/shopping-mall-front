@@ -30,15 +30,7 @@ function ProductList() {
         }
         return sortItems;
     };
-
-    // useEffect(() => {
-
-    // }, [sort]);
-
-    // useEffect(() => {
-
-    // }, [products]);
-
+    
     return (
         <>
             <button onClick={() => { setSort('oreum') }} onChange={sortProducts(sort)}>낮은가격순</button>
