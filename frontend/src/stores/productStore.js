@@ -56,15 +56,27 @@ export const cartList = {
     get cartLists() {
         return this._cartList;
     },
-    
-    createCartList(title, categoryId, categoryName) {
+
+    setCartLists(cartListArray) { // 전체 장바구니 리스트 반환
+        return this._cartList = cartListArray;
+    },
+
+    setCartListPurchase(id) {   // 구매 할 상품인지
+        return this._cartList[id-1].purchase = !this._cartList[id-1].purchase; 
+    },
+
+    createCartList(productId, title, categoryId, categoryName, img, price) {
         this._cartList = [
             ...this._cartList,
             {
                 id: this._cartList.length + 1,
+                productId,
                 title,
                 categoryId,
                 categoryName,
+                img,
+                price,
+                purchase : true,
             }
         ];
     }
