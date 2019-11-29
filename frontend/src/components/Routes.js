@@ -13,29 +13,37 @@ import ProductList from '../pages/ProductList';
 import SearchResult from './SearchResult';
 import AlwaysTop from '../components/AlwaysTop';
 import PurchaseProduct from '../pages/PurchaseProduct';
+import ProductCartList from '../pages/ProductCartList';
 
 export default () => (
     <>
         <Router>
-            <AlwaysTop />
             <Switch>
+                <Route path="/order/purchaseRequest/:productId">
+                    <PurchaseProduct />
+                </Route>
+                <Route path="/cartList">
+                    <ProductCartList />
+                </Route>
                 <Route path="/product/new">
+                    <AlwaysTop />
                     <ProductNew />
                 </Route>
                 <Route path="/product/:productId">
+                    <AlwaysTop />
                     <ProductDetail />
                 </Route>
                 <Route path="/category/group/:groupId">
+                    <AlwaysTop />
                     <ProductList />
                 </Route>
                 <Route path="/search/:keyword">
+                    <AlwaysTop />
                     <SearchResult />
                 </Route>
                 <Route path="/">
+                    <AlwaysTop />
                     <Home />
-                </Route>
-                <Route path="/order/purchaseRequest">
-                    <PurchaseProduct />
                 </Route>
             </Switch>
         </Router>
