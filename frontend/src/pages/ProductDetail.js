@@ -8,7 +8,7 @@ function ProductDetail() {
     const { title, price, categoryId, categoryName, img, detail } = productStore.getProduct(productId);
 
     const addCartList = () => {
-        cartList.createCartList(title, categoryId, categoryName);
+        cartList.createCartList(productId, title, categoryId, categoryName, img, price);
     }
 
     return (
@@ -31,7 +31,7 @@ function ProductDetail() {
             <Link to={`/order/purchaseRequest/${productId}`}>
                 <button>구매하기</button>
             </Link>
-            <button onClick={addCartList}>장바구니</button>
+            <button onClick={addCartList}>장바구니 담기</button>
         </>
     );
 }
