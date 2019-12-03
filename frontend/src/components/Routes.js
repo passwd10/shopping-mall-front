@@ -14,6 +14,7 @@ import SearchResult from './SearchResult';
 import AlwaysTop from '../components/AlwaysTop';
 import PurchaseProduct from '../pages/PurchaseProduct';
 import ProductCartList from '../pages/ProductCartList';
+import Login from '../pages/Login';
 
 export default () => (
     <>
@@ -40,6 +41,10 @@ export default () => (
                 <Route path="/search/:keyword">
                     <AlwaysTop />
                     <SearchResult />
+                </Route>
+                <Route path='/user/login'>
+                    <AlwaysTop />
+                    <Login />
                 </Route>
                 <Route path="/">
                     <AlwaysTop />
