@@ -32,7 +32,6 @@ function UserInfo() {
                     </tr>
                 </tbody>
             </table>
-            <button>수정</button>
             
         </>
     )

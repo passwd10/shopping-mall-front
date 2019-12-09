@@ -15,18 +15,18 @@ function Login() {
 
         userList.userLists.map(user => {
             if (id == user.userId && password == user.password) {
-                localStorage.setItem(
-                    'userInfo',
-                    JSON.stringify({
-                        id: user.userId,
-                        userName: user.name,
-                    })
-                )
+                localStorage.setItem('name', user.name);
+                localStorage.setItem('userId', user.userId);
+                localStorage.setItem('password', user.password);
+                localStorage.setItem('phoneNum', user.phoneNum);
+                localStorage.setItem('birth', user.birth);
                 setLoginAvailable(true);
             } else {
                 setWarningState('아이디 비밀번호가 일치하지 않습니다.');
             }
         })
+
+        console.log('사용자정보', localStorage);
     };
 
     return (

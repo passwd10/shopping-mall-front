@@ -12,6 +12,7 @@ function ModifyName() {
 
     const changeName = () => {
         localStorage['name'] = name;
+        onHandleModify();
     }
 
     const showModify = (
@@ -25,7 +26,7 @@ function ModifyName() {
         <>
             <tr>
                 <td>이름</td>
-                <td>{name}</td>
+                <td>{localStorage['name']}</td>
                 <td><button onClick={onHandleModify}>{button}</button></td>
             </tr>
             {visible == true ? showModify : null}

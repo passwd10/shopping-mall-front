@@ -18,6 +18,7 @@ import Login from '../pages/Login';
 import MyPage from '../pages/MyPage';
 import SignUp from '../pages/SignUp';
 import UserInfo from '../pages/UserInfo';
+import ServiceCenter from '../pages/ServiceCenter';
 
 function Routes() {
 
@@ -61,6 +62,10 @@ function Routes() {
                     <Route path='/mypage/buylist'>
                         <AlwaysTop />
                         <MyPage />
+                    </Route>
+                    <Route path='/mypage/qna'>
+                        <AlwaysTop />
+                        <ServiceCenter />
                     </Route>
                     <Route path="/">
                         <AlwaysTop />
