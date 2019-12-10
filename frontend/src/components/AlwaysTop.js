@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Search from './Search';
+import Menu from '../components/Menu';
 
 const Button = styled.li`
     display: inline-block;
@@ -10,6 +11,7 @@ const Button = styled.li`
     padding: 5px;
     min-width: 70px;
     text-align: center;
+    color: black;
     /* width: 5%; */
     height: auto;
     font-weight: 600;
@@ -41,6 +43,13 @@ const Title = styled.h1`
     /* position: fixed; */
 `
 
+const Img = styled.img`
+    width: auto;
+    height: auto;
+    max-width: 200px;
+     max-height: 150px;
+`
+
 const TopBar = styled.div`
     width: 1120px;
     max-width: none !important;
@@ -49,7 +58,6 @@ const TopBar = styled.div`
     /* top: 0; left: 0; right: 0px; */
     margin: 0 auto;
  
-    border: 1px solid #3d3d;
 `;
 
 
@@ -94,11 +102,10 @@ function AlwaysTop() {
                     </Link>
                 </AllBtn>
 
-                <Title>온라인 쇼핑몰</Title>
+                <Title><Img src='/../img/logo.jpg'/></Title>
                 <Search />
             </TopBar>
-
-
+            <Menu />
         </>
     );
 }

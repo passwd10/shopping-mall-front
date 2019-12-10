@@ -2,13 +2,26 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 
 import productStore, { cartList } from "../stores/productStore";
+import { element } from "prop-types";
 
 function ProductDetail() {
     const { productId } = useParams();
     const { title, price, categoryId, categoryName, img, detail } = productStore.getProduct(productId);
 
     const addCartList = () => {
-        cartList.createCartList(productId, title, categoryId, categoryName, img, price);
+        
+        let isFind = false;
+
+        cartList.cartLists.map(element => {
+            if (element.productId == productId) {
+                isFind = true;
+            }
+        })
+
+        if (isFind == false) {
+            cartList.createCartList(productId, title, categoryId, categoryName, img, price);
+        }
+
     }
 
     return (

@@ -31,6 +31,8 @@ function ProductCartList() {
         calculatePrice();
     },[]);
 
+    console.log('장바구니', cList);
+
     return (
         <>
             <h1>장바구니</h1>

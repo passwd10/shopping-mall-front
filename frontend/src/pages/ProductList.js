@@ -4,16 +4,38 @@ import { Link, useParams } from "react-router-dom";
 import productStore, { productsCategory } from '../stores/productStore';
 import sortProducts from '../service/sortProducts';
 
+import styled from 'styled-components';
+
+const Table = styled.table`
+    width: 1000px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+`;
+
+const Button = styled.button`
+    color: black;
+    background-color: pink;
+`;
+
 const store = {
     items: [],
 };
+
+let newGroupId = 0;
 
 function ProductList() {
     const { groupId } = useParams();
     const categoryName = productsCategory[groupId];
     const [sort, setSort] = useState('');
-    const [products, setProducts] = useState(productStore.products.filter(product =>
-        product.categoryName == categoryName));
+    const [products, setProducts] = useState([]);
+
+
+    if (groupId != newGroupId) {
+        newGroupId = groupId;
+        setProducts(productStore.products.filter(product =>
+            product.categoryName == categoryName));
+    }
 
     const sortProducts = v => {
 
@@ -30,28 +52,40 @@ function ProductList() {
         }
         return sortItems;
     };
-    
+
     return (
         <>
-            <button onClick={() => { setSort('oreum') }} onChange={sortProducts(sort)}>낮은가격순</button>
-            <button onClick={() => { setSort('naerim') }} onChange={sortProducts(sort)}>높은가격순</button>
+            <div style={{width: '60%', marginRight: 'auto', marginLeft: 'auto'}}>
+                
+                <div style={{ textAlign: 'right' }}>
+                    <Button  onClick={() => { setSort('oreum') }} onChange={sortProducts(sort)}>낮은가격순</Button>
+                    <Button onClick={() => { setSort('naerim') }} onChange={sortProducts(sort)}>높은가격순</Button>
+                </div>
+                <span style={{ textAlign: 'left' }}><h3>전체 상품</h3></span>
 
-            <h3>상세페이지를 보려면 이미지를 클릭 해주세요</h3>
+                <div style={{ width: '500', textAlign: "center" }}>
+                    <Table border="1">
+                        <tbody>
+                            <tr align="center">
+                                {products.map(item =>
+                                    <td key={item.id}>
+                                        <Link to={`/product/${item.id}`} id={`${item.id}`}>
+                                            <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="30%" />
+                                        </Link>
+                                        <h2> {item.title} </h2>
+                                        <h3> {item.price} 원 </h3>
+                                    </td>
+                                )
+                                }
+                            </tr>
 
-            <div>
-                {products.map(item =>
-                    <div key={item.id}>
-                        <Link to={`/product/${item.id}`} id={`${item.id}`}>
-                            <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="30%" />
-                        </Link>
-                        <h2> {item.title} </h2>
-                        <h3> {item.price} 원 </h3>
-                    </div>
-                )
-                }
+                        </tbody>
+
+                    </Table>
+                </div>
+
+                {store.items = []}
             </div>
-
-            {store.items = []}
         </>
     );
 };
