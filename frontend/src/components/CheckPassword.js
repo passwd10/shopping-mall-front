@@ -60,16 +60,16 @@ function CheckPassword({ onHandleChange, allState, onHandleValid }) {
 
     return (
         <>
-            <tr>
-                <td>비밀번호</td>
-                <td><input type="password" name="user_pw" placeholder="영문/숫자/특수문자 조합 6~15자" size="30"
-                    value={allState.password} onChange={handleChangeEvent} />{pwdNotice}</td>
-            </tr>
-            <tr>
-                <td>비밀번호 확인</td>
-                <td><input type="password" name="user_pw2" size="30" placeholder="비밀번호를 한번 더 입력해주세요"
-                    value={inspectPasswd} onChange={v => setInspectPasswd(v.target.value)} />{inspNotice}</td>
-            </tr>
+            <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
+                <div>비밀번호</div>
+                <div><input type="password" name="user_pw" placeholder="영문/숫자/특수문자 조합 6~15자" size="30"
+                    value={allState.password} style={{width: '100%'}} onChange={handleChangeEvent} />{pwdNotice}</div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ',paddingTop: '5px' }}>
+                <div>비밀번호 확인</div>
+                <div><input type="password" name="user_pw2" size="30" placeholder="비밀번호를 한번 더 입력해주세요"
+                    value={inspectPasswd} style={{width: '100%'}} onChange={v => setInspectPasswd(v.target.value)} />{inspNotice}</div>
+            </div>
         </>
     )
 }

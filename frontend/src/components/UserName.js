@@ -27,10 +27,10 @@ function UserName({ onHandleChange, allState, onHandleValid }) {
 
     return (
         <>
-            <tr>
-                <td>이름</td>
-                <td><input type="text" name="user_name" size="30" value={allState.name} onChange={handleChangeEvent} />{notice}</td>
-            </tr>
+            <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
+                <div>이름</div>
+                <div><input type="text" name="user_name" style={{width: '100%'}} value={allState.name} onChange={handleChangeEvent} />{notice}</div>
+            </div>
         </>
     );
 }

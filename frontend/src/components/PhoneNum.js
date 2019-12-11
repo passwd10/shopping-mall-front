@@ -25,11 +25,11 @@ function PhoneNum({ onHandleChange, allState, onHandleValid }) {
     }
 
     return (
-        <tr>
-            <td>휴대폰번호</td>
-            <td><input type="number" name="user_phone_num" size="30" placeholder="-없이 입력" value={allState.phoneNum}
-                onChange={handleChangeEvent}/>{notice}</td>
-        </tr>
+        <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
+            <div>휴대폰번호</div>
+            <div><input type="number" name="user_phone_num" style={{width: '100%'}} placeholder="-없이 입력" value={allState.phoneNum}
+                onChange={handleChangeEvent}/>{notice}</div>
+        </div>
     );
 }
 

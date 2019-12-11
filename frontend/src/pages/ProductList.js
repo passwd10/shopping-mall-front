@@ -15,7 +15,12 @@ const Table = styled.table`
 
 const Button = styled.button`
     color: black;
-    background-color: pink;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid gray;
+    font-size: 15px;
+    padding: 5px;
+    margin: 5px;
 `;
 
 const store = {
@@ -35,7 +40,10 @@ function ProductList() {
         newGroupId = groupId;
         setProducts(productStore.products.filter(product =>
             product.categoryName == categoryName));
-    }
+    } 
+
+    console.log('newGroupId', newGroupId);
+    console.log('현재상품',products);
 
     const sortProducts = v => {
 
@@ -69,11 +77,12 @@ function ProductList() {
                             <tr align="center">
                                 {products.map(item =>
                                     <td key={item.id}>
-                                        <Link to={`/product/${item.id}`} id={`${item.id}`}>
+                                        <Link to={`/product/${item.id}`} id={`${item.id}`}  style={{color: '#333', textDecoration: 'none'}}>
                                             <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="30%" />
+                                            <h2> {item.title} </h2>
+                                            <h3> {item.price} 원 </h3>
+                                            {newGroupId = 0}
                                         </Link>
-                                        <h2> {item.title} </h2>
-                                        <h3> {item.price} 원 </h3>
                                     </td>
                                 )
                                 }

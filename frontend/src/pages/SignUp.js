@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import styled from 'styled-components';
 
 import DuplicateInspect from '../components/DuplicateInspect';
 import CheckPassword from '../components/CheckPassword';
@@ -8,6 +8,40 @@ import PhoneNum from '../components/PhoneNum';
 import Birth from '../components/Birth';
 import UserName from '../components/UserName';
 import userStore from '../stores/userStore';
+
+const SignUpHeader = styled.span`
+    display: block;
+    /* background-color: #F9F9F9; */
+    color: #333;
+    font-size: 40px;
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+`;
+
+const SignUpForm = styled.form`
+    width: 600px;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 50px;
+    background-color: white;
+`;
+
+const SignUpBtn = styled.input`
+    color: white;
+    margin-top: 30px;
+    border-radius: 5px;
+    background-color: #EE5555;
+    border: 1px solid #EE5555;
+    font-size: 20px;
+    padding: 10px;
+    padding-left: 140px;
+    padding-right: 140px;
+`;
 
 function SignUp() {
 
@@ -87,19 +121,19 @@ function SignUp() {
     useEffect(() => {
         let cntTrue = 0;
 
-        for( let [key, value] of Object.entries(allValid)) {
-            if( value == true) {
-                cntTrue ++;
-            } 
+        for (let [key, value] of Object.entries(allValid)) {
+            if (value == true) {
+                cntTrue++;
+            }
         }
 
         console.log('cntTrue', cntTrue);
 
-        if( cntTrue == 5) {
+        if (cntTrue == 5) {
             setActiveButton(false);
         }
 
-        if ( cntTrue != 5) {
+        if (cntTrue != 5) {
             setActiveButton(true);
         }
 
@@ -107,25 +141,24 @@ function SignUp() {
 
     return (
         <>
-            <div>
-                <h4>회원가입</h4>
-                <form name="sign_up_form">
-                    <table>
-                        <tbody>
-                            <DuplicateInspect onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                            <CheckPassword onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                            <UserName onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                            <PhoneNum onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                            <Birth onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                            <tr>
-                                <td></td>
-                                <td><input type="submit" name="submit" value="회원가입 완료" onClick={saveUserInfo} disabled={activeButton} /></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
+            <div style={{display: 'flex', flexDirection: 'column', height: '100%',  backgroundColor: '#F9F9F9'}}>
+                <div style={{ flex: '1', overflow: 'auto', paddingBottom: '100px' }}>
+                    <SignUpHeader>회원가입</SignUpHeader>
+                    <SignUpForm name="sign_up_form">
+                            <div>
+                                <DuplicateInspect onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
+                                <CheckPassword onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
+                                <UserName onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
+                                <PhoneNum onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
+                                <Birth onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
+                                <div>
+                                    <div></div>
+                                    <div><SignUpBtn type="submit" name="submit" value="회원가입 완료" onClick={saveUserInfo} disabled={activeButton} /></div>
+                                </div>
+                            </div>
+                    </SignUpForm>
+                </div>
             </div>
-
         </>
     )
 }

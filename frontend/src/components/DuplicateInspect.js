@@ -32,14 +32,13 @@ function DuplicateInspect({ onHandleChange, allState, onHandleValid }) { //아�
 
     return (
         <>
-            <tr>
-                <td>아이디</td>
-                <td>
-                    <input type="text" name="user_id" size="19" value={allState.userId} onChange={handleChangeEvent} />
-                    <button onClick={isDuplicate}>중복검사</button>
-                    <span>{writeDoc}</span>
-                </td>
-            </tr>
+            <div style={{ display: 'grid', gridTemplateColumns: '150px 160px 100px' }}>
+                <div>아이디</div>
+                <div><input type="text" value={allState.userId} style={{width: '100%'}} onChange={handleChangeEvent} /></div>
+                <div><button onClick={isDuplicate}>중복검사</button></div>
+            </div>
+            <div>{writeDoc}</div>
+
         </>
     )
 }

@@ -10,6 +10,7 @@ const ListDiv = styled.div`
     max-width: none !important;
     height: 50px;
     margin: 0 auto;
+    text-align: center;
 `;
 
 const Span = styled.span`
@@ -18,19 +19,15 @@ const Span = styled.span`
 `;
 
 const Ul = styled.ul`
-    /* display: block; */
-    /* float: left; */
-    /* top: 0; left: 0; */
+    display: grid;
+    grid-template-columns: 150px 100px 100px 100px 100px 100px;
     width: 100%;
-    /* height: auto; */
-    margin-left: 110px;
-    /* margin-right: auto; */
-    /* margin: 0 auto; */
-    /* border: 1px solid #9acb; */
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 `;
 
-const Li = styled.li`
+const Li = styled.div`
      width: 10%;
     height: auto;
     list-style-type: none;

@@ -26,11 +26,11 @@ function Birth({ onHandleChange, allState, onHandleValid }) {
     }
 
     return (
-        <tr>
-            <td>생년월일</td>
-            <td><input type="number" name="user_birth" placeholder="8자리 숫자로 입력 (ex. 19901201)" size="30" value={allState.birth}
-                onChange={handleChangeEvent} />{notice}</td>
-        </tr>
+        <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
+            <div>생년월일</div>
+            <div><input type="number" name="user_birth" placeholder="8자리 숫자로 입력 (ex. 19901201)" style={{width: '100%'}} value={allState.birth}
+                onChange={handleChangeEvent} />{notice}</div>
+        </div>
     );
 }
 
