@@ -102,7 +102,7 @@ function AlwaysTop() {
                     </Link>
                 </AllBtn>
 
-                <Title><Img src='/../img/logo.jpg'/></Title>
+                <Link to='/'><Title><Img src='/../img/logo.jpg'/></Title></Link>
                 <Search />
             </TopBar>
             <Menu />

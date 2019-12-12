@@ -81,7 +81,7 @@ function ProductList() {
                                             <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="30%" />
                                             <h2> {item.title} </h2>
                                             <h3> {item.price} 원 </h3>
-                                            {newGroupId = 0}
+                                            
                                         </Link>
                                     </td>
                                 )

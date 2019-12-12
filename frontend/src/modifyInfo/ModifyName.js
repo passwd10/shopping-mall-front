@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import ModifyDivGrid, {ModifyCategory, ModifyInfo} from '../lib/Div';
+import ModifyBtn from '../lib/Button';
 
 function ModifyName() {
     const [name, setName] = useState(localStorage.getItem('name'));
@@ -16,21 +19,23 @@ function ModifyName() {
     }
 
     const showModify = (
-        <tr>
-            <td></td>
-            <td><input type='text' onChange={v => setName(v.target.value)} /></td>
-            <td><button type='submit' onClick={changeName}>변경하기</button></td>
-        </tr>);
+        <ModifyInfo>
+            <div></div>
+            <div><input type='text' onChange={v => setName(v.target.value)} /></div>
+            <div><ModifyBtn type='submit' onClick={changeName}>변경하기</ModifyBtn></div>
+        </ModifyInfo>);
 
     return (
-        <>
-            <tr>
-                <td>이름</td>
-                <td>{localStorage['name']}</td>
-                <td><button onClick={onHandleModify}>{button}</button></td>
-            </tr>
-            {visible == true ? showModify : null}
-        </>
+        <div>
+            <ModifyDivGrid>
+                <ModifyCategory>이름</ModifyCategory>
+                <ModifyInfo>
+                    <span style={{paddingRight: '20px'}}>{localStorage['name']}</span>
+                    <span><ModifyBtn onClick={onHandleModify}>{button}</ModifyBtn></span>
+                    {visible == true ? showModify : null}
+                </ModifyInfo>
+            </ModifyDivGrid>
+        </div>
     );
 }
 

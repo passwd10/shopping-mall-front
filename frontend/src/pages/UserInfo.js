@@ -6,6 +6,9 @@ import ModifyName from '../modifyInfo/ModifyName';
 import ModifyPhoneNum from '../modifyInfo/ModifyPhoneNum';
 import ModifyUserId from '../modifyInfo/ModifyUserId';
 
+import ModifyDivGrid, {ModifyCategory, ModifyInfo, BasicForm} from '../lib/Div';
+import ModifyBtn from '../lib/Button';
+
 function UserInfo() {
    
     // const [userId, setUserId] = useState(localStorage.getItem('userId'));
@@ -17,23 +20,19 @@ function UserInfo() {
     console.log(localStorage.getItem('userId'));
     
     return (
-        <>
-            <h4>회원정보 수정</h4>
+        <BasicForm>
+            <h2 style={{fontWeight: "bold"}}>회원정보 수정</h2>
             <h5>기본 정보</h5>
-            
-            <table>
-                <tbody>
+            <div>    
                     <ModifyName />
                     <ModifyUserId />
                     <ModifyPhoneNum />
-                    <tr>
-                        <td>생년월일</td>
-                        <td>{birth}</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-        </>
+                    <ModifyDivGrid>
+                        <ModifyCategory>생년월일</ModifyCategory>
+                        <ModifyInfo>{birth}</ModifyInfo>
+                    </ModifyDivGrid>
+            </div>           
+        </BasicForm>
     )
 }
 

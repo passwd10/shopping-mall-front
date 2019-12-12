@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import ModifyDivGrid, {ModifyCategory, ModifyInfo} from '../lib/Div';
+import ModifyBtn from '../lib/Button';
 
 function ModifyUserId() {
     const [userId, setUserId] = useState(localStorage.getItem('userId'));
@@ -16,20 +19,23 @@ function ModifyUserId() {
     }
 
     const showModify = (
-    <tr>
-        <td></td>
-        <td><input type='text' onChange={v => setUserId(v.target.value)} /></td>
-        <td><button type='submit' onClick={changeId}>변경하기</button></td>
-    </tr>);
+    <ModifyInfo>
+        <div></div>
+        <div><input type='text' onChange={v => setUserId(v.target.value)} /></div>
+        <div><ModifyBtn type='submit' onClick={changeId}>변경하기</ModifyBtn></div>
+    </ModifyInfo>);
 
     return (
         <>
-            <tr>
-                <td>아이디</td>
-                <td>{localStorage['userId']}</td>
-                <td><button onClick={onHandleModify}>{button}</button></td>
-            </tr>
-            {visible == true ? showModify : null}
+            <ModifyDivGrid>
+                <ModifyCategory >아이디</ModifyCategory>
+                <ModifyInfo>
+                    <span style={{paddingRight: '20px'}}>{localStorage['userId']}</span>
+                    <span><ModifyBtn onClick={onHandleModify}>{button}</ModifyBtn></span>
+                    {visible == true ? showModify : null}
+                </ModifyInfo>
+            </ModifyDivGrid>
+        
         </>
     );
 }
