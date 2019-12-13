@@ -3,14 +3,25 @@ import { Link, useParams } from "react-router-dom";
 
 import productStore, { productsCategory } from '../stores/productStore';
 import sortProducts from '../service/sortProducts';
+import ProductItem from '../components/ProductItem';
 
 import styled from 'styled-components';
 
-const Table = styled.table`
+const DivGrid = styled.div`
+    display: grid;
+    grid-template-columns: 330px 330px 330px;
+    grid-template-rows: 400px;
     width: 1000px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+`;
+
+const DivItem = styled.div`
+    display: grid;
+    grid-template-rows: '330px 100px 100px';
+    align-items: center;
+    justify-content: center;
 `;
 
 const Button = styled.button`
@@ -35,15 +46,11 @@ function ProductList() {
     const [sort, setSort] = useState('');
     const [products, setProducts] = useState([]);
 
-
     if (groupId != newGroupId) {
         newGroupId = groupId;
-        setProducts(productStore.products.filter(product =>
-            product.categoryName == categoryName));
-    } 
-
-    console.log('newGroupId', newGroupId);
-    console.log('현재상품',products);
+        console.log('바뀐 후 newGroupId', newGroupId);
+        setProducts(productStore.products.filter(product => product.categoryName === categoryName));
+    }
 
     const sortProducts = v => {
 
@@ -61,36 +68,30 @@ function ProductList() {
         return sortItems;
     };
 
+    useEffect(() => {
+        setProducts(productStore.products.filter(product => product.categoryName === categoryName));
+    }, [setProducts]);
+
     return (
         <>
-            <div style={{width: '60%', marginRight: 'auto', marginLeft: 'auto'}}>
-                
+            <div style={{ width: '60%', marginRight: 'auto', marginLeft: 'auto' }}>
                 <div style={{ textAlign: 'right' }}>
-                    <Button  onClick={() => { setSort('oreum') }} onChange={sortProducts(sort)}>낮은가격순</Button>
+                    <Button onClick={() => { setSort('oreum') }} onChange={sortProducts(sort)}>낮은가격순</Button>
                     <Button onClick={() => { setSort('naerim') }} onChange={sortProducts(sort)}>높은가격순</Button>
                 </div>
                 <span style={{ textAlign: 'left' }}><h3>전체 상품</h3></span>
 
                 <div style={{ width: '500', textAlign: "center" }}>
-                    <Table border="1">
-                        <tbody>
-                            <tr align="center">
+                    <DivGrid>
                                 {products.map(item =>
-                                    <td key={item.id}>
-                                        <Link to={`/product/${item.id}`} id={`${item.id}`}  style={{color: '#333', textDecoration: 'none'}}>
-                                            <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="30%" />
-                                            <h2> {item.title} </h2>
-                                            <h3> {item.price} 원 </h3>
-                                            
+                                    <DivItem key={item.id}>
+                                        <Link to={`/product/${item.id}`} id={`${item.id}`} style={{ color: '#333', textDecoration: 'none' }}>
+                                            <ProductItem item={item} />
                                         </Link>
-                                    </td>
+                                    </DivItem>
                                 )
                                 }
-                            </tr>
-
-                        </tbody>
-
-                    </Table>
+                    </DivGrid>
                 </div>
 
                 {store.items = []}

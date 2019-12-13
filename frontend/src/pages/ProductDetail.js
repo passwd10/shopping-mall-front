@@ -33,7 +33,6 @@ function ProductDetail() {
         if (isFind == false) {
             cartList.createCartList(productId, title, categoryId, categoryName, img, price);
         }
-
     }
 
     return (

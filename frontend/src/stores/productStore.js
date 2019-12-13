@@ -52,7 +52,7 @@ const productStore = {
 export const cartList = {
     
     _cartList : [],
-
+    
     get cartLists() {
         return this._cartList;
     },

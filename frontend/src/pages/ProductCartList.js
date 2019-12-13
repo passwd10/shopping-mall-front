@@ -112,11 +112,8 @@ function ProductCartList() {
     }
 
     useEffect(() => {
-        console.log(myCartList);
         calculatePrice();
-    }, []);
-
-    console.log('장바구니', cList);
+    }, [cList]);
 
     return (
             <div style={{ width: '700px', margin: 'auto' }}>

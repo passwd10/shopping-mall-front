@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
+import { productsCategory } from '../stores/productStore';
+import MenuCategory from '../components/MenuCategory';
 
 const ListDiv = styled.div`
     
@@ -11,11 +13,6 @@ const ListDiv = styled.div`
     height: 50px;
     margin: 0 auto;
     text-align: center;
-`;
-
-const Span = styled.span`
-    color: black;
-    font-size: 15px;
 `;
 
 const Ul = styled.ul`
@@ -54,6 +51,10 @@ const Li = styled.div`
 
 function Menu() {
 
+    const productsCategoryArr = Object.entries(productsCategory);
+
+    console.log('productCategory', productsCategory);
+    console.log('productCategoryArr', productsCategoryArr);
 
     return (
 
@@ -62,22 +63,12 @@ function Menu() {
                 <Li>
                     상품 카테고리
                 </Li>
-                <Li>
-                    <Link to="/category/group/1" id="견과류"><Span>견과류</Span></Link>
-                </Li>
-                <Li>
-                    <Link to="/category/group/2" id="음료"><Span>음료</Span></Link>
-                </Li>
-                <Li>
-                    <Link to="/category/group/3" id="스포츠"><Span>스포츠</Span></Link>
-                </Li>
-                <Li>
-                    <Link to="/category/group/4" id="화장품"><Span>화장품</Span></Link>
-                </Li>
-                <Li>
-                    <Link to="/product/new"><Span>+ 상품추가</Span> </Link>
-                </Li>
-            </Ul>
+                {productsCategoryArr.map((category, index) =>
+                    <Li key={index}>
+                        <MenuCategory categoryName={category[1]} categortId={category[0]} />
+                    </Li>
+                )}
+          </Ul>
         </ListDiv>
     )
 }
