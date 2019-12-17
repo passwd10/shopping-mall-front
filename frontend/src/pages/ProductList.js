@@ -2,8 +2,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import productStore, { productsCategory } from '../stores/productStore';
-import sortProducts from '../service/sortProducts';
 import ProductItem from '../components/ProductItem';
+import { getProducts } from '../service/taskService';
 
 import styled from 'styled-components';
 
@@ -34,10 +34,6 @@ const Button = styled.button`
     margin: 5px;
 `;
 
-const store = {
-    items: [],
-};
-
 let newGroupId = 0;
 
 function ProductList() {
@@ -45,13 +41,25 @@ function ProductList() {
     const categoryName = productsCategory[groupId];
     const [sort, setSort] = useState('');
     const [products, setProducts] = useState([]);
+    
+    let allProducts = getProducts().then(() => {});
 
-    if (groupId != newGroupId) {
+    console.log(allProducts);
+    // (async() => {
+    //     try {
+    //         allProducts = await getProducts();
+    //         // console.log('allProducts', allProducts);
+    //     } catch (e) {
+    //         console.error(e)
+    //     }
+    // })();
+
+    if (groupId != newGroupId) { 
         newGroupId = groupId;
-        console.log('바뀐 후 newGroupId', newGroupId);
-        setProducts(productStore.products.filter(product => product.categoryName === categoryName));
+        setProducts(products.filter(product => product.categoryName === categoryName));
     }
 
+    // console.log('현재카테고리아이템', allProducts);
     const sortProducts = v => {
 
         let sortItems;
@@ -69,7 +77,8 @@ function ProductList() {
     };
 
     useEffect(() => {
-        setProducts(productStore.products.filter(product => product.categoryName === categoryName));
+        // setProducts(productStore.products.filter(product => product.categoryName === categoryName));
+        setProducts(products.filter(product => product.categoryName === categoryName));
     }, [setProducts]);
 
     return (
@@ -83,18 +92,15 @@ function ProductList() {
 
                 <div style={{ width: '500', textAlign: "center" }}>
                     <DivGrid>
-                                {products.map(item =>
-                                    <DivItem key={item.id}>
-                                        <Link to={`/product/${item.id}`} id={`${item.id}`} style={{ color: '#333', textDecoration: 'none' }}>
-                                            <ProductItem item={item} />
-                                        </Link>
-                                    </DivItem>
-                                )
-                                }
+                        {products.map(item =>
+                            <DivItem key={item.id}>
+                                <Link to={`/product/${item.id}`} id={`${item.id}`} style={{ color: '#333', textDecoration: 'none' }}>
+                                    <ProductItem item={item} />
+                                </Link>
+                            </DivItem>
+                        )}
                     </DivGrid>
                 </div>
-
-                {store.items = []}
             </div>
         </>
     );

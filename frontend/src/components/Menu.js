@@ -53,9 +53,6 @@ function Menu() {
 
     const productsCategoryArr = Object.entries(productsCategory);
 
-    console.log('productCategory', productsCategory);
-    console.log('productCategoryArr', productsCategoryArr);
-
     return (
 
         <ListDiv>
