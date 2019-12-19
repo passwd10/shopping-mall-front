@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import productStore, { productsCategory } from '../stores/productStore';
 import ProductItem from '../components/ProductItem';
-import { getProducts } from '../service/taskService';
+import { getProducts, getCategory } from '../service/taskService';
 
 import styled from 'styled-components';
 
@@ -38,37 +37,27 @@ let newGroupId = 0;
 
 function ProductList() {
     const { groupId } = useParams();
-    const categoryName = productsCategory[groupId];
+    let categoryName;
     const [sort, setSort] = useState('');
     const [products, setProducts] = useState([]);
-    
-    let allProducts = getProducts().then(() => {});
 
-    console.log(allProducts);
-    // (async() => {
-    //     try {
-    //         allProducts = await getProducts();
-    //         // console.log('allProducts', allProducts);
-    //     } catch (e) {
-    //         console.error(e)
-    //     }
-    // })();
+    getCategory().then(category => categoryName = category[groupId]);
 
-    if (groupId != newGroupId) { 
-        newGroupId = groupId;
-        setProducts(products.filter(product => product.categoryName === categoryName));
-    }
+    getProducts().then(value => {
+        if (groupId !== newGroupId) {
+            newGroupId = groupId;
+            setProducts(value.filter(product => product.categoryName === categoryName));
+        }
+    });
 
-    // console.log('현재카테고리아이템', allProducts);
     const sortProducts = v => {
-
         let sortItems;
-        if (v == 'oreum') {
-            products.sort((a, b) => {
+        if (v ==='oreum') {
+            sortItems = products.sort((a, b) => {
                 return a.price - b.price;
             });
         }
-        if (v == 'naerim') {
+        if (v === 'naerim') {
             sortItems = products.sort((a, b) => {
                 return b.price - a.price;
             });
@@ -77,8 +66,9 @@ function ProductList() {
     };
 
     useEffect(() => {
-        // setProducts(productStore.products.filter(product => product.categoryName === categoryName));
-        setProducts(products.filter(product => product.categoryName === categoryName));
+        getProducts().then(value => {
+            setProducts(value.filter(product => product.categoryName === categoryName));
+        });
     }, [setProducts]);
 
     return (

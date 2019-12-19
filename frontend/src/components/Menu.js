@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-import { productsCategory } from '../stores/productStore';
 import MenuCategory from '../components/MenuCategory';
+import { getCategory } from '../apis/task';
+
 
 const ListDiv = styled.div`
     
@@ -50,11 +50,13 @@ const Li = styled.div`
 
 
 function Menu() {
+    const [productsCategoryArr, setProductsCategoryArr] = useState([]);
 
-    const productsCategoryArr = Object.entries(productsCategory);
+    getCategory().then(value => {
+        setProductsCategoryArr(Object.entries(value));
+    });
 
     return (
-
         <ListDiv>
             <Ul>
                 <Li>
@@ -65,7 +67,7 @@ function Menu() {
                         <MenuCategory categoryName={category[1]} categortId={category[0]} />
                     </Li>
                 )}
-          </Ul>
+            </Ul>
         </ListDiv>
     )
 }

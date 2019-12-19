@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const PRODUCT_STORE = 'http://localhost:3000/productStore';
-const PRODUCTS_CATEGORY = 'http://localhost:3000/Category';
+const PRODUCTS_CATEGORY = 'http://localhost:3000/productsCategory';
 const CARTLIST = 'http://localhost:3000/cartList';
 
 const getProducts = async () => {
