@@ -3,12 +3,21 @@ import {
     getCategory as apiGetCategory,
     getCartList as apiGetCartList,
     getProductImg as apiGetProductImg,
+    addProduct as apiAddProduct,
 } from '../apis/task';
 
 const getProducts = async () => {
     try {
         return await apiGetProducts();
     } catch(e) {
+        console.error(e);
+    }
+}
+
+const addProduct = async (title, categoryId, categoryName, detail, img, price) => {
+    try {
+        return await apiAddProduct(title, categoryId, categoryName, detail, img, price)
+    } catch (e) {
         console.error(e);
     }
 }
@@ -37,4 +46,4 @@ const getCartList = async () => {
     }
 }
 
-export { getProducts, getCategory, getCartList };
+export { getProducts, getCategory, getCartList, addProduct };

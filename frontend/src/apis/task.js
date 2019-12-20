@@ -9,6 +9,11 @@ const getProducts = async () => {
     return data;
 };
 
+const addProduct = async (title, categoryId, categoryName, detail, img, price) => {
+    const { data } = await axios.post(PRODUCT_STORE, { title, categoryId, categoryName, detail, img, price });
+    return data;
+}
+
 const getCategory = async () => {
     const { data } = await axios.get(PRODUCTS_CATEGORY);
     return data;
@@ -24,4 +29,4 @@ const addTask = async (title) => {
     return data;
 };
 
-export { getProducts, getCategory, getCartList, };
+export { getProducts, getCategory, getCartList, addProduct, };

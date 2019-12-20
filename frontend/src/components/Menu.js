@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -60,7 +61,9 @@ function Menu() {
         <ListDiv>
             <Ul>
                 <Li>
-                    상품 카테고리
+                    <Link to={`/product/new`}>
+                        상품 등록
+                    </Link>
                 </Li>
                 {productsCategoryArr.map((category, index) =>
                     <Li key={index}>

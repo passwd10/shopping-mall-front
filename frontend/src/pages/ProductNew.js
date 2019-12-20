@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import productStore, { productsCategory } from '../stores/productStore';
 import ModifyDivGrid, { ModifyCategory, ModifyInfo, BasicForm } from '../lib/Div';
 import { OkBtn, CancelBtn } from '../lib/Button';
-
+import { addProduct } from '../service/taskService';
 
 function ProductNew() {
     const [title, setTitle] = useState('');
@@ -20,14 +20,17 @@ function ProductNew() {
         event.preventDefault();
         event.stopPropagation();
 
-        productStore.createProduct({
-            title,
-            categoryId,
-            categoryName,
-            detail,
-            img,
-            price,
-        })
+        addProduct(title, categoryId, categoryName, detail, img, price);
+        // productStore.createProduct({
+        //     title,
+        //     categoryId,
+        //     categoryName,
+        //     detail,
+        //     img,
+        //     price,
+        // })
+
+        
     };
 
     const onCategoryChange = (event) => {
