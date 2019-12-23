@@ -65,13 +65,17 @@ function Login() {
         event.stopPropagation();
 
         getUserInfo(id, password).then(v => {
-            
-            localStorage.setItem('name', v.userInfo[0].name);
-            localStorage.setItem('userId', v.userInfo[0].userId);
-            localStorage.setItem('password', v.userInfo[0].password);
-            localStorage.setItem('phoneNum', v.userInfo[0].phoneNum);
-            localStorage.setItem('birth', v.userInfo[0].birth);
-            setLoginAvailable(true);
+
+            if(v.userInfo.length === 0) {
+                setWarningState('아이디 비밀번호가 일치하지 않습니다.');
+            } else {
+                localStorage.setItem('name', v.userInfo[0].name);
+                localStorage.setItem('userId', v.userInfo[0].userId);
+                localStorage.setItem('password', v.userInfo[0].password);
+                localStorage.setItem('phoneNum', v.userInfo[0].phoneNum);
+                localStorage.setItem('birth', v.userInfo[0].birth);
+                setLoginAvailable(true);
+            }
         })
 
         // console.log('사용자정보', localStorage);
