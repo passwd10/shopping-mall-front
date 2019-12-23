@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const USER_STORE = 'http://localhost:3000/userStore';
+const LOGIN = 'http://localhost:3000/login';
 
-const getUserInfo = async () => {
-    const { data } = await axios.get(USER_STORE);
+const getUserInfo = async (userId, userPasswd) => {
+    const { data } = await axios.post(LOGIN, { userId, userPasswd });
     return data;
 }
 

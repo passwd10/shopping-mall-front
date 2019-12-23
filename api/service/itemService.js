@@ -1,3 +1,5 @@
+const { productStore } = require('../stores/productStore');
+
 const store = {
   items: [],
 };
@@ -6,12 +8,20 @@ const getItems = () => {
   return store.items;
 };
 
-const addItem = (title) => {
-  const maxId = store.items.length;
-  store.items = [
-    ...store.items,
-    { id: maxId + 1, title, completed: false } //tasks에 들어갈 형식을 만들어줌
-  ];
+const addItem = (title, categoryId, categoryName, detail, img, price) => {
+  productStore.createProduct({
+    title,
+    categoryId,
+    categoryName,
+    detail,
+    img,
+    price,
+  })
+  // const maxId = store.items.length;
+  // store.items = [
+  //   ...store.items,
+  //   { id: maxId + 1, title, completed: false } //tasks에 들어갈 형식을 만들어줌
+  // ];
 
   return store.items;
 }
