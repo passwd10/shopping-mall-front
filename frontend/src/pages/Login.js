@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
-import userList from '../stores/userStore';
-import getUserInfo from '../service/loginService';
+import getSession from '../service/loginService';
 
 const LoginHeader = styled.span`
     display: block;
@@ -64,21 +63,13 @@ function Login() {
         event.preventDefault();
         event.stopPropagation();
 
-        getUserInfo(id, password).then(v => {
-
-            if(v.userInfo.length === 0) {
+        getSession(id, password).then(v => {
+            if (v.length === 0) {
                 setWarningState('아이디 비밀번호가 일치하지 않습니다.');
             } else {
-                localStorage.setItem('name', v.userInfo[0].name);
-                localStorage.setItem('userId', v.userInfo[0].userId);
-                localStorage.setItem('password', v.userInfo[0].password);
-                localStorage.setItem('phoneNum', v.userInfo[0].phoneNum);
-                localStorage.setItem('birth', v.userInfo[0].birth);
                 setLoginAvailable(true);
             }
         })
-
-        // console.log('사용자정보', localStorage);
     };
 
     return (

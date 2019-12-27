@@ -1,11 +1,11 @@
-import { getUserInfo as apiGetUserInfo } from '../apis/user';
+import { getSession as apiGetSession, } from '../apis/user';
 
-const getUserInfo = async (userId, userPasswd) => {
+const getSession = async (userId, userPasswd) => {
     try {
-        return await apiGetUserInfo(userId, userPasswd);
+        return await apiGetSession(userId, userPasswd);
     } catch (e) {
         console.error(e);
     }
 }
 
-export default getUserInfo;
+export default getSession;

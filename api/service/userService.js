@@ -11,6 +11,11 @@ const isUserInUserStore = (userId, userPasswd) => {
     return needUser;
 }
 
+const setCartListId = (userId, newCategoryId) => {
+    return userList.setUserCartListId(userId, newCategoryId);
+}
+
 module.exports = {
     isUserInUserStore,
+    setCartListId,
 };
