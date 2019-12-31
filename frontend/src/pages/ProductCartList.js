@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
-import { cartList } from "../stores/productStore";
 import styled from 'styled-components';
+
 
 const InCart = styled.div`
     display: flex;
@@ -116,49 +116,53 @@ function ProductCartList() {
     }, [cList]);
 
     return (
-            <div style={{ width: '700px', margin: 'auto' }}>
+        <>
+            {localStorage.getItem('userId') == null ?
+                <Redirect to='/user/login' /> :
+                <div style={{ width: '700px', margin: 'auto' }}>
 
-                <CartHeader>장바구니</CartHeader>
+                    <CartHeader>장바구니</CartHeader>
 
-                <Div>
-                    <span>장바구니 수량 : {myCartList.length} 개</span>
-                </Div>
+                    <Div>
+                        <span>장바구니 수량 : {myCartList.length} 개</span>
+                    </Div>
 
-                <div>
-                    <DivInfo>
-                        <div></div>
-                        <div>상품정보</div>
-                        <div>가격</div>
-                        <div>수량</div>
-                        <div></div>
-                    </DivInfo>
-                    {myCartList.map(cartList =>
-                        <DivCart key={cartList.id}>
-                            <InCart>
-                                <input type="checkbox" defaultChecked={cartList.purchase} onChange={() => onChangeList(cartList.id)} />
-                            </InCart>
-                            <InCart><img src={cartList.img} width="30%"></img>{cartList.title}</InCart>
-                            <InCart>{cartList.price}원</InCart>
-                            <InCart>1</InCart>
-                            <div><DeleteBtn onClick={() => setCList(deleteList(cartList.id))}>삭제</DeleteBtn></div>
-                        </DivCart>
-                    )}
+                    <div>
+                        <DivInfo>
+                            <div></div>
+                            <div>상품정보</div>
+                            <div>가격</div>
+                            <div>수량</div>
+                            <div></div>
+                        </DivInfo>
+                        {myCartList.map(cartList =>
+                            <DivCart key={cartList.id}>
+                                <InCart>
+                                    <input type="checkbox" defaultChecked={cartList.purchase} onChange={() => onChangeList(cartList.id)} />
+                                </InCart>
+                                <InCart><img src={cartList.img} width="30%"></img>{cartList.title}</InCart>
+                                <InCart>{cartList.price}원</InCart>
+                                <InCart>1</InCart>
+                                <div><DeleteBtn onClick={() => setCList(deleteList(cartList.id))}>삭제</DeleteBtn></div>
+                            </DivCart>
+                        )}
 
-                </div>
+                    </div>
 
-                <Div>
-                    <span>예상 가격 : {estPrice} 원</span>
-                </Div>
+                    <Div>
+                        <span>예상 가격 : {estPrice} 원</span>
+                    </Div>
 
-                <DivBtn>
-                    <Link to={`/`}>
-                        <KeepShopBtn>쇼핑 계속하기</KeepShopBtn>
-                    </Link>
-                    <Link to={`/order/purchaseRequest/999`}>
-                        <PurchaseButton>구매하기</PurchaseButton>
-                    </Link>
-                </DivBtn>
-            </div>
+                    <DivBtn>
+                        <Link to={`/`}>
+                            <KeepShopBtn>쇼핑 계속하기</KeepShopBtn>
+                        </Link>
+                        <Link to={`/order/purchaseRequest/999`}>
+                            <PurchaseButton>구매하기</PurchaseButton>
+                        </Link>
+                    </DivBtn>
+                </div>}
+        </>
     )
 }
 

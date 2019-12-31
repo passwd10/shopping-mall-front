@@ -21,7 +21,7 @@ const DivLi = styled.div`
 `;
 
 function MyPage() {
-    const [myState, setMyState] = useState(localStorage.getItem('userId'));
+    const [myState, setMyState] = useState(document.cookie.split('=')[1]);
 
     return (
         <div style={{width: '60%', marginRight: 'auto', marginLeft: 'auto'}}>

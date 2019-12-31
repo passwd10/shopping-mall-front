@@ -3,10 +3,17 @@ import styled from 'styled-components';
 import ModifyDivGrid, {ModifyCategory, ModifyInfo} from '../lib/Div';
 import ModifyBtn from '../lib/Button';
 
+import { getUserInfo, patchUserInfo } from '../service/loginService';
+
 function ModifyName() {
-    const [name, setName] = useState(localStorage.getItem('name'));
+    const [name, setName] = useState('');
+    const [inputName, setInputName] = useState('');
     const [button, setButton] = useState('이름 변경')
     const [visible, setVisible] = useState(false);
+
+    (async () => 
+        await getUserInfo().then(v => setName(v[0].name))
+    )();
 
     const onHandleModify = () => {
         setVisible(!visible);
@@ -14,23 +21,29 @@ function ModifyName() {
     };
 
     const changeName = () => {
-        localStorage['name'] = name;
+        patchUserInfo('name', inputName);
+        setName(inputName);
         onHandleModify();
-    }
+    };
+
+    const handleChange = e => {
+        setInputName(e.target.value);
+    };
 
     const showModify = (
         <ModifyInfo>
             <div></div>
-            <div><input type='text' onChange={v => setName(v.target.value)} /></div>
+            <div><input type='text' value={inputName} onChange={handleChange}/></div>
             <div><ModifyBtn type='submit' onClick={changeName}>변경하기</ModifyBtn></div>
-        </ModifyInfo>);
+        </ModifyInfo>
+    );
 
     return (
         <div>
             <ModifyDivGrid>
                 <ModifyCategory>이름</ModifyCategory>
                 <ModifyInfo>
-                    <span style={{paddingRight: '20px'}}>{localStorage['name']}</span>
+                    <span style={{ paddingRight: '20px' }}>{name}</span>
                     <span><ModifyBtn onClick={onHandleModify}>{button}</ModifyBtn></span>
                     {visible == true ? showModify : null}
                 </ModifyInfo>

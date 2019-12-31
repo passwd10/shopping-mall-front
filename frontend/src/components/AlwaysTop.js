@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import Search from './Search';
 import Menu from '../components/Menu';
+import { deleteSession } from '../service/loginService';
 
 const Button = styled.li`
     display: inline-block;
@@ -63,21 +64,22 @@ const TopBar = styled.div`
 
 function AlwaysTop() {
 
-    const [userId, setUserId] = useState(localStorage.getItem('userId'));
+    const [cookie, setCookie] = useState(document.cookie.split('=')[1]);
     const [btnState, setBtnState] = useState('로그인');
 
     const clearLoginState = () => {
-        setUserId(localStorage.clear());
+        setCookie("");
+        deleteSession();
     }
 
     useEffect(() => {
-        setUserId(localStorage.getItem('userId'));
+        setCookie(document.cookie.split('=')[1]);
 
-        if (userId != null) {
+        if (document.cookie != [""]) {
             setBtnState('로그아웃');
         }
 
-    }, [userId]);
+    }, [cookie]);
 
     return (
         <>
@@ -87,7 +89,7 @@ function AlwaysTop() {
                         <Button>홈으로</Button>
                     </Link>
                     {
-                        userId == null ?
+                        cookie == null ?
                             <Link to='/user/login'><Button>로그인</Button></Link> :
                             <Button onClick={clearLoginState}>로그아웃</Button>
                     }
@@ -102,7 +104,7 @@ function AlwaysTop() {
                     </Link>
                 </AllBtn>
 
-                <Link to='/'><Title><Img src='/../img/logo.jpg'/></Title></Link>
+                <Link to='/'><Title><Img src='/../img/logo.jpg' /></Title></Link>
                 <Search />
             </TopBar>
             <Menu />

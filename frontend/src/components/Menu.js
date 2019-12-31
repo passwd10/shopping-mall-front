@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
@@ -53,9 +53,11 @@ const Li = styled.div`
 function Menu() {
     const [productsCategoryArr, setProductsCategoryArr] = useState([]);
 
-    getCategory().then(value => {
-        setProductsCategoryArr(Object.entries(value));
-    });
+    useEffect(() => {
+        getCategory().then(value => {
+            setProductsCategoryArr(Object.entries(value));
+        }); 
+    },[])
 
     return (
         <ListDiv>

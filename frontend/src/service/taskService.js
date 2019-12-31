@@ -1,7 +1,6 @@
 import {
     getProducts as apiGetProducts,
     getCategory as apiGetCategory,
-    getCartList as apiGetCartList,
     getProductImg as apiGetProductImg,
     addProduct as apiAddProduct,
 } from '../apis/task';

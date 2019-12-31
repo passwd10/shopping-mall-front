@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import styled from 'styled-components';
 
 import { getProducts } from '../service/taskService';
+import { addCartList } from '../service/cartService';
 
 const Div = styled.div`
     display: grid;
@@ -16,12 +17,12 @@ const Div = styled.div`
 `;
 
 
-const initialProduct = { 
-    title: '', 
-    img: '', 
-    categoryId: 0, 
-    categoryName: '', 
-    price: 0, 
+const initialProduct = {
+    title: '',
+    img: '',
+    categoryId: 0,
+    categoryName: '',
+    price: 0,
     detail: '',
 };
 
@@ -71,12 +72,12 @@ function ProductDetail() {
             const saveData = await getProducts();
             dispatch({
                 type: 'addProduct',
-                title: saveData[productId-1].title,
-                img: saveData[productId-1].img,
-                categoryId: saveData[productId-1].categoryId,
-                categoryName: saveData[productId-1].categoryName,
-                price: saveData[productId-1].price,
-                detail: saveData[productId-1].detail
+                title: saveData[productId - 1].title,
+                img: saveData[productId - 1].img,
+                categoryId: saveData[productId - 1].categoryId,
+                categoryName: saveData[productId - 1].categoryName,
+                price: saveData[productId - 1].price,
+                detail: saveData[productId - 1].detail
             });
         } catch (e) {
             console.log(e);
@@ -87,19 +88,9 @@ function ProductDetail() {
         fetchMyApi();
     }, []);
 
-    const addCartList = () => {
-
-        let isFind = false;
-
-        cartList.cartLists.map(element => {
-            if (element.productId == productId) {
-                isFind = true;
-            }
-        })
-
-        if (isFind == false) {
-            cartList.createCartList(productId, title, categoryId, categoryName, img, price);
-        }
+    const addCart = () => { 
+        addCartList(localStorage.getItem('userId'), localStorage.getItem('categoryId'), productId);
+        console.log('사용자정보', localStorage);
     }
 
     return (
@@ -124,7 +115,7 @@ function ProductDetail() {
                             <button style={{ backgroundColor: '#5f0080', color: 'white', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid purple', marginRight: '20px' }}>구매하기</button>
                         </Link>
                     </div>
-                    <div><button style={{ backgroundColor: 'white', color: 'purple', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid #5f0080' }} onClick={addCartList}>장바구니 담기</button></div>
+                    <div><button style={{ backgroundColor: 'white', color: 'purple', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid #5f0080' }} onClick={addCart}>장바구니 담기</button></div>
                 </div>
             </div>
         </Div>

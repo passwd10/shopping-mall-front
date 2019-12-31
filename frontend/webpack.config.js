@@ -21,18 +21,17 @@ module.exports = {
         historyApiFallback: true,
         contentBase: './',
         hot: true,
-        proxy: {
-            '/login': {
-                target : 'http://localhost:3000/',
-                secure: false,
-                changeOrigin: true,
-            }
-        }
+        proxy: [{
+            context: ['/login', '/session-content'],
+            target: 'http://localhost:3000/',
+            secure: false,
+            changeOrigin: true,
+        }]
     },
     plugins: [
         new HtmlWebPackPlugin({
-         template: './index.html',
-        filename: 'index.html',
-    })
-  ],
+            template: './index.html',
+            filename: 'index.html',
+        })
+    ],
 };

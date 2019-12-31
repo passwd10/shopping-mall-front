@@ -10,9 +10,11 @@ const {
 
 const { userList } = require('./stores/userStore');
 const { addItem } = require('./service/itemService');
-const { isUserInUserStore } = require('./service/userService');
+const { isUserInUserStore, setUserStore } = require('./service/userService');
 const { cartStore } = require('./stores/cartStore');
 const { createCartList, addCartList } = require('./service/cartService');
+
+const FileStore = require('session-file-store')(session);
 
 const port = 3000;
 
@@ -28,7 +30,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { 
         name: 'userInfoCookie',
-        httpOnly: true,
+        httpOnly: false,
         secure: false,
         maxAge: 3600000,
         expires: new Date(Date.now() + 3600000)
@@ -44,12 +46,30 @@ app.post('/login', (req, res) => {
 
     session.userInfo = userInfo;
 
+    console.log('session', session);
     res.send(session.userInfo);   
 });
 
-app.get('/logout', (req, res) => {
+app.delete('/login', (req, res) => {
     req.session.destroy();
+    res.clearCookie('connect.sid');
     res.send('Session Destroyed');
+});
+
+app.get('/session-content', (req, res) => {
+    res.send(req.session.userInfo)
+    // sessionID로 session 데이터 가져오기
+});
+
+app.patch('/session-content', (req, res) => {
+    const { userAttribute, infoToChange } = req.body;
+    const firstUserId = req.session.userInfo[0].userId;
+
+    req.session.userInfo[0][userAttribute] = infoToChange;
+
+    setUserStore(firstUserId, userAttribute, infoToChange); // json파일 변경
+    
+    res.send(req.session.userInfo);
 });
 
 app.get('/productStore', (req, res) => {
