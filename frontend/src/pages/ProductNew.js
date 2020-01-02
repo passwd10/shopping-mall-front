@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import productStore, { productsCategory } from '../stores/productStore';
 import ModifyDivGrid, { ModifyCategory, ModifyInfo, BasicForm } from '../lib/Div';
 import { OkBtn, CancelBtn } from '../lib/Button';
 import { addProduct } from '../service/taskService';

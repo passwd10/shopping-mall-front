@@ -7,7 +7,7 @@ import SignUpValidation from '../components/SignUpValidation';
 import PhoneNum from '../components/PhoneNum';
 import Birth from '../components/Birth';
 import UserName from '../components/UserName';
-import userStore from '../stores/userStore';
+// import userStore from '../stores/userStore';
 
 const SignUpHeader = styled.span`
     display: block;

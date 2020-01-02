@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import ModifyDivGrid, { ModifyCategory, ModifyInfo, OrderProductInfo, OrderProductCategory } from '../lib/Div';
 import { OkBtn } from '../lib/Button';
 
-import productStore, { cartList } from "../stores/productStore";
+// import productStore, { cartList } from "../stores/productStore";
 
 function OrderInfo() {
 

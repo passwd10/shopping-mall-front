@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
-import productStore from '../stores/productStore';
-
 function CantFind(props) {
     return (
         <>
@@ -44,7 +42,7 @@ const searchCompleted = {
 
 function SearchResult() {
     const { keyword } = useParams();
-    const [state, setState] = useState(productStore.products);
+    const [state, setState] = useState([]);
 
     let isFind = 0;
 

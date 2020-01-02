@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import userStore from '../stores/userStore';
 import ModifyName from '../modifyInfo/ModifyName';
 import ModifyPhoneNum from '../modifyInfo/ModifyPhoneNum';
 import ModifyUserId from '../modifyInfo/ModifyUserId';
