@@ -10,11 +10,8 @@ const {
 
 const { userList } = require('./stores/userStore');
 const { addItem } = require('./service/itemService');
-const { isUserInUserStore, setUserStore } = require('./service/userService');
-const { cartStore } = require('./stores/cartStore');
-const { createCartList, addCartList } = require('./service/cartService');
-
-const FileStore = require('session-file-store')(session);
+const { isUserInUserStore, setUserStore, getCartId } = require('./service/userService');
+const { addCartList } = require('./service/cartService');
 
 const port = 3000;
 
@@ -28,12 +25,12 @@ app.use(session({
     secret: 'hello',
     resave: false,
     saveUninitialized: true,
-    cookie: { 
+    cookie: {
         name: 'userInfoCookie',
         httpOnly: false,
         secure: false,
         maxAge: 3600000,
-        expires: new Date(Date.now() + 3600000)
+        expires: new Date(Date.now() + 3600000),
     }
 }));
 
@@ -46,8 +43,7 @@ app.post('/login', (req, res) => {
 
     session.userInfo = userInfo;
 
-    console.log('session', session);
-    res.send(session.userInfo);   
+    res.send(session.userInfo);
 });
 
 app.delete('/login', (req, res) => {
@@ -58,7 +54,6 @@ app.delete('/login', (req, res) => {
 
 app.get('/session-content', (req, res) => {
     res.send(req.session.userInfo)
-    // sessionID로 session 데이터 가져오기
 });
 
 app.patch('/session-content', (req, res) => {
@@ -67,8 +62,8 @@ app.patch('/session-content', (req, res) => {
 
     req.session.userInfo[0][userAttribute] = infoToChange;
 
-    setUserStore(firstUserId, userAttribute, infoToChange); // json파일 변경
-    
+    setUserStore(firstUserId, userAttribute, infoToChange);
+
     res.send(req.session.userInfo);
 });
 
@@ -86,18 +81,15 @@ app.get('/productsCategory', (req, res) => {
     res.send(productsCategory);
 });
 
-app.get('/cartList', (req, res) => {
-    res.send(cartStore._cartList);
+app.post('/cartList', (req, res) => {
+    const { productId } = req.body;
+    req.session.userInfo = addCartList(req.session.userInfo[0].userId, productId);
+    res.send();
 });
 
-app.post('/cartList', (req, res) => {
-    const { userId, cartListId, productId } = req.body;
-    console.log('장바구니 클릭시 유저아이디', userId);
-    console.log('장바구니 클릭시 유저카트아이디', cartListId);
-    console.log('장바구니 클릭시 상품아이디', productId);
-    const { id, productIdList } = cartListId == 0 ? createCartList(userId, cartListId, productId) : addCartList(cartListId, productId);
-    res.send({ id, productIdList });
-})
+app.get('/cartList', (req, res) => {
+    res.send(req.session.userInfo[0].cartList);
+});
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

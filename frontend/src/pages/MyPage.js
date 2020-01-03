@@ -21,13 +21,13 @@ const DivLi = styled.div`
 `;
 
 function MyPage() {
-    const [myState, setMyState] = useState(document.cookie.split('=')[1]);
+    const [isLogin, setIsLogin] = useState(document.cookie.split('=')[1]);
 
     return (
         <div style={{width: '60%', marginRight: 'auto', marginLeft: 'auto'}}>
             <DivGrid>
                 <div style={{backgroundColor: '#f9f9f9', padding: '10px'}}>
-                    {myState == null ?
+                    {isLogin == null ?
                         <Redirect to='/user/login' /> :
                         <div>
                             <div style={{fontSize:'20px', textAlign: 'center'}}>마이페이지</div>

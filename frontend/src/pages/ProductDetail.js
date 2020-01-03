@@ -89,8 +89,7 @@ function ProductDetail() {
     }, []);
 
     const addCart = () => { 
-        addCartList(localStorage.getItem('userId'), localStorage.getItem('categoryId'), productId);
-        console.log('사용자정보', localStorage);
+        addCartList(productId);
     }
 
     return (

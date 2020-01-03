@@ -16,12 +16,17 @@ const setUserStore = (firstUserId, userKey, userValue) => {
 
 }
 
-const setCartListId = (userId, newCategoryId) => {
-    return userList.setUserCartListId(userId, newCategoryId);
+const getCartId = (userId) => {
+    return userList._userList.filter(v => v.userId === userId).cartId;
+}
+
+const addProductIdInCart = (userId, productId) => {
+    userList._userList.filter(v => v.userId === userId);
+    //Todo
 }
 
 module.exports = {
     isUserInUserStore,
-    setCartListId,
     setUserStore,
+    getCartId,
 };

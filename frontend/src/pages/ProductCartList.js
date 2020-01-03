@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import styled from 'styled-components';
+import { getUserInfo } from '../service/loginService';
 
+import styled from 'styled-components';
 
 const InCart = styled.div`
     display: flex;
@@ -89,14 +90,17 @@ const DeleteBtn = styled.button`
 `;
 
 function ProductCartList() {
-    let uniq = {};
-    const deDupMyCartList = cartList.cartLists.filter(obj => !uniq[obj.productId] && (uniq[obj.productId] = true)); //장바구니 중복제거
-    const myCartList = cartList.setCartLists(deDupMyCartList);
+    // let uniq = {};
+    // const deDupMyCartList = cartList.cartLists.filter(obj => !uniq[obj.productId] && (uniq[obj.productId] = true)); //장바구니 중복제거
+    // const myCartList = cartList.setCartLists(deDupMyCartList);
 
     const [cList, setCList] = useState([]); // 장바구니 상태
+    const [myCartList, setMyCartList] = useState([]); //서버에서 가져온 장바구니 상태
     const [estPrice, setEstPrice] = useState(0);    //예상 가격 상태
+    const [isLogin, setIsLogin] = useState(document.cookie.split('=')[1]); // 로그인중인지?
 
-    const deleteList = (id) => {
+    const deleteList = id => {
+
         return cartList.setCartLists(myCartList.filter(list => list.id != id));
     };
 
@@ -112,12 +116,16 @@ function ProductCartList() {
     }
 
     useEffect(() => {
+        getUserInfo().then(v => setMyCartList(v[0].cartList))
+    }, [])
+
+    useEffect(() => {
         calculatePrice();
     }, [cList]);
 
     return (
         <>
-            {localStorage.getItem('userId') == null ?
+            {isLogin == null ?
                 <Redirect to='/user/login' /> :
                 <div style={{ width: '700px', margin: 'auto' }}>
 

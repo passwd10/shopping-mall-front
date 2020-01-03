@@ -22,7 +22,7 @@ module.exports = {
         contentBase: './',
         hot: true,
         proxy: [{
-            context: ['/login', '/session-content'],
+            context: ['/login', '/session-content', '/cartList'],
             target: 'http://localhost:3000/',
             secure: false,
             changeOrigin: true,

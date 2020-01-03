@@ -67,7 +67,6 @@ function Login() {
             if (v.length === 0) {
                 setWarningState('아이디 비밀번호가 일치하지 않습니다.');
             } else {
-                console.log(v);
                 setLoginAvailable(true);
             }
         })
