@@ -12,4 +12,9 @@ const addCartList = async (productId) => {
     return data;
 }
 
-export { getCartList, addCartList };
+const deleteCartList = async (productId) => {
+    const { data } = await axios.delete(CARTLIST, { data: { productId: productId } });
+    return data;
+}
+
+export { getCartList, addCartList, deleteCartList };

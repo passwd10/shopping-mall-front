@@ -11,7 +11,7 @@ const {
 const { userList } = require('./stores/userStore');
 const { addItem } = require('./service/itemService');
 const { isUserInUserStore, setUserStore, getCartId } = require('./service/userService');
-const { addCartList } = require('./service/cartService');
+const { addCartList, deleteCartList } = require('./service/cartService');
 
 const port = 3000;
 
@@ -81,15 +81,22 @@ app.get('/productsCategory', (req, res) => {
     res.send(productsCategory);
 });
 
+app.get('/cartList', (req, res) => {
+    res.send(req.session.userInfo[0].cartList);
+});
+
 app.post('/cartList', (req, res) => {
     const { productId } = req.body;
+    console.log(req.session.userInfo[0].userId);
     req.session.userInfo = addCartList(req.session.userInfo[0].userId, productId);
     res.send();
 });
 
-app.get('/cartList', (req, res) => {
+app.delete('/cartList', (req, res) => {
+    const { productId } = req.body;
+    req.session.userInfo = [deleteCartList(req.session.userInfo[0].userId, productId)];
     res.send(req.session.userInfo[0].cartList);
-});
+})
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

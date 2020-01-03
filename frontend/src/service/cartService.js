@@ -1,5 +1,8 @@
-import { getCartList as apiGetCartList,
-         addCartList as apiAddCartList } from '../apis/cart';
+import {
+    getCartList as apiGetCartList,
+    addCartList as apiAddCartList,
+    deleteCartList as apiDeleteCartList
+} from '../apis/cart';
 
 const getCartList = async () => {
     try {
@@ -17,4 +20,12 @@ const addCartList = async (productId) => {
     }
 };
 
-export { getCartList, addCartList };
+const deleteCartList = async (productId) => {
+    try {
+        return await apiDeleteCartList(productId);
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export { getCartList, addCartList, deleteCartList };

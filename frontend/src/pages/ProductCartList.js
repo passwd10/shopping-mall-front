@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import { getUserInfo } from '../service/loginService';
+import { deleteCartList } from '../service/cartService';
 
 import styled from 'styled-components';
 
@@ -86,23 +87,17 @@ const DeleteBtn = styled.button`
     font-size: 15px;
     border-color: gray;
     margin-top: 50px;
-    /* padding: 10px; */
 `;
 
 function ProductCartList() {
-    // let uniq = {};
-    // const deDupMyCartList = cartList.cartLists.filter(obj => !uniq[obj.productId] && (uniq[obj.productId] = true)); //장바구니 중복제거
-    // const myCartList = cartList.setCartLists(deDupMyCartList);
-
     const [cList, setCList] = useState([]); // 장바구니 상태
     const [myCartList, setMyCartList] = useState([]); //서버에서 가져온 장바구니 상태
     const [estPrice, setEstPrice] = useState(0);    //예상 가격 상태
     const [isLogin, setIsLogin] = useState(document.cookie.split('=')[1]); // 로그인중인지?
 
     const deleteList = id => {
-
-        return cartList.setCartLists(myCartList.filter(list => list.id != id));
-    };
+        deleteCartList(id).then(v => setMyCartList(v));
+    }
 
     const onChangeList = (id) => {
         cartList.setCartListPurchase(id);
@@ -128,13 +123,10 @@ function ProductCartList() {
             {isLogin == null ?
                 <Redirect to='/user/login' /> :
                 <div style={{ width: '700px', margin: 'auto' }}>
-
                     <CartHeader>장바구니</CartHeader>
-
                     <Div>
                         <span>장바구니 수량 : {myCartList.length} 개</span>
                     </Div>
-
                     <div>
                         <DivInfo>
                             <div></div>
@@ -151,16 +143,13 @@ function ProductCartList() {
                                 <InCart><img src={cartList.img} width="30%"></img>{cartList.title}</InCart>
                                 <InCart>{cartList.price}원</InCart>
                                 <InCart>1</InCart>
-                                <div><DeleteBtn onClick={() => setCList(deleteList(cartList.id))}>삭제</DeleteBtn></div>
+                                <div><DeleteBtn onClick={() => deleteList(cartList.id)}>삭제</DeleteBtn></div>
                             </DivCart>
                         )}
-
                     </div>
-
                     <Div>
                         <span>예상 가격 : {estPrice} 원</span>
                     </Div>
-
                     <DivBtn>
                         <Link to={`/`}>
                             <KeepShopBtn>쇼핑 계속하기</KeepShopBtn>

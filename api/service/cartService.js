@@ -13,4 +13,11 @@ const addCartList = (userId, productId) => {
     return userList._userList.filter(v => v.userId == userId);
 };
 
-module.exports = { addCartList };
+const deleteCartList = (userId, productId) => {
+    
+    userList._userList.forEach(v => userId == v.userId ? v.cartList = v.cartList.filter(e => e.id != productId) : null);
+    
+    return userList._userList.filter(v => userId == v.userId)[0];
+}
+
+module.exports = { addCartList, deleteCartList };
