@@ -87,7 +87,6 @@ app.get('/cartList', (req, res) => {
 
 app.post('/cartList', (req, res) => {
     const { productId } = req.body;
-    console.log(req.session.userInfo[0].userId);
     req.session.userInfo = addCartList(req.session.userInfo[0].userId, productId);
     res.send();
 });
