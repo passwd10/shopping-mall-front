@@ -77,6 +77,10 @@ app.post('/productStore', (req, res) => {
     res.send({ item });
 })
 
+app.get('/productStore/:id', (req, res) => {
+    res.send(productStore.getProduct(req.params.id));
+})
+
 app.get('/productsCategory', (req, res) => {
     res.send(productsCategory);
 });
