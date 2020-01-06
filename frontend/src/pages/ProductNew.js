@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import ModifyDivGrid, { ModifyCategory, ModifyInfo, BasicForm } from '../lib/Div';
 import { OkBtn, CancelBtn } from '../lib/Button';
-import { addProduct } from '../service/taskService';
+import { addProduct } from '../services/productService';
 
 function ProductNew() {
     const [title, setTitle] = useState('');

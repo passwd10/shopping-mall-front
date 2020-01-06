@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ModifyDivGrid, {ModifyCategory, ModifyInfo} from '../lib/Div';
 import ModifyBtn from '../lib/Button';
 
-import { getUserInfo, patchUserInfo } from '../service/loginService';
+import { getUserInfo, patchUserInfo } from '../services/userInfoService';
 
 function ModifyUserId() {
     const [userId, setUserId] = useState();

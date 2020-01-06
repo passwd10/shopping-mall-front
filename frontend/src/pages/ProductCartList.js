@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { getUserInfo } from '../service/loginService';
-import { deleteCartList } from '../service/cartService';
+import { getUserInfo } from '../services/userInfoService';
+import { deleteCart } from '../services/cartService';
 
 import styled from 'styled-components';
 
@@ -96,11 +96,10 @@ function ProductCartList() {
     const [isLogin, setIsLogin] = useState(document.cookie.split('=')[1]); // 로그인중인지?
 
     const deleteList = id => {
-        deleteCartList(id).then(v => setMyCartList(v));
+        deleteCart(id).then(v => setMyCartList(v));
     }
 
     const onChangeList = (id) => {
-        cartList.setCartListPurchase(id);
         calculatePrice();
     };
 

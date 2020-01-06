@@ -2,7 +2,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import ProductItem from '../components/ProductItem';
-import { getProducts, getCategory } from '../service/taskService';
+
+import { getCategories } from '../services/productsCategoryService';
+import { getProducts } from '../services/productService';
 
 import styled from 'styled-components';
 
@@ -41,7 +43,7 @@ function ProductList() {
     const [sort, setSort] = useState('');
     const [products, setProducts] = useState([]);
 
-    getCategory().then(category => categoryName = category[groupId]);
+    getCategories().then(category => categoryName = category[groupId]);
 
     getProducts().then(value => {
         if (groupId !== newGroupId) {

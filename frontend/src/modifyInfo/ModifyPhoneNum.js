@@ -4,7 +4,7 @@ import ModifyDivGrid, {ModifyCategory, ModifyInfo} from '../lib/Div';
 import ModifyBtn from '../lib/Button';
 import ModifyNotice from '../lib/Notice';
 
-import { getUserInfo, patchUserInfo } from '../service/loginService';
+import { getUserInfo, patchUserInfo } from '../services/userInfoService';
 
 function ModifyPhoneNum() {
     const [phoneNum, setPhoneNum] = useState('');

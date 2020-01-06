@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Search from './Search';
 import Menu from '../components/Menu';
-import { deleteSession } from '../service/loginService';
+import { deleteSession } from '../services/loginService';
 
 const Button = styled.li`
     display: inline-block;

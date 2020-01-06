@@ -2,8 +2,8 @@ import React, { useState, useEffect, useReducer } from "react";
 import { useParams, Link } from "react-router-dom";
 import styled from 'styled-components';
 
-import { getProducts } from '../service/taskService';
-import { addCartList } from '../service/cartService';
+import { getProducts } from '../services/productService';
+import { addCart } from '../services/cartService';
 
 const Div = styled.div`
     display: grid;
@@ -88,8 +88,8 @@ function ProductDetail() {
         fetchMyApi();
     }, []);
 
-    const addCart = () => { 
-        addCartList(productId);
+    const addToCart = () => { 
+        addCart(productId);
     }
 
     return (
@@ -114,7 +114,7 @@ function ProductDetail() {
                             <button style={{ backgroundColor: '#5f0080', color: 'white', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid purple', marginRight: '20px' }}>구매하기</button>
                         </Link>
                     </div>
-                    <div><button style={{ backgroundColor: 'white', color: 'purple', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid #5f0080' }} onClick={addCart}>장바구니 담기</button></div>
+                    <div><button style={{ backgroundColor: 'white', color: 'purple', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid #5f0080' }} onClick={addToCart}>장바구니 담기</button></div>
                 </div>
             </div>
         </Div>
