@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import MenuCategory from '../components/MenuCategory';
-import { getCategory } from '../apis/task';
-
+import { getCategories } from '../services/productsCategoryService';
 
 const ListDiv = styled.div`
     
@@ -48,16 +47,21 @@ const Li = styled.div`
     background-color: white; */
 `;
 
-
-
 function Menu() {
     const [productsCategoryArr, setProductsCategoryArr] = useState([]);
 
     useEffect(() => {
-        getCategory().then(value => {
-            setProductsCategoryArr(Object.entries(value));
-        }); 
-    },[])
+        let isMount = true;
+        getCategories().then(value => {
+            if (isMount) {
+                setProductsCategoryArr(Object.entries(value));
+            }
+        });
+ 
+        return () => {
+            isMount = false;
+        }
+    }, [])
 
     return (
         <ListDiv>
