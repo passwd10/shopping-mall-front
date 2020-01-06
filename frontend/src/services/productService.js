@@ -9,9 +9,14 @@ const getProducts = async () => {
     return data;
 };
 
+const getProduct = async (id) => {
+    const { data } = await axios.get(URL + `/${id}`);
+    return data;
+}
+
 const addProduct = async (title, categoryId, categoryName, detail, img, price) => {
     const { data } = await axios.post(URL, { title, categoryId, categoryName, detail, img, price });
     return data;
 }
 
-export { getProducts, addProduct, };
+export { getProducts, addProduct, getProduct };
