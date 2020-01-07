@@ -9,9 +9,10 @@ const {
 } = require('./stores/productStore');
 
 const { userList } = require('./stores/userStore');
-const { addItem } = require('./service/itemService');
-const { isUserInUserStore, setUserStore, getCartId } = require('./service/userService');
-const { addCartList, deleteCartList } = require('./service/cartService');
+const { addItem, searchItems } = require('./services/itemService');
+const { isUserInUserStore, setUserStore, getCartId } = require('./services/userService');
+const { addCartList, deleteCartList } = require('./services/cartService');
+const { checkDuplicateId } = require('./services/checkUserDuplicate');
 
 const port = 3000;
 
@@ -81,6 +82,11 @@ app.get('/productStore/:id', (req, res) => {
     res.send(productStore.getProduct(req.params.id));
 })
 
+app.get('/products/search', (req, res) => {
+    const searchKeyword = req.query.q;
+    res.send(searchItems(searchKeyword));
+})
+
 app.get('/productsCategory', (req, res) => {
     res.send(productsCategory);
 });
@@ -99,6 +105,12 @@ app.delete('/cartList', (req, res) => {
     const { productId } = req.body;
     req.session.userInfo = [deleteCartList(req.session.userInfo[0].userId, productId)];
     res.send(req.session.userInfo[0].cartList);
+})
+
+app.get('/signUp/checkDuplicate', (req, res) => {
+    const checkingObj = req.query;
+    const isDup = checkDuplicateId(Object.keys(checkingObj) == 'id' && req.query.id)
+    res.send(isDup);
 })
 
 app.listen(port, () => {
