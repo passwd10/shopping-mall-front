@@ -62,7 +62,7 @@ const TopBar = styled.div`
 `;
 
 
-function AlwaysTop() {
+function AlwaysTop(props) {
 
     const [cookie, setCookie] = useState(document.cookie.split('=')[1]);
     const [btnState, setBtnState] = useState('로그인');
@@ -71,6 +71,10 @@ function AlwaysTop() {
         setCookie("");
         deleteSession();
     }
+
+    const sendSearchKeywordToRoutes = keyword => {
+        props.searchCallBack(keyword)
+    };
 
     useEffect(() => {
         setCookie(document.cookie.split('=')[1]);
@@ -105,7 +109,7 @@ function AlwaysTop() {
                 </AllBtn>
 
                 <Link to='/'><Title><Img src='/../img/logo.jpg' /></Title></Link>
-                <Search />
+                <Search searchCallBack={sendSearchKeywordToRoutes}/>
             </TopBar>
             <Menu />
         </>

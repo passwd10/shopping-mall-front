@@ -1,9 +1,16 @@
-// 3. 검색어와 일치하는 제품이 있다면 이름일치하는 제품, 해당제품의 카테고리 순으로 출력
-// 4. 2개이상 겹치는 단어가 있는가?
-import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import queryString from 'query-string';
+
+import { searchProducts } from '../services/searchService';
+import { getProducts } from '../services/productService';
+
+const searchCompleted = {
+    items: [],
+}
 
 function CantFind(props) {
+    
     return (
         <>
             <h1>'{props.keyword}' 검색결과</h1>
@@ -13,54 +20,43 @@ function CantFind(props) {
 }
 
 function CanFind(props) {
-
     const foundItems = props.items;
-
     searchCompleted.items = [];
-
     return (
-        <>    
+        <>
             <h1>'{props.keyword}' 검색결과</h1>
-            {foundItems.map(item => 
-                <div key = {item.id}>
+            {foundItems.map(item =>
+                <div key={item.id}>
                     <Link to={`/product/${item.id}`} id={`${item.id}`}>
-                        <img src={item.img} className="itemImg" alt="이미지를 띄울 수 없습니다" width="20%" />
+                        <img src={item.img} className='itemImg' alt='이미지를 띄울 수 없습니다' width='20%' />
                     </Link>
                     <h2> {item.title} </h2>
                     <h3> {item.price} 원 </h3>
                 </div>
             )}
-
-            
         </>
     )
 }
 
-const searchCompleted = {
-    items: [],
-}
+function SearchResult(props, {locatoin}) {
+    const [products, setProducts] = useState([]);
 
-function SearchResult() {
-    const { keyword } = useParams();
-    const [state, setState] = useState([]);
+    const { q } = queryString.parse(location.search);
+    const keyword = q;
+    
+    useEffect(() => {
+        getProducts();
+    }, [props.keyword])
 
-    let isFind = 0;
-
-    state.map(item => {
-        if (item.title.indexOf(keyword) != -1) {
-            isFind = 1;
-            searchCompleted.items = [
-                ...searchCompleted.items,
-                { id: item.id, title: item.title, category: item.category, detail: item.detail, img: item.img, price: item.price }
-            ]
-        }
-    })
-
-    if (isFind == 1) {
-        return <CanFind keyword={keyword} items={searchCompleted.items} />
-    } else {
-        return <CantFind keyword={keyword} />
+    const getProducts = () => {
+        searchProducts(q).then(setProducts);
     }
+
+    const productsExist = () => products.length > 0;
+
+    return productsExist()
+            ? <CanFind keyword={keyword} items={products} /> 
+            : <CantFind keyword={keyword} />
 }
 
 export default SearchResult;

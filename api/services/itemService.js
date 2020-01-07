@@ -17,11 +17,6 @@ const addItem = (title, categoryId, categoryName, detail, img, price) => {
     img,
     price,
   })
-  // const maxId = store.items.length;
-  // store.items = [
-  //   ...store.items,
-  //   { id: maxId + 1, title, completed: false } //tasks에 들어갈 형식을 만들어줌
-  // ];
 
   return store.items;
 }
@@ -40,9 +35,14 @@ const toggleItem = (id) => {
   return store.items;
 };
 
+const searchItems = (keyword) => {
+  return productStore._product.filter(product => product.title.indexOf(keyword) != -1);
+}
+
 module.exports = {
   getItems,
   addItem,
   removeItem,
   toggleItem,
+  searchItems,
 };

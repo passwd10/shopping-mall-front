@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -21,54 +21,57 @@ import UserInfo from '../pages/UserInfo';
 import ServiceCenter from '../pages/ServiceCenter';
 
 function Routes() {
+    const [searchKeyword, setSearchKeyword] = useState('');
+
+    let searchCallBack = (value) => setSearchKeyword(value);
 
     return (
         <>
             <Router>
                 <Switch>
-                    <Route path="/order/purchaseRequest/:productId">
+                    <Route path='/order/purchaseRequest/:productId'>
                         <PurchaseProduct />
                     </Route>
-                    <Route path="/cartList">
+                    <Route path='/cartList'>
                         <ProductCartList />
                     </Route>
-                    <Route path="/product/new">
-                        <AlwaysTop />
+                    <Route path='/product/new'>
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <ProductNew />
                     </Route>
-                    <Route path="/product/:productId">
-                        <AlwaysTop />
+                    <Route path='/product/:productId'>
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <ProductDetail />
                     </Route>
-                    <Route path="/category/group/:groupId">
-                        <AlwaysTop />
+                    <Route path='/category/group/:groupId'>
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <ProductList />
                     </Route>
-                    <Route path="/search/:keyword">
-                        <AlwaysTop />
-                        <SearchResult />
+                    <Route path='/products/search'>
+                        <AlwaysTop searchCallBack={searchCallBack} />
+                        <SearchResult keyword={searchKeyword}/>
                     </Route>
                     <Route path='/user/login'>  
                         <Login />
                     </Route>
                     <Route path='/user/join'>
-                        <AlwaysTop />
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <SignUp />
                     </Route>
-                    <Route path="/user/modify">
-                        <AlwaysTop />
+                    <Route path='/user/modify'>
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <UserInfo />
                     </Route>
                     <Route path='/mypage/buylist'>
-                        <AlwaysTop />
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <MyPage />
                     </Route>
                     <Route path='/mypage/qna'>
-                        <AlwaysTop />
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <ServiceCenter />
                     </Route>
-                    <Route path="/">
-                        <AlwaysTop />
+                    <Route path='/'>
+                        <AlwaysTop searchCallBack={searchCallBack}/>
                         <Home />
                     </Route>
                 </Switch>
