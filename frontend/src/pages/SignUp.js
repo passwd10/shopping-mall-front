@@ -56,12 +56,12 @@ function SignUp() {
         birth: '',
     });
 
-    const [allValid, setAllValid] = useState({
-        userIdValid: false,
-        passwordValid: false,
-        nameValid: false,
-        phoneNumValid: false,
-        birthValid: false,
+    const [validCondition, setValidCondition] = useState({
+        validUserId: false,
+        validPassword: false,
+        validName: false,
+        validPhoneNum: false,
+        validBirth: false,
     })
 
     const onHandleChange = ({ userId, password, name, phoneNum, birth }, value) => {
@@ -88,25 +88,25 @@ function SignUp() {
 
     };
 
-    const onHandleValid = ({ userIdValid, passwordValid, nameValid, phoneNumValid, birthValid }, value) => {
+    const onHandleValid = ({ validUserId, validPassword, validName, validPhoneNum, validBirth }, value) => {
         if (value == 'birth') {
-            setAllValid({ ...allValid, birthValid });
+            setValidCondition({ ...validCondition, validBirth });
         }
 
         if (value == 'userId') {
-            setAllValid({ ...allValid, userIdValid });
+            setValidCondition({ ...validCondition, validUserId });
         }
 
         if (value == 'name') {
-            setAllValid({ ...allValid, nameValid });
+            setValidCondition({ ...validCondition, validName });
         }
 
         if (value == 'password') {
-            setAllValid({ ...allValid, passwordValid });
+            setValidCondition({ ...validCondition, validPassword });
         }
 
         if (value == 'phoneNum') {
-            setAllValid({ ...allValid, phoneNumValid });
+            setValidCondition({ ...validCondition, validPhoneNum });
         }
     };
 
@@ -120,13 +120,11 @@ function SignUp() {
     useEffect(() => {
         let satisfyCondition = 0;
 
-        for (let [key, value] of Object.entries(allValid)) {
+        for (let [key, value] of Object.entries(validCondition)) {
             if (value == true) {
                 satisfyCondition++;
             }
         }
-
-        console.log('satisfyCondition', satisfyCondition);
 
         if (satisfyCondition == 5) {
             setActiveButton(false);
@@ -136,7 +134,7 @@ function SignUp() {
             setActiveButton(true);
         }
 
-    }, [allValid])
+    }, [validCondition])
 
     return (
         <>
