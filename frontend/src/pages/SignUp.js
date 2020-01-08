@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import DuplicateInspect from '../components/DuplicateInspect';
+import CheckIdDuplicate from '../components/CheckIdDuplicate';
 import CheckPassword from '../components/CheckPassword';
 import SignUpValidation from '../components/SignUpValidation';
 import PhoneNum from '../components/PhoneNum';
 import Birth from '../components/Birth';
 import UserName from '../components/UserName';
-// import userStore from '../stores/userStore';
 
 const SignUpHeader = styled.span`
     display: block;
@@ -47,7 +46,7 @@ function SignUp() {
 
     const [activeButton, setActiveButton] = useState(true);
 
-    const [allState, setAllState] = useState({
+    const [userInfo, setUserInfo] = useState({
         userId: '',
         password: '',
         name: '',
@@ -66,23 +65,23 @@ function SignUp() {
     const onHandleChange = ({ userId, password, name, phoneNum, birth }, value) => {
 
         if (value == 'birth') {
-            setAllState({ ...allState, birth });
+            setUserInfo({ ...userInfo, birth });
         }
 
         if (value == 'userId') {
-            setAllState({ ...allState, userId });
+            setUserInfo({ ...userInfo, userId });
         }
 
         if (value == 'name') {
-            setAllState({ ...allState, name });
+            setUserInfo({ ...userInfo, name });
         }
 
         if (value == 'password') {
-            setAllState({ ...allState, password });
+            setUserInfo({ ...userInfo, password });
         }
 
         if (value == 'phoneNum') {
-            setAllState({ ...allState, phoneNum });
+            setUserInfo({ ...userInfo, phoneNum });
         }
 
     };
@@ -113,9 +112,9 @@ function SignUp() {
         event.preventDefault();
         event.stopPropagation();
 
-        // userStore.createUserList(allState.userId, allState.password, allState.name, allState.phoneNum, allState.birth);
-        userStore.createUserList(allState);
-        console.log('유저정보', userStore.userLists);
+        // userStore.createUserList(userInfo.userId, userInfo.password, userInfo.name, userInfo.phoneNum, userInfo.birth);
+        // userStore.createUserList(userInfo);
+        // console.log('유저정보', userStore.userLists);
     };
 
     useEffect(() => {
@@ -146,11 +145,11 @@ function SignUp() {
                     <SignUpHeader>회원가입</SignUpHeader>
                     <SignUpForm name="sign_up_form">
                             <div>
-                                <DuplicateInspect onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                                <CheckPassword onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                                <UserName onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                                <PhoneNum onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
-                                <Birth onHandleChange={onHandleChange} allState={allState} onHandleValid={onHandleValid} />
+                                <CheckIdDuplicate onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
+                                <CheckPassword onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
+                                <UserName onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
+                                <PhoneNum onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
+                                <Birth onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
                                 <div>
                                     <div></div>
                                     <div><SignUpBtn type="submit" name="submit" value="회원가입 완료" onClick={saveUserInfo} disabled={activeButton} /></div>
