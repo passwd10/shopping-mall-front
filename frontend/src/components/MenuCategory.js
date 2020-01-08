@@ -8,13 +8,13 @@ const Span = styled.span`
 `;
 
 function MenuCategory({ categoryName, categortId }) {
-    return (
-        <>
-            <Link to={`/category/group/${categortId}`}>
-                <Span>{categoryName}</Span>
-            </Link>
-        </>
-    );
+  return (
+    <>
+      <Link to={`/category/group/${categortId}`}>
+        <Span>{categoryName}</Span>
+      </Link>
+    </>
+  );
 }
 
 export default MenuCategory;

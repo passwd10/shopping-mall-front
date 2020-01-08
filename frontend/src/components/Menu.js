@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
-import MenuCategory from '../components/MenuCategory';
+import MenuCategory from './MenuCategory';
 import { getCategories } from '../services/productsCategoryService';
 
 const ListDiv = styled.div`
-    
     width: 1120px;
     max-width: none !important;
     height: 50px;
@@ -31,54 +30,43 @@ const Li = styled.div`
     float: left;
     left: 50%;
     text-align: center;
-    /* margin: 0 auto; */
-    /* color: #333; */
     padding: 5px;
-
     min-width: 120px;
-    font-weight: 600; 
-    /* -webkit-appearance: none; */
-    /* border: 0px; */
-    /* cursor: pointer;
-    &:active,
-    &:focus {
-      outline: none;
-    }
-    background-color: white; */
+    font-weight: 600;
 `;
 
 function Menu() {
-    const [productsCategoryArr, setProductsCategoryArr] = useState([]);
+  const [productsCategoryArr, setProductsCategoryArr] = useState([]);
 
-    useEffect(() => {
-        let isMount = true;
-        getCategories().then(value => {
-            if (isMount) {
-                setProductsCategoryArr(Object.entries(value));
-            }
-        });
- 
-        return () => {
-            isMount = false;
-        }
-    }, [])
+  useEffect(() => {
+    let isMount = true;
+    getCategories().then((value) => {
+      if (isMount) {
+        setProductsCategoryArr(Object.entries(value));
+      }
+    });
 
-    return (
-        <ListDiv>
-            <Ul>
-                <Li>
-                    <Link to={`/product/new`}>
-                        상품 등록
-                    </Link>
-                </Li>
-                {productsCategoryArr.map((category, index) =>
-                    <Li key={index}>
-                        <MenuCategory categoryName={category[1]} categortId={category[0]} />
-                    </Li>
-                )}
-            </Ul>
-        </ListDiv>
-    )
+    return () => {
+      isMount = false;
+    };
+  }, []);
+
+  return (
+    <ListDiv>
+      <Ul>
+        <Li>
+          <Link to="/product/new">
+            상품 등록
+          </Link>
+        </Li>
+        {productsCategoryArr.map((category, index) => (
+          <Li key={index}>
+            <MenuCategory categoryName={category[1]} categortId={category[0]} />
+          </Li>
+        ))}
+      </Ul>
+    </ListDiv>
+  );
 }
 
 export default Menu;

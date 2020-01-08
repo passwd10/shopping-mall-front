@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
+  BrowserRouter as Router,
+  Route,
+  Switch,
 } from 'react-router-dom';
 
 import Home from '../pages/Home';
@@ -21,63 +21,63 @@ import UserInfo from '../pages/UserInfo';
 import ServiceCenter from '../pages/ServiceCenter';
 
 function Routes() {
-    const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('');
 
-    let searchCallBack = (value) => setSearchKeyword(value);
+  let searchCallBack = (value) => setSearchKeyword(value);
 
-    return (
-        <>
-            <Router>
-                <Switch>
-                    <Route path='/order/purchaseRequest/:productId'>
-                        <PurchaseProduct />
-                    </Route>
-                    <Route path='/cartList'>
-                        <ProductCartList />
-                    </Route>
-                    <Route path='/product/new'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <ProductNew />
-                    </Route>
-                    <Route path='/product/:productId'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <ProductDetail />
-                    </Route>
-                    <Route path='/category/group/:groupId'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <ProductList />
-                    </Route>
-                    <Route path='/products/search'>
-                        <AlwaysTop searchCallBack={searchCallBack} />
-                        <SearchResult keyword={searchKeyword}/>
-                    </Route>
-                    <Route path='/user/login'>  
-                        <Login />
-                    </Route>
-                    <Route path='/user/join'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <SignUp />
-                    </Route>
-                    <Route path='/user/modify'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <UserInfo />
-                    </Route>
-                    <Route path='/mypage/buylist'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <MyPage />
-                    </Route>
-                    <Route path='/mypage/qna'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <ServiceCenter />
-                    </Route>
-                    <Route path='/'>
-                        <AlwaysTop searchCallBack={searchCallBack}/>
-                        <Home />
-                    </Route>
-                </Switch>
-            </Router>
-        </>
-    )
+  return (
+    <>
+      <Router>
+        <Switch>
+          <Route path='/order/purchaseRequest/:productId'>
+            <PurchaseProduct />
+          </Route>
+          <Route path='/cartList'>
+            <ProductCartList />
+          </Route>
+          <Route path='/product/new'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <ProductNew />
+          </Route>
+          <Route path='/product/:productId'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <ProductDetail />
+          </Route>
+          <Route path='/category/group/:groupId'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <ProductList />
+          </Route>
+          <Route path='/products/search'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <SearchResult keyword={searchKeyword} />
+          </Route>
+          <Route path='/user/login'>
+            <Login />
+          </Route>
+          <Route path='/user/join'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <SignUp />
+          </Route>
+          <Route path='/user/modify'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <UserInfo />
+          </Route>
+          <Route path='/mypage/buylist'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <MyPage />
+          </Route>
+          <Route path='/mypage/qna'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <ServiceCenter />
+          </Route>
+          <Route path='/'>
+            <AlwaysTop searchCallBack={searchCallBack} />
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </>
+  )
 }
 
 export default Routes;
