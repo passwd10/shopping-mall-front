@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 import CheckIdDuplicate from '../components/CheckIdDuplicate';
 import CheckPassword from '../components/CheckPassword';
-import SignUpValidation from '../components/SignUpValidation';
 import PhoneNum from '../components/PhoneNum';
 import Birth from '../components/Birth';
 import UserName from '../components/UserName';
@@ -12,7 +13,6 @@ import { signUpUser } from '../services/signUpService';
 
 const SignUpHeader = styled.span`
     display: block;
-    /* background-color: #F9F9F9; */
     color: #333;
     font-size: 40px;
     padding: 20px;
@@ -45,9 +45,7 @@ const SignUpBtn = styled.input`
 `;
 
 function SignUp() {
-
-    const [activeButton, setActiveButton] = useState(true);
-
+    const [isValid, setIsValid] = useState(false);
     const [userInfo, setUserInfo] = useState({
         userId: '',
         password: '',
@@ -55,7 +53,6 @@ function SignUp() {
         phoneNum: '',
         birth: '',
     });
-
     const [validCondition, setValidCondition] = useState({
         validUserId: false,
         validPassword: false,
@@ -64,99 +61,63 @@ function SignUp() {
         validBirth: false,
     })
 
-    const onHandleChange = ({ userId, password, name, phoneNum, birth }, value) => {
+    useEffect(() => {
+        setIsValid(isValidForm());
+    }, [validCondition])
 
-        if (value == 'birth') {
-            setUserInfo({ ...userInfo, birth });
-        }
+    const isValidForm = () =>
+        Object.entries(validCondition)
+            .map(second)
+            .every(isTrue);
 
-        if (value == 'userId') {
-            setUserInfo({ ...userInfo, userId });
-        }
+    const onHandleChange = (property) =>
+        (value) => setUserInfo({ ...userInfo, [property]: value });
 
-        if (value == 'name') {
-            setUserInfo({ ...userInfo, name });
-        }
+    const onHandleValid = (property) =>
+        (valid) => setValidCondition({ ...validCondition, [property]: valid });
 
-        if (value == 'password') {
-            setUserInfo({ ...userInfo, password });
-        }
-
-        if (value == 'phoneNum') {
-            setUserInfo({ ...userInfo, phoneNum });
-        }
-
-    };
-
-    const onHandleValid = ({ validUserId, validPassword, validName, validPhoneNum, validBirth }, value) => {
-        if (value == 'birth') {
-            setValidCondition({ ...validCondition, validBirth });
-        }
-
-        if (value == 'userId') {
-            setValidCondition({ ...validCondition, validUserId });
-        }
-
-        if (value == 'name') {
-            setValidCondition({ ...validCondition, validName });
-        }
-
-        if (value == 'password') {
-            setValidCondition({ ...validCondition, validPassword });
-        }
-
-        if (value == 'phoneNum') {
-            setValidCondition({ ...validCondition, validPhoneNum });
-        }
-    };
-
-    const saveUserInfo = event => {
+    const signup = event => {
         event.preventDefault();
         event.stopPropagation();
 
         signUpUser(userInfo);
     };
 
-    useEffect(() => {
-        let satisfyCondition = 0;
+    const second = (arr) => arr[1];
 
-        for (let [key, value] of Object.entries(validCondition)) {
-            if (value == true) {
-                satisfyCondition++;
-            }
-        }
-
-        if (satisfyCondition == 5) {
-            setActiveButton(false);
-        }
-
-        if (satisfyCondition != 5) {
-            setActiveButton(true);
-        }
-
-    }, [validCondition])
+    const isTrue = (value) => value === true;
 
     return (
-        <>
-            <div style={{display: 'flex', flexDirection: 'column', height: '100%',  backgroundColor: '#F9F9F9'}}>
-                <div style={{ flex: '1', overflow: 'auto', paddingBottom: '100px' }}>
-                    <SignUpHeader>회원가입</SignUpHeader>
-                    <SignUpForm name="sign_up_form">
-                            <div>
-                                <CheckIdDuplicate onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
-                                <CheckPassword onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
-                                <UserName onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
-                                <PhoneNum onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
-                                <Birth onHandleChange={onHandleChange} userInfo={userInfo} onHandleValid={onHandleValid} />
-                                <div>
-                                    <div></div>
-                                    <div><SignUpBtn type="submit" name="submit" value="회원가입 완료" onClick={saveUserInfo} disabled={activeButton} /></div>
-                                </div>
-                            </div>
-                    </SignUpForm>
-                </div>
-            </div>
-        </>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', paddingBottom: '100px', backgroundColor: '#F9F9F9' }}>
+            <SignUpHeader>회원가입</SignUpHeader>
+            <SignUpForm name="sign_up_form">
+                <CheckIdDuplicate
+                    userInfo={userInfo}
+                    onHandleChange={onHandleChange('userId')}
+                    onHandleValid={onHandleValid('validUserId')} />
+                <CheckPassword
+                    userInfo={userInfo}
+                    onHandleChange={onHandleChange('password')}
+                    onHandleValid={onHandleValid('validPassword')} />
+                <UserName
+                    userInfo={userInfo}
+                    onHandleChange={onHandleChange('name')}
+                    onHandleValid={onHandleValid('validName')} />
+                <PhoneNum
+                    userInfo={userInfo}
+                    onHandleChange={onHandleChange('phoneNum')}
+                    onHandleValid={onHandleValid('validPhoneNum')} />
+                <Birth
+                    userInfo={userInfo}
+                    onHandleChange={onHandleChange('birth')}
+                    onHandleValid={onHandleValid('validBirth')} />
+                <SignUpBtn
+                    value="회원가입 완료"
+                    onClick={signup}
+                    disabled={!isValid}
+                    type="submit" />
+            </SignUpForm>
+        </div>
     )
 }
 
