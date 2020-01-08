@@ -118,21 +118,21 @@ function SignUp() {
     };
 
     useEffect(() => {
-        let cntTrue = 0;
+        let satisfyCondition = 0;
 
         for (let [key, value] of Object.entries(allValid)) {
             if (value == true) {
-                cntTrue++;
+                satisfyCondition++;
             }
         }
 
-        console.log('cntTrue', cntTrue);
+        console.log('satisfyCondition', satisfyCondition);
 
-        if (cntTrue == 5) {
+        if (satisfyCondition == 5) {
             setActiveButton(false);
         }
 
-        if (cntTrue != 5) {
+        if (satisfyCondition != 5) {
             setActiveButton(true);
         }
 
