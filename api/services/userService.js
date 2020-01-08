@@ -10,23 +10,36 @@ const isUserInUserStore = (userId, userPasswd) => {
 
 }
 
-const setUserStore = (firstUserId, userKey, userValue) => {
+const setUserStore = (firstUserId, userKey, userValue) => userList.userLists.map(v => v.userId === firstUserId ? v[userKey] = userValue : null);
 
-    return userList.userLists.map(v => v.userId === firstUserId ? v[userKey] = userValue : null);
 
-}
+const getCartId = (userId) => userList._userList.filter(v => v.userId === userId).cartId;
 
-const getCartId = (userId) => {
-    return userList._userList.filter(v => v.userId === userId).cartId;
-}
+
+const createUserList = ({ userId, password, name, phoneNum, birth }) => {
+    userList._userList = [
+        ...userList._userList,
+        {
+            userId,
+            password,
+            name,
+            phoneNum,
+            birth,
+            cartList: [],
+        }
+    ]
+
+    return userList._userList.filter(v => v.userId === userId)[0].userId;
+};
 
 const addProductIdInCart = (userId, productId) => {
     userList._userList.filter(v => v.userId === userId);
     //Todo
-}
+};
 
 module.exports = {
     isUserInUserStore,
     setUserStore,
     getCartId,
+    createUserList,
 };

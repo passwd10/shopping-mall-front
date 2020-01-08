@@ -10,7 +10,7 @@ const {
 
 const { userList } = require('./stores/userStore');
 const { addItem, searchItems } = require('./services/itemService');
-const { isUserInUserStore, setUserStore, getCartId } = require('./services/userService');
+const { isUserInUserStore, setUserStore, getCartId, createUserList } = require('./services/userService');
 const { addCartList, deleteCartList } = require('./services/cartService');
 const { checkDuplicateId } = require('./services/checkUserDuplicate');
 
@@ -111,6 +111,12 @@ app.get('/signUp/checkDuplicate', (req, res) => {
     const checkingObj = req.query;
     const isDup = checkDuplicateId(Object.keys(checkingObj) == 'id' && req.query.id)
     res.send(isDup);
+})
+
+app.post('/signUp/user', (req, res) => {
+    const { userInfo } = req.body;
+    const signUpUserInfo = createUserList(userInfo);
+    res.send(signUpUserInfo);
 })
 
 app.listen(port, () => {

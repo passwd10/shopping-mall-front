@@ -8,6 +8,8 @@ import PhoneNum from '../components/PhoneNum';
 import Birth from '../components/Birth';
 import UserName from '../components/UserName';
 
+import { signUpUser } from '../services/signUpService';
+
 const SignUpHeader = styled.span`
     display: block;
     /* background-color: #F9F9F9; */
@@ -112,9 +114,7 @@ function SignUp() {
         event.preventDefault();
         event.stopPropagation();
 
-        // userStore.createUserList(userInfo.userId, userInfo.password, userInfo.name, userInfo.phoneNum, userInfo.birth);
-        // userStore.createUserList(userInfo);
-        // console.log('유저정보', userStore.userLists);
+        signUpUser(userInfo);
     };
 
     useEffect(() => {
