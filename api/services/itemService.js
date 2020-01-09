@@ -1,4 +1,4 @@
-const { productStore } = require('../stores/productStore');
+import { productStore } from '../stores/productStore';
 
 const store = {
   items: [],
@@ -39,7 +39,7 @@ const searchItems = (keyword) => {
   return productStore._product.filter(product => product.title.indexOf(keyword) != -1);
 }
 
-module.exports = {
+export {
   getItems,
   addItem,
   removeItem,
