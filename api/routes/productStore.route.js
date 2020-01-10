@@ -6,7 +6,7 @@ import { productStore } from '../stores/productStore';
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  res.send(productStore._product);
+  res.send(productStore.products);
 });
 
 router.get('/:id', (req, res) => {
@@ -14,8 +14,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  const { title, categoryId, categoryName, detail, img, price } = req.body;
-  const item = addItem(title, categoryId, categoryName, detail, img, price);
+  const item = addItem(req.body);
   res.send({ item });
 })
 
