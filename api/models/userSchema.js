@@ -28,33 +28,4 @@ const userSchema = new Schema({
 
 const User = mongoose.model('user', userSchema);
 
-const user = [
-  {
-    userId: 'hye',
-    password: "1234",
-    name: '박앤서',
-    phoneNum: "01012345678",
-    birth: "19941007",
-    cartList: [],
-  },
-  {
-    userId: 'hye2',
-    password: "1234",
-    name: '박앤서2',
-    phoneNum: "01012345678",
-    birth: "1994-10-07",
-    cartList: [],
-  }
-]
-
-User.insertMany(user, onInsert);
-
-function onInsert(err, docs) {
-  if (err) {
-    console.error();
-  } else {
-    console.log('Users were successfully stored', docs.length);
-  }
-}
-
 export default User;

@@ -3,7 +3,7 @@ import session from 'express-session';
 import cors from 'cors';
 import Route from './routes';
 import mongoose from 'mongoose';
-import User from './models/userSchema';
+import initDB from './services/initDataBaseService';
 
 const app = express();
 
@@ -29,7 +29,6 @@ app.use(session({
 }));
 
 app.use(Route);
-
 app.use('/static', express.static('public'));
 
 const db = mongoose.connection;
@@ -44,6 +43,7 @@ db.once('open', function () {
       console.log("delete collection success");
     }
   });
+  initDB();
 });
 
 mongoose.connect('mongodb://localhost:27017/store', {
@@ -51,6 +51,7 @@ mongoose.connect('mongodb://localhost:27017/store', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
