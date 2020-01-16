@@ -2,8 +2,12 @@ import express from 'express';
 import session from 'express-session';
 import cors from 'cors';
 import Route from './routes';
+import mongoose from 'mongoose';
+import User from './models/userSchema';
 
 const app = express();
+
+const PORT = 3000;
 
 app.use(express.json());
 app.use(cors({
@@ -28,7 +32,25 @@ app.use(Route);
 
 app.use('/static', express.static('public'));
 
-const PORT = 3000;
+const db = mongoose.connection;
+
+db.on('error', console.error);
+db.once('open', function () {
+  console.log('Connected to mongod server');
+  db.dropCollection("users", function (err, result) {
+    if (err) {
+      console.log("error delete collection");
+    } else {
+      console.log("delete collection success");
+    }
+  });
+});
+
+mongoose.connect('mongodb://localhost:27017/store', {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
