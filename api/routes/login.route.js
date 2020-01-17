@@ -4,14 +4,12 @@ import { isUserInUserStore } from '../services/userService';
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { userId, userPasswd } = req.body;
-  const userInfo = isUserInUserStore(userId, userPasswd);
-  console.log('잘 오냐', userInfo);
+  const userInfo = await isUserInUserStore(userId, userPasswd);
   const session = req.session;
 
   session.userInfo = userInfo;
-
   res.send(session.userInfo);
 });
 

@@ -20,8 +20,7 @@ const userSchema = new Schema({
     min: 11
   },
   birth: {
-    type: Date,
-    default: Date.now
+    type: Number
   },
   cartList: [Number],
 })

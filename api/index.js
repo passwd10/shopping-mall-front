@@ -3,8 +3,7 @@ import session from 'express-session';
 import cors from 'cors';
 import Route from './routes';
 import mongoose from 'mongoose';
-import initDB, { clearDB } from './services/databaseService';
-import User from './models/userSchema';
+import { initCollection, clearCollection } from './services/collectionService';
 
 const app = express();
 
@@ -37,8 +36,8 @@ const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', () => {
   console.log('Connected to mongod server');
-  clearDB();
-  initDB();
+  clearCollection();
+  initCollection();
 });
 
 mongoose.connect('mongodb://localhost:27017/store', {
@@ -46,7 +45,6 @@ mongoose.connect('mongodb://localhost:27017/store', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
-
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

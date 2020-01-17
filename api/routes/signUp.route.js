@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { checkDuplicateId } from '../services/checkUserDuplicate';
-import { createUserList } from '../services/userService';
+import UserRepository from '../repositories/user.repository'
 
 const router = express.Router();
 
@@ -11,9 +11,12 @@ router.get('/checkDuplicate', (req, res) => {
   res.send(isDup);
 })
 
-router.post('/user', (req, res) => {
+router.post('/user', async (req, res) => {
   const { userInfo } = req.body;
-  const signUpUserInfo = createUserList(userInfo);
+  const userRepo = new UserRepository();
+
+  const signUpUserInfo = await userRepo.store(userInfo);
+
   res.send(signUpUserInfo);
 })
 

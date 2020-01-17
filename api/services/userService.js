@@ -18,19 +18,20 @@ const setUserStore = (firstUserId, userKey, userValue) => userList.userLists
 const getCartId = (userId) => userList._userList
   .filter(v => v.userId === userId).cartId;
 
-const createUserList = ({ userId, password, name, phoneNum, birth }) => {
-userList._userList =
-  [
-    ...userList._userList,
-    {
-      userId,
-      password,
-      name,
-      phoneNum,
-      birth,
-      cartList: [],
-    }
-  ]
+const createUserList = (userInfo) => {
+  const { userId, password, name, phoneNum, birth } = userInfo;
+  userList._userList =
+    [
+      ...userList._userList,
+      {
+        userId,
+        password,
+        name,
+        phoneNum,
+        birth,
+        cartList: [],
+      }
+    ]
   return userList._userList.filter(v => v.userId === userId)[0].userId;
 };
 

@@ -1,23 +1,23 @@
-import { productStore } from '../stores/productStore';
+import Product from '../models/productSchema';
 
 class ProductStoreRepository {
-  constructor()
+  constructor() { }
 
   async store(data) {
-    return await productStore.createProduct(data);
+    const newProduct = await Product.create({})
+    return newProduct;
   }
 
-  async findById(id) {
-    return await productStore.getProduct(id);
-  }
-
-  async findByTitle(title) {
-    return await productStore.getProductTitle(title);
+  async findByName(name) {
+    await Product.find({
+      name: name,
+    });
   }
 
   async findAll() {
-    return await productStore.products;
-  }
+    const products = await Product.find({});
+    return products;
+  };
 
 }
 
