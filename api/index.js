@@ -3,7 +3,8 @@ import session from 'express-session';
 import cors from 'cors';
 import Route from './routes';
 import mongoose from 'mongoose';
-import initDB from './services/initDataBaseService';
+import initDB, { clearDB } from './services/databaseService';
+import User from './models/userSchema';
 
 const app = express();
 
@@ -34,15 +35,9 @@ app.use('/static', express.static('public'));
 const db = mongoose.connection;
 
 db.on('error', console.error);
-db.once('open', function () {
+db.once('open', () => {
   console.log('Connected to mongod server');
-  db.dropCollection("users", function (err, result) {
-    if (err) {
-      console.log("error delete collection");
-    } else {
-      console.log("delete collection success");
-    }
-  });
+  clearDB();
   initDB();
 });
 

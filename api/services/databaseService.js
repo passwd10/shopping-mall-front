@@ -11,4 +11,14 @@ const initDB = () => {
   });
 }
 
+export const clearDB = () => {
+  User.deleteMany({}, (err) => {
+    if(err) {
+      console.error(err);
+    } else {
+      console.log('DB cleared successfully');
+    }
+  });
+}
+
 export default initDB;
