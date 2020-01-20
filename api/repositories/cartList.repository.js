@@ -3,17 +3,17 @@ import { userList } from '../stores/userStore';
 class CartListRepository {
   constructor ()
 
-  async store(data) {
+  // async store(data) {
     
-  }
+  // }
 
-  async findAll() {
+  // async findAll() {
     
-  }
+  // }
 
-  async deleteOne() {
+  // async deleteOne() {
 
-  }
+  // }
 }
 
 export default CartListRepository;

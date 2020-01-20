@@ -44,7 +44,7 @@ mongoose.connect('mongodb://localhost:27017/store', {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+}).catch(err => console.error(err));
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

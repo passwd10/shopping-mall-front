@@ -3,8 +3,6 @@ import { addCartList, deleteCartList } from '../services/cartService';
 
 const router = express.Router();
 
-console.log('cartListRoute');
-
 router.get('/', (req, res) => {
   console.log('??', req.session);
   res.send(req.session.userInfo[0].cartList);

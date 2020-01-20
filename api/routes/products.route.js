@@ -4,9 +4,9 @@ import { searchItems } from '../services/itemService'
 
 const router = express.Router();
 
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
   const searchKeyword = req.query.q;
-  res.send(searchItems(searchKeyword));
+  res.send(await searchItems(searchKeyword));
 })
 
 export default router;
