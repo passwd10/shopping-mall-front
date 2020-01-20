@@ -1,22 +1,32 @@
 import Product from '../models/productSchema';
 
+const DEFAULT_IMAGE = '/../img/cantfind.jpg';
+
 class ProductStoreRepository {
   constructor() { }
 
-  async store(data) {
-    const newProduct = await Product.create({})
-    return newProduct;
+  async store(product) {
+    const length = await Product.collection.countDocuments();
+    return await Product.create({
+      ...product,
+      id: length + 1,
+      img: DEFAULT_IMAGE,
+    })
   }
 
-  async findByName(name) {
+  async findById(id) {
     await Product.find({
-      name: name,
+      id: id,
     });
   }
 
-  async findAll() {
+  async findByKeyword(keyword) {
     const products = await Product.find({});
-    return products;
+    return products.filter(product => product.title.includes(keyword));
+  }
+
+  async findAll() {
+    return await Product.find({});
   };
 
 }

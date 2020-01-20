@@ -1,24 +1,17 @@
-import { productStore } from '../stores/productStore';
+import ProductStoreRepository from '../repositories/productStore.repository';
 
 const store = {
   items: [],
 };
 
+const product = new ProductStoreRepository();
+
 const getItems = () => {
   return store.items;
 };
 
-const addItem = ({title, categoryId, categoryName, detail, img, price}) => {
-  productStore.createProduct({
-    title,
-    categoryId,
-    categoryName,
-    detail,
-    img,
-    price,
-  })
-
-  return store.items;
+const addItem = (item) => {
+  return product.store(item);
 }
 
 const removeItem = (id) => {
@@ -35,8 +28,8 @@ const toggleItem = (id) => {
   return store.items;
 };
 
-const searchItems = (keyword) => {
-  return productStore._product.filter(product => product.title.indexOf(keyword) != -1);
+const searchItems = async (keyword) => {
+  return product.findByKeyword(keyword);
 }
 
 export {

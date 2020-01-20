@@ -14,8 +14,8 @@ const getProduct = async (id) => {
   return data;
 }
 
-const addProduct = async (title, categoryId, categoryName, detail, img, price) => {
-  const { data } = await axios.post(URL, { title, categoryId, categoryName, detail, img, price });
+const addProduct = async (productInfo) => {
+  const { data } = await axios.post(URL, productInfo);
   return data;
 }
 

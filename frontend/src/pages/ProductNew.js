@@ -11,7 +11,7 @@ function ProductNew() {
     const [detail, setDetail] = useState('');
     const [price, setPrice] = useState(0);
     const [categoryName, setCategoryName] = useState('');
-    const [categoryId, setCategoryId] = useState(0);
+    const [categoryId, setCategoryId] = useState('0');
     const [fileName, setFileName] = useState('이미지 파일 선택');
     const [img, setImg] = useState();
 
@@ -19,21 +19,21 @@ function ProductNew() {
         event.preventDefault();
         event.stopPropagation();
 
-        addProduct(title, categoryId, categoryName, detail, img, price);
-        // productStore.createProduct({
-        //     title,
-        //     categoryId,
-        //     categoryName,
-        //     detail,
-        //     img,
-        //     price,
-        // })
+        const newProduct = {
+            title,
+            categoryId,
+            categoryName,
+            detail,
+            img,
+            price
+        }
 
-        
+        addProduct(newProduct);        
     };
 
     const onCategoryChange = (event) => {
         setCategoryName(event.target.value ? event.target.value : undefined);
+        setCategoryId(event.target.options.selectedIndex);
     };
 
     const onChangeFile = (event) => {
@@ -51,16 +51,11 @@ function ProductNew() {
                     <ModifyCategory> 카테고리 </ModifyCategory>
                     <ModifyInfo>
                         <select id='productCategory' onChange={onCategoryChange} key={categoryId} value={categoryName}>
-                            <option value={undefined} key={0}>카테고리를 선택해주세요.</option>
-                            <option value={'견과류'} key={1}>견과류</option>
-                            <option value={'음료'} key={2}>음료</option>
-                            <option value={'스포츠'} key={3}>스포츠</option>
-                            <option value={'화장품'} key={4}>화장품</option>
-
-                            {/* {Object.values(productsCategory).map((category,index) => {
-                            console.log(category,index);
-                            <option value = {index+1}> {category} </option>
-                        })} */}
+                            <option value={undefined} key='0'>카테고리를 선택해주세요.</option>
+                            <option value={'견과류'} key='1'>견과류</option>
+                            <option value={'음료'} key='2'>음료</option>
+                            <option value={'스포츠'} key='3'>스포츠</option>
+                            <option value={'화장품'} key='4'>화장품</option>
                         </select>
                     </ModifyInfo>
                 </ModifyDivGrid>

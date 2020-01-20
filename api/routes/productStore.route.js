@@ -1,16 +1,20 @@
 import express from 'express';
 
 import { addItem } from '../services/itemService';
-import { productStore } from '../stores/productStore';
+import ProductStoreRepository from '../repositories/productStore.repository'
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.send(productStore.products);
+const productStore = new ProductStoreRepository();
+
+router.get('/', async (req, res, next) => {
+  const products = await productStore.findAll();
+  res.send(products);
 });
 
-router.get('/:id', (req, res) => {
-  res.send(productStore.getProduct(req.params.id));
+router.get('/:id', async (req, res) => {
+  const product = await productStore.findById(req.params.id);
+  res.send(product);
 })
 
 router.post('/', (req, res) => {
