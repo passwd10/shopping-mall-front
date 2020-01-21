@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ModifyDivGrid, { ModifyCategory, ModifyInfo } from '../lib/Div';
 import ModifyBtn from '../lib/Button';
@@ -11,9 +11,11 @@ function ModifyUserId() {
   const [button, setButton] = useState('아이디 변경')
   const [visible, setVisible] = useState(false);
 
-  (async () =>
-    await getUserInfo().then(v => setUserId(v[0].userId))
-  )();
+  useEffect(() => {
+    (async () =>
+      await getUserInfo().then(v => setUserId(v[0].userId))
+    )();
+  }, [])
 
   const onHandleModify = () => {
     setVisible(!visible);
@@ -21,7 +23,7 @@ function ModifyUserId() {
   };
 
   const changeId = () => {
-    patchUserInfo('userId', inputUserId);
+    patchUserInfo({ userId: inputUserId });
     setUserId(inputUserId);
     onHandleModify();
   }

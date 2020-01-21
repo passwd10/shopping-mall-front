@@ -39,11 +39,12 @@ let newGroupId = 0;
 
 function ProductList() {
     const { groupId } = useParams();
-    let categoryName;
     const [sort, setSort] = useState('');
     const [products, setProducts] = useState([]);
 
-    getCategories().then(category => categoryName = category[groupId]);
+    let categoryName;
+
+    getCategories().then(v => categoryName = v[groupId - 1].categoryName)
 
     getProducts().then(value => {
         if (groupId !== newGroupId) {

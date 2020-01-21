@@ -13,9 +13,11 @@ function ModifyPhoneNum() {
   const [visible, setVisible] = useState(false);
   const [notice, setNotice] = useState('');
 
-  (async () =>
-    await getUserInfo().then(v => setPhoneNum(v[0].phoneNum))
-  )();
+  useEffect(() => {
+    (async () =>
+      await getUserInfo().then(v => setPhoneNum(v[0].phoneNum))
+    )();
+  }, [])
 
   const onHandleModify = () => {
     setVisible(!visible);
@@ -30,7 +32,7 @@ function ModifyPhoneNum() {
 
     if (inputPhoneNum.length == 11) {
       setNotice('');
-      patchUserInfo('phoneNum', inputPhoneNum);
+      patchUserInfo({ phoneNum: inputPhoneNum });
       setPhoneNum(inputPhoneNum);
       onHandleModify();
     }

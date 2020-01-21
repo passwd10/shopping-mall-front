@@ -1,8 +1,8 @@
-import { userList } from '../stores/userStore';
 import UserRepository from '../repositories/user.repository';
 
+const userRepo = new UserRepository();
+
 const isUserInUserStore = async (userId, userPasswd) => {
-  const userRepo = new UserRepository();
   const data = await userRepo.findAll();
 
   return data.filter(user => {
@@ -12,32 +12,16 @@ const isUserInUserStore = async (userId, userPasswd) => {
   });
 }
 
-const setUserStore = (firstUserId, userKey, userValue) => userList.userLists
-  .map(v => v.userId === firstUserId ? v[userKey] = userValue : null);
-
-const getCartId = (userId) => userList._userList
-  .filter(v => v.userId === userId).cartId;
+const setUserStore = (userId, updateInfo) => {
+  return userRepo.setUser(userId, updateInfo);
+};
 
 const createUserList = (userInfo) => {
-  const { userId, password, name, phoneNum, birth } = userInfo;
-  userList._userList =
-    [
-      ...userList._userList,
-      {
-        userId,
-        password,
-        name,
-        phoneNum,
-        birth,
-        cartList: [],
-      }
-    ]
-  return userList._userList.filter(v => v.userId === userId)[0].userId;
+  return userRepo.store(userInfo)
 };
 
 export {
   isUserInUserStore,
   setUserStore,
-  getCartId,
   createUserList,
 };

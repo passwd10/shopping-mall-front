@@ -3,8 +3,8 @@ import User from '../models/userSchema';
 class UserRepository {
   constructor(){}
 
-  async store(data) {
-    const { userId, password, name, phoneNum, birth } = data;
+  async store(userInfo) {
+    const { userId, password, name, phoneNum, birth } = userInfo;
 
     const newUser = await User.create({
       userId: userId,
@@ -28,6 +28,13 @@ class UserRepository {
     const users = await User.find({});
     return users;
   };
+
+  async setUser(userId, updateInfo) {
+    await User.updateOne({ userId: userId }, updateInfo);
+    return User.find({
+      userId: userId,
+    })
+  }
 
 }
 

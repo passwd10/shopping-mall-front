@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ModifyDivGrid, { ModifyCategory, ModifyInfo } from '../lib/Div';
 import ModifyBtn from '../lib/Button';
@@ -11,17 +11,19 @@ function ModifyName() {
   const [button, setButton] = useState('이름 변경');
   const [visible, setVisible] = useState(false);
 
-  (async () => 
-    await getUserInfo().then((v) => setName(v[0].name))
-  )();
+  useEffect(() => {
+    (async () =>
+      await getUserInfo().then((v) => setName(v[0].name))
+    )();
+  }, [])
 
   const onHandleModify = () => {
     setVisible(!visible);
-    button == '이름 변경' ? setButton('변경 취소') : setButton('이름 변경');
+    button === '이름 변경' ? setButton('변경 취소') : setButton('이름 변경');
   };
 
   const changeName = () => {
-    patchUserInfo('name', inputName);
+    patchUserInfo({ name: inputName });
     setName(inputName);
     onHandleModify();
   };

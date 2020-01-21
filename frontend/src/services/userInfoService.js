@@ -9,8 +9,8 @@ const getUserInfo = async () => {
   return data;
 }
 
-const patchUserInfo = async (userAttribute, infoToChange) => {
-  const { data } = await axios.patch(URL, { userAttribute, infoToChange })
+const patchUserInfo = async (updateInfo) => {
+  const { data } = await axios.patch(URL, { updateInfo })
   return data;
 }
 

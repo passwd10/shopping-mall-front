@@ -1,11 +1,12 @@
 import express from 'express'
 
-import { productsCategory } from '../stores/productStore';
+import { getCategories } from '../services/categoryService'
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send(productsCategory);
+router.get('/', async (req, res) => {
+  const categories = await getCategories();
+  res.send(categories);
 });
 
 export default router;

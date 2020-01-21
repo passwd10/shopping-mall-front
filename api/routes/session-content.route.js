@@ -1,6 +1,6 @@
 import express from 'express';
 
-import setUserStore from '../services/userService';
+import { setUserStore } from '../services/userService';
 
 const router = express.Router();
 
@@ -8,13 +8,12 @@ router.get('/', (req, res) => {
   res.send(req.session.userInfo)
 });
 
-router.patch('/', (req, res) => {
-  const { userAttribute, infoToChange } = req.body;
-  const firstUserId = req.session.userInfo[0].userId;
+router.patch('/', async (req, res) => {
+  const { updateInfo } = req.body;
 
-  req.session.userInfo[0][userAttribute] = infoToChange;
+  const userId = req.session.userInfo[0].userId;
 
-  setUserStore(firstUserId, userAttribute, infoToChange);
+  req.session.userInfo = await setUserStore(userId, updateInfo);
 
   res.send(req.session.userInfo);
 });

@@ -11,9 +11,6 @@ import { getUserInfo } from '../services/userInfoService';
 
 function UserInfo() {
    
-    // const [userId, setUserId] = useState(localStorage.getItem('userId'));
-    // const [password, setPassword] = useState(localStorage.getItem('password'));
-    // const [phoneNum, setPhoneNum] = useState(localStorage.getItem('phoneNum'));
     const [birth, setBirth] = useState('');
 
     (async () => 
