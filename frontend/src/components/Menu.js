@@ -42,7 +42,7 @@ function Menu() {
     let isMount = true;
     getCategories().then((value) => {
       if (isMount) {
-        setProductsCategoryArr(Object.entries(value));
+        setProductsCategoryArr(value);
       }
     });
 
@@ -61,7 +61,7 @@ function Menu() {
         </Li>
         {productsCategoryArr.map((category, index) => (
           <Li key={index}>
-            <MenuCategory categoryName={category[1]} categortId={category[0]} />
+            <MenuCategory categoryName={category.categoryName} categoryId={category.categoryId} />
           </Li>
         ))}
       </Ul>

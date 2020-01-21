@@ -7,10 +7,10 @@ const Span = styled.span`
     font-size: 15px;
 `;
 
-function MenuCategory({ categoryName, categortId }) {
+function MenuCategory({ categoryName, categoryId }) {
   return (
     <>
-      <Link to={`/category/group/${categortId}`}>
+      <Link to={`/category/group/${categoryId}`}>
         <Span>{categoryName}</Span>
       </Link>
     </>
