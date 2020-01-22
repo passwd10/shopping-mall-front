@@ -53,6 +53,18 @@ class UserRepository {
       userId: userId,
     });
   };
+
+  async deleteOneInCart(userId, product) {
+    const user = await this.findById(userId);
+    const userCart = _.remove(user[0].cartList, (v) => {
+      return !_.isEqual(v, product);
+    });
+
+    await User.updateOne({ userId: userId }, { cartList: userCart });
+    return User.find({
+      userId: userId,
+    });  
+  }
 }
 
 export default UserRepository;
