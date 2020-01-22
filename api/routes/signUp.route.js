@@ -5,10 +5,10 @@ import UserRepository from '../repositories/user.repository'
 
 const router = express.Router();
 
-router.get('/checkDuplicate', (req, res) => {
+router.get('/checkDuplicate', async (req, res) => {
   const checkingObj = req.query;
-  const isDup = checkDuplicateId(Object.keys(checkingObj) == 'id' && req.query.id)
-  res.send(isDup);
+  const isDup = await checkDuplicateId(Object.keys(checkingObj) == 'id' && req.query.id);
+  res.send(isDup + '');
 })
 
 router.post('/user', async (req, res) => {

@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ModifyDivGrid, { ModifyCategory, ModifyInfo } from '../lib/Div';
 
+import { getUserInfo, patchUserInfo } from '../services/userInfoService';
+
 function ShippingInfo() {
+  const [name, setName] = useState('');
+  const [phoneNum, setPhoneNum] = useState('');
+
+  useEffect(() => {
+    (async () =>
+      await getUserInfo().then((v) => setName(v[0].name))
+    )();
+  }, [])
+
+  useEffect(() => {
+    (async () =>
+      await getUserInfo().then(v => setPhoneNum(v[0].phoneNum))
+    )();
+  }, [])
 
   return (
     <div>
@@ -9,7 +25,7 @@ function ShippingInfo() {
       <div>
         <ModifyDivGrid>
           <ModifyCategory>주문자</ModifyCategory>
-          <ModifyInfo>박인서</ModifyInfo>
+          <ModifyInfo>{name}</ModifyInfo>
         </ModifyDivGrid>
         <ModifyDivGrid>
           <ModifyCategory>이름</ModifyCategory>
@@ -17,7 +33,7 @@ function ShippingInfo() {
         </ModifyDivGrid>
         <ModifyDivGrid>
           <ModifyCategory>연락처</ModifyCategory>
-          <ModifyInfo>010-1234-5678</ModifyInfo>
+          <ModifyInfo>0{phoneNum}</ModifyInfo>
         </ModifyDivGrid>
         <ModifyDivGrid>
           <ModifyCategory>주소</ModifyCategory>

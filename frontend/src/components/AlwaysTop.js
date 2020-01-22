@@ -47,7 +47,7 @@ const Img = styled.img`
 const TopBar = styled.div`
     width: 1120px;
     max-width: none !important;
-    height: 150px;
+    height: 250px;
     margin: 0 auto;
 `;
 
@@ -96,7 +96,7 @@ function AlwaysTop(props) {
 
         <Link to="/">
             <Title>
-                <Img src="/../img/logo.jpg" />
+                <Img src="/../img/home-logo.png" />
             </Title>
         </Link>
         <Search searchCallBack={sendSearchKeywordToRoutes} />

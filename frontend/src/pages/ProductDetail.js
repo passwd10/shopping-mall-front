@@ -46,27 +46,6 @@ function ProductDetail() {
     const { productId } = useParams();
     const [productState, dispatch] = useReducer(reducer, initialProduct);
 
-    // const [title, setTitle] = useState();
-    // const [img, setImg] = useState();
-    // const [categoryId, setCategoryId] = useState();
-    // const [price, setPrice] = useState();
-    // const [detail, setDetail] = useState();
-    // const [categoryName, setCategoryName] = useState();
-    // async function fetchMyApi() {
-    //     try {
-    //         const saveData = await getProducts();
-    //         const productIndex = productId - 1;
-    //         setTitle(saveData[productIndex].title);
-    //         setImg(saveData[productIndex].img);
-    //         setCategoryId(saveData[productIndex].categoryId);
-    //         setCategoryName(saveData[productIndex].categoryName);
-    //         setPrice(saveData[productIndex].price);
-    //         setDetail(saveData[productIndex].detail);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
     const fetchMyApi = async () => {
         try {
             const saveData = await getProducts();
@@ -111,10 +90,34 @@ function ProductDetail() {
                 <div style={{ display: 'flex', marginTop: '30px' }}>
                     <div>
                         <Link to={`/order/purchaseRequest/${productId}`}>
-                            <button style={{ backgroundColor: '#5f0080', color: 'white', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid purple', marginRight: '20px' }}>구매하기</button>
+                            <button style={{
+                                backgroundColor: '#5f0080',
+                                color: 'white',
+                                padding: '10px',
+                                paddingLeft: '40px',
+                                paddingRight: '40px',
+                                borderRadius: '5px',
+                                border: '1px solid purple',
+                                marginRight: '20px'
+                            }}>
+                                구매하기
+                            </button>
                         </Link>
                     </div>
-                    <div><button style={{ backgroundColor: 'white', color: 'purple', padding: '10px', paddingLeft: '40px', paddingRight: '40px', borderRadius: '5px', border: '1px solid #5f0080' }} onClick={addToCart}>장바구니 담기</button></div>
+                    <div>
+                        <button style={{
+                            backgroundColor: 'white',
+                            color: 'purple',
+                            padding: '10px',
+                            paddingLeft: '40px',
+                            paddingRight: '40px',
+                            borderRadius: '5px',
+                            border: '1px solid #5f0080'
+                        }}
+                            onClick={addToCart}>
+                            장바구니 담기
+                        </button>
+                    </div>
                 </div>
             </div>
         </Div>

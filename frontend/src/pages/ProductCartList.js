@@ -117,10 +117,6 @@ function ProductCartList() {
         deleteCart(id).then(v => setMyCartList(v));
     }
 
-    const onChangeList = (id) => {
-        calculatePrice();
-    };
-
     const calculatePrice = () => {
         let resultPrice = 0;
         myCartList.filter(product => product.purchase == true).map(product => resultPrice += Number(product.price));
@@ -133,8 +129,8 @@ function ProductCartList() {
 
     useEffect(() => {
         promise.then(product => {
-            console.log('product', product);
             setProducts(product);
+            console.log('products : ', product);
         })
     }, [myCartList])
 
@@ -149,7 +145,9 @@ function ProductCartList() {
                 <div style={{ width: '700px', margin: 'auto' }}>
                     <CartHeader>장바구니</CartHeader>
                     <Div>
-                        <span>장바구니 수량 : {myCartList.length} 개</span>
+                        <span>
+                            장바구니 수량 : {myCartList.length} 개
+                        </span>
                     </Div>
                     <div>
                         <DivInfo>
@@ -159,20 +157,32 @@ function ProductCartList() {
                             <div>수량</div>
                             <div></div>
                         </DivInfo>
-                        {products.map(cartList =>
-                            <DivCart key={cartList.id}>
+                        {products.map((product, index) =>
+                            <DivCart key={product.id}>
                                 <InCart>
-                                    <input type="checkbox" defaultChecked={cartList.purchase} onChange={() => onChangeList(cartList.id)} />
+                                    {index + 1}
                                 </InCart>
-                                <InCart><img src={cartList.img} width="30%"></img>{cartList.title}</InCart>
-                                <InCart>{cartList.price}원</InCart>
+                                <InCart>
+                                    <img src={product.img} width="30%"/>
+                                    {product.title}
+                                </InCart>
+                                <InCart>
+                                    {product.price}
+                                    원
+                                </InCart>
                                 <InCart>1</InCart>
-                                <div><DeleteBtn onClick={() => deleteList(cartList.id)}>삭제</DeleteBtn></div>
+                                <div>
+                                    <DeleteBtn onClick={() => deleteList(cartList.id)}>
+                                        삭제
+                                    </DeleteBtn>
+                                </div>
                             </DivCart>
                         )}
                     </div>
                     <Div>
-                        <span>예상 가격 : {estPrice} 원</span>
+                        <span>
+                            예상 가격 : {estPrice} 원
+                        </span>
                     </Div>
                     <DivBtn>
                         <Link to={`/`}>

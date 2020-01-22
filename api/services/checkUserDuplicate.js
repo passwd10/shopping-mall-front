@@ -1,9 +1,10 @@
-import { userList } from '../stores/userStore';
+import UserRepository from '../repositories/user.repository';
 
-const checkDuplicateId = userId => {
-  const findDuplicateUser = userList._userList
-    .filter(user => user.userId === userId);
-  return findDuplicateUser.length === 0 ? false : true;
+const userRepo = new UserRepository();
+
+const checkDuplicateId = async (userId) => {
+  const user = await userRepo.findById(userId)
+  return user.length;
 }
 
 export { checkDuplicateId };

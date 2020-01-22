@@ -5,7 +5,6 @@ import ModifyPhoneNum from '../modifyInfo/ModifyPhoneNum';
 import ModifyUserId from '../modifyInfo/ModifyUserId';
 
 import ModifyDivGrid, {ModifyCategory, ModifyInfo, BasicForm} from '../lib/Div';
-import ModifyBtn from '../lib/Button';
 
 import { getUserInfo } from '../services/userInfoService';
 

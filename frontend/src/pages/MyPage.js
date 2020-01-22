@@ -30,7 +30,9 @@ function MyPage() {
                     {isLogin == null ?
                         <Redirect to='/user/login' /> :
                         <div>
-                            <div style={{fontSize:'20px', textAlign: 'center'}}>마이페이지</div>
+                            <div style={{fontSize:'20px', textAlign: 'center'}}>
+                                마이페이지
+                            </div>
                             <div style={{paddingBottom: '20px'}}>
                                 <DivTitle>My 쇼핑</DivTitle>
                                 <DivLi>주문목록/배송조회</DivLi>

@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { getProduct } from '../services/productService';
+import { getUserInfo } from '../services/userInfoService';
+
 import { OrderProductInfo, OrderProductCategory } from '../lib/Div';
 import { OkBtn } from '../lib/Button';
 
-import { getProduct } from '../services/productService';
-import { getCarts } from '../services/cartService';
+const first = (arr) => arr[0];
 
 function OrderInfo() {
   const { productId } = useParams();
   const [products, setProducts] = useState([]);
   const [resultPrice, setResultPrice] = useState(0);
+  const [myCartList, setMyCartList] = useState([]);
+
+  let productsIdArr = [];
+
+  myCartList.forEach(v => productsIdArr = [...productsIdArr, v.productId])
+
+  const fetchProducts = () => {
+    return Promise.all(
+      productsIdArr.map(getProduct)
+    ).then((products) => {
+      return products.map(first);
+    });
+  }
+
+  const promise = fetchProducts();
+
+  useEffect(() => {
+    getUserInfo().then(v => setMyCartList(v[0].cartList))
+  }, [])
 
   useEffect(() => {
     if (productId === '999') { // 장바구니에서 불러오기
-      getCarts().then((v) => setProducts(v.filter((product) => product.purchase === true)));
+      promise.then(product => {
+        console.log(product);
+        setProducts(product);
+      })
     } else {
-      getProduct(productId).then((v) => setProducts([v]));
+      getProduct(productId).then((v) => setProducts(v));
     }
-  }, []);
+  }, [myCartList]);
 
   useEffect(() => {
     let priceSum = 0;
