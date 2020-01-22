@@ -1,19 +1,17 @@
 import { userList } from '../stores/userStore';
-import { productStore } from '../stores/productStore';
 
-const addCartList = (userId, productId) => {
+import UserRepository from '../repositories/user.repository';
+import ProductStoreRepository from '../repositories/productStore.repository';
 
-  const addProduct = productStore._product.filter(v => productId == v.id);
-  const isPurchase = { 'purchase': true };
+const userRepo = new UserRepository();
+const productRepo = new ProductStoreRepository();
 
-  Object.assign(addProduct[0], isPurchase);
+const addCartList = async (userId, productId) => {
 
-  userList
-    ._userList
-    .forEach(v => userId == v.userId &&
-      (v.cartList = [...new Set([...v.cartList, ...addProduct])]));
+  const productToAdd = await productRepo.findById(productId);
+  const cartList = { productId: productToAdd[0].id, purchase: true }
 
-  return userList._userList.filter(v => v.userId == userId);
+  return userRepo.addCart(userId, cartList);
 };
 
 const deleteCartList = (userId, productId) => {

@@ -15,7 +15,7 @@ class ProductStoreRepository {
   }
 
   async findById(id) {
-    await Product.find({
+    return await Product.find({
       id: id,
     });
   }

@@ -34,10 +34,10 @@ app.use('/static', express.static('public'));
 const db = mongoose.connection;
 
 db.on('error', console.error);
-db.once('open', () => {
+db.once('open', async () => {
   console.log('Connected to mongod server');
-  clearCollection();
-  initCollection();
+  await clearCollection();
+  await initCollection();
 });
 
 mongoose.connect('mongodb://localhost:27017/store', {

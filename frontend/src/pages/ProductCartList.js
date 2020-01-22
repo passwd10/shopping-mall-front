@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { getUserInfo } from '../services/userInfoService';
 import { deleteCart } from '../services/cartService';
+import { getProduct } from '../services/productService';
 
 import styled from 'styled-components';
 
@@ -89,12 +90,29 @@ const DeleteBtn = styled.button`
     margin-top: 50px;
 `;
 
+const first = (arr) => arr[0];
+
 function ProductCartList() {
     const [cList, setCList] = useState([]); // 장바구니 상태
     const [myCartList, setMyCartList] = useState([]); //서버에서 가져온 장바구니 상태
     const [estPrice, setEstPrice] = useState(0);    //예상 가격 상태
     const [isLogin, setIsLogin] = useState(document.cookie.split('=')[1]); // 로그인중인지?
+    const [products, setProducts] = useState([]);
 
+    let productsIdArr = [];
+
+    myCartList.forEach(v => productsIdArr = [...productsIdArr, v.productId])
+    
+    const fetchProducts = () => {
+        return Promise.all(
+            productsIdArr.map(getProduct)
+        ).then((products) => {
+            return products.map(first);
+        });
+    }
+    
+    const promise = fetchProducts();
+    
     const deleteList = id => {
         deleteCart(id).then(v => setMyCartList(v));
     }
@@ -112,6 +130,13 @@ function ProductCartList() {
     useEffect(() => {
         getUserInfo().then(v => setMyCartList(v[0].cartList))
     }, [])
+
+    useEffect(() => {
+        promise.then(product => {
+            console.log('product', product);
+            setProducts(product);
+        })
+    }, [myCartList])
 
     useEffect(() => {
         calculatePrice();
@@ -134,7 +159,7 @@ function ProductCartList() {
                             <div>수량</div>
                             <div></div>
                         </DivInfo>
-                        {myCartList.map(cartList =>
+                        {products.map(cartList =>
                             <DivCart key={cartList.id}>
                                 <InCart>
                                     <input type="checkbox" defaultChecked={cartList.purchase} onChange={() => onChangeList(cartList.id)} />

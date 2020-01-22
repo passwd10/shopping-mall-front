@@ -22,7 +22,7 @@ const userSchema = new Schema({
   birth: {
     type: Number
   },
-  cartList: [Number],
+  cartList: [Object],
 })
 
 const User = mongoose.model('user', userSchema);
