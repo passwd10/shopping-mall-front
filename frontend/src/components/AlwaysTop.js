@@ -52,11 +52,18 @@ const TopBar = styled.div`
 `;
 
 function AlwaysTop(props) {
-  const [cookie, setCookie] = useState(document.cookie.split('=')[1]);
-  const [btnState, setBtnState] = useState('로그인');
+  const [loginBtn, setLoginBtn] = useState('');
+  const [cartLink, setCartLink] = useState('');
+  const [myPageLink, setMyPageLink] = useState('');
+
+  const linkToCart = '/user/cartList';
+  const linkToMyPage = '/mypage/buylist'
+  const linkToLogin = '/user/login';
 
   const clearLoginState = () => {
-    setCookie('');
+    setLoginBtn('로그인');
+    setCartLink(linkToLogin);
+    setMyPageLink(linkToLogin);
     deleteSession();
   };
 
@@ -65,12 +72,16 @@ function AlwaysTop(props) {
   };
 
   useEffect(() => {
-    setCookie(document.cookie.split('=')[1]);
-
-    if (document.cookie != ['']) {
-      setBtnState('로그아웃');
-    }
-  }, [cookie]);
+    if (document.cookie.length === 0) {
+      setLoginBtn('로그인');
+      setCartLink(linkToLogin);
+      setMyPageLink(linkToLogin);
+    } else {
+      setLoginBtn('로그아웃');
+      setCartLink(linkToCart);
+      setMyPageLink(linkToMyPage);
+    } 
+  }, [document.cookie]);
 
   return (
     <>
@@ -79,17 +90,17 @@ function AlwaysTop(props) {
           <Link to="/">
             <Button>홈으로</Button>
           </Link>
-          {cookie == null
-            ? <Link to="/user/login"><Button>로그인</Button></Link>
-            : <Button onClick={clearLoginState}>로그아웃</Button>
+          {loginBtn === '로그인'
+            ? <Link to="/user/login"><Button>{loginBtn}</Button></Link>
+            : <Button onClick={clearLoginState}>{loginBtn}</Button>
           }
           <Link to="/mypage/qna">
             <Button>고객센터</Button>
           </Link>
-          <Link to="/mypage/buylist">
+          <Link to={myPageLink}>
             <Button>마이페이지</Button>
           </Link>
-          <Link to="/cartlist">
+          <Link to={cartLink}>
             <Button>장바구니</Button>
           </Link>
         </AllBtn>

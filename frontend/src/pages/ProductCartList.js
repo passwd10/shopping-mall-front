@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { getUserInfo } from '../services/userInfoService';
 import { deleteCart } from '../services/cartService';
@@ -34,14 +34,13 @@ const DivInfo = styled.div`
     margin-right: auto;
     border: 1px solid #333;
     text-align: center;
-    `;
+`;
 
 const DivCart = styled.div`
     display: grid;
     grid-template-columns: 100px 250px 150px 100px 100px;
     grid-template-rows: 125px;
     text-align: center;
-
 `;
 
 const Div = styled.div`
@@ -93,107 +92,101 @@ const DeleteBtn = styled.button`
 const first = (arr) => arr[0];
 
 function ProductCartList() {
-    const [cList, setCList] = useState([]); // 장바구니 상태
-    const [myCartList, setMyCartList] = useState([]); //서버에서 가져온 장바구니 상태
-    const [estPrice, setEstPrice] = useState(0);    //예상 가격 상태
-    const [isLogin, setIsLogin] = useState(document.cookie.split('=')[1]); // 로그인중인지?
-    const [products, setProducts] = useState([]);
+	const [cList, setCList] = useState([]); // 장바구니 상태
+	const [myCartList, setMyCartList] = useState([]); //서버에서 가져온 장바구니 상태
+	const [estPrice, setEstPrice] = useState(0);    //예상 가격 상태
+	const [products, setProducts] = useState([]);
 
-    let productsIdArr = [];
+	let productsIdArr = [];
 
-    myCartList.forEach(v => productsIdArr = [...productsIdArr, v.productId])
-    
-    const fetchProducts = () => {
-        return Promise.all(
-            productsIdArr.map(getProduct)
-        ).then((products) => {
-            return products.map(first);
-        });
-    }
-    
-    const promise = fetchProducts();
-    
-    const deleteList = id => {
-        deleteCart(id).then(v => setMyCartList(v));
-    }
+	myCartList.forEach(v => productsIdArr = [...productsIdArr, v.productId])
 
-    const calculatePrice = () => {
-        let resultPrice = 0;
-        myCartList.filter(product => product.purchase == true).map(product => resultPrice += Number(product.price));
-        setEstPrice(resultPrice);
-    }
+	const fetchProducts = () => {
+		return Promise.all(
+			productsIdArr.map(getProduct)
+		).then((products) => {
+			return products.map(first);
+		});
+	}
 
-    useEffect(() => {
-        getUserInfo().then(v => setMyCartList(v[0].cartList))
-    }, [])
+	const promise = fetchProducts();
 
-    useEffect(() => {
-        promise.then(product => {
-            setProducts(product);
-        })
-    }, [myCartList])
+	const deleteList = id => {
+		deleteCart(id).then(v => setMyCartList(v));
+	}
 
-    useEffect(() => {
-        calculatePrice();
-    }, [cList]);
+	const calculatePrice = () => {
+		let resultPrice = 0;
+		myCartList.filter(product => product.purchase == true).map(product => resultPrice += Number(product.price));
+		setEstPrice(resultPrice);
+	}
 
-    return (
-        <>
-            {isLogin == null ?
-                <Redirect to='/user/login' /> :
-                <div style={{ width: '700px', margin: 'auto' }}>
-                    <CartHeader>장바구니</CartHeader>
-                    <Div>
-                        <span>
-                            장바구니 수량 : {myCartList.length} 개
-                        </span>
-                    </Div>
-                    <div>
-                        <DivInfo>
-                            <div></div>
-                            <div>상품정보</div>
-                            <div>가격</div>
-                            <div>수량</div>
-                            <div></div>
-                        </DivInfo>
-                        {products.map((product, index) =>
-                            <DivCart key={product.id}>
-                                <InCart>
-                                    {index + 1}
-                                </InCart>
-                                <InCart>
-                                    <img src={product.img} width="30%"/>
-                                    {product.title}
-                                </InCart>
-                                <InCart>
-                                    {product.price}
-                                    원
-                                </InCart>
-                                <InCart>1</InCart>
-                                <div>
-                                    <DeleteBtn onClick={() => deleteList(product.id)}>
-                                        삭제
-                                    </DeleteBtn>
-                                </div>
-                            </DivCart>
-                        )}
-                    </div>
-                    <Div>
-                        <span>
-                            예상 가격 : {estPrice} 원
-                        </span>
-                    </Div>
-                    <DivBtn>
-                        <Link to={`/`}>
-                            <KeepShopBtn>쇼핑 계속하기</KeepShopBtn>
-                        </Link>
-                        <Link to={`/order/purchaseRequest/999`}>
-                            <PurchaseButton>구매하기</PurchaseButton>
-                        </Link>
-                    </DivBtn>
-                </div>}
-        </>
-    )
+	useEffect(() => {
+		getUserInfo().then(v => setMyCartList(v[0].cartList))
+	}, [])
+
+	useEffect(() => {
+		promise.then(product => {
+			setProducts(product);
+		})
+	}, [myCartList])
+
+	useEffect(() => {
+		calculatePrice();
+	}, [cList]);
+
+	return (
+		<div style={{ width: '700px', margin: 'auto' }}>
+			<CartHeader>장바구니</CartHeader>
+			<Div>
+				<span>
+					장바구니 수량 : {myCartList.length} 개
+        </span>
+			</Div>
+			<div>
+				<DivInfo>
+					<div></div>
+					<div>상품정보</div>
+					<div>가격</div>
+					<div>수량</div>
+					<div></div>
+				</DivInfo>
+				{products.map((product, index) =>
+					<DivCart key={product.id}>
+						<InCart>
+							{index + 1}
+						</InCart>
+						<InCart>
+							<img src={product.img} width="30%" />
+							{product.title}
+						</InCart>
+						<InCart>
+							{product.price}
+							원
+            </InCart>
+						<InCart>1</InCart>
+						<div>
+							<DeleteBtn onClick={() => deleteList(product.id)}>
+								삭제
+              </DeleteBtn>
+						</div>
+					</DivCart>)}
+			</div>
+			<Div>
+				<span>
+					예상 가격 : {estPrice} 원
+        </span>
+			</Div>
+			<DivBtn>
+				<Link to={`/`}>
+					<KeepShopBtn>쇼핑 계속하기</KeepShopBtn>
+				</Link>
+				<Link to={`/order/purchaseRequest/999`}>
+					<PurchaseButton>구매하기</PurchaseButton>
+				</Link>
+			</DivBtn>
+		</div>
+	);
 }
 
 export default ProductCartList;

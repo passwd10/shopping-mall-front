@@ -11,7 +11,7 @@ const SearchForm = styled.form`
 const SearchInput = styled.input`
     display: inline-block;
     width: 366px; height: 40px;
-    border: 3px solid #006C00;
+    border: 3px solid #5f0080;
     background: white;
     padding: 10px;
 `;
@@ -19,11 +19,11 @@ const SearchInput = styled.input`
 const SearchBtn = styled.button`
     width: 54px; height: 40px;
     margin: 0px; border: 0px;
-    color: white;
-    vertical-align: top;
+    background-color: #5f0080;
+  	color: white;
+	  vertical-align: top;
     font-weight: bold;
     border-radius: 1px;
-    background: #006C00;
     cursor: pointer;
 `;
 
