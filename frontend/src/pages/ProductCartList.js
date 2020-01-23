@@ -130,7 +130,6 @@ function ProductCartList() {
     useEffect(() => {
         promise.then(product => {
             setProducts(product);
-            console.log('products : ', product);
         })
     }, [myCartList])
 
@@ -172,7 +171,7 @@ function ProductCartList() {
                                 </InCart>
                                 <InCart>1</InCart>
                                 <div>
-                                    <DeleteBtn onClick={() => deleteList(cartList.id)}>
+                                    <DeleteBtn onClick={() => deleteList(product.id)}>
                                         삭제
                                     </DeleteBtn>
                                 </div>
