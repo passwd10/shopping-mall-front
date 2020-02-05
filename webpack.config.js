@@ -40,6 +40,6 @@ module.exports = {
     performance: {
         hints: false
     },
-    mode: 'development',
+    mode: 'production',
     devtool: false,
 };
