@@ -5,18 +5,20 @@ import Route from './routes';
 import mongoose from 'mongoose';
 import { initCollection, clearCollection } from './services/collectionService';
 
+require('dotenv').config();
+
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:8080',
+  origin: process.env.CORS_ORIGIN,
   credentials: true,
 }));
 
 app.use(session({
-  secret: 'hello',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -40,11 +42,18 @@ db.once('open', async () => {
   await initCollection();
 });
 
-mongoose.connect('mongodb://localhost:27017/store', {
-  useCreateIndex: true,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).catch(err => console.error(err));
+mongoose.connect(
+  process.env.DB_SCHEME
+  + process.env.DB_USER
+  + ':'
+  + process.env.DB_PW
+  + process.env.DB_HOST,
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+).catch(err => console.error(err));
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
