@@ -1,5 +1,9 @@
-# 온라인 쇼핑몰
+# Online shopping mall front
 
-## Front
+## Quck Start
 
-## Server Api
+```bash
+git clone https://github.com/passwd10/shopping-mall-front.git
+npm install
+npm start
+```
