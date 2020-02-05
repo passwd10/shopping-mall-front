@@ -27,7 +27,6 @@ module.exports = {
         proxy: [{
             context: ['/login', '/session-content', '/cartList'],
             target: 'https://shopping-mall-api.herokuapp.com',
-            secure: false,
             changeOrigin: true,
         }]
     },
