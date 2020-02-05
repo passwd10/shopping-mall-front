@@ -56,7 +56,7 @@ function AlwaysTop(props) {
   const [cartLink, setCartLink] = useState('');
   const [myPageLink, setMyPageLink] = useState('');
 
-  const linkToCart = '/user/cartList';
+  const linkToCart = '/cartList';
   const linkToMyPage = '/mypage/buylist'
   const linkToLogin = '/user/login';
 

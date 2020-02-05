@@ -36,7 +36,6 @@ function OrderInfo() {
   useEffect(() => {
     if (productId === '999') { // 장바구니에서 불러오기
       promise.then(product => {
-        console.log(product);
         setProducts(product);
       })
     } else {
