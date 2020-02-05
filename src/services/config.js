@@ -1,4 +1,4 @@
-const SERVER_URL = 'http://localhost:8080';
-export const API_SERVER_URL = 'http://localhost:3000';
+const SERVER_URL = 'answer-shopping-mall.netlify.com';
+export const API_SERVER_URL = 'https://shopping-mall-api.herokuapp.com/';
 
 export default SERVER_URL;
