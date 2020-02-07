@@ -6,7 +6,7 @@ base = "/"
 
 [[redirects]]
 
-  from = "/login", "/session-content", "/cartList"
+  from = "/login"
   to = "https://shopping-mall-api.herokuapp.com"
   status = 200
   force = true
