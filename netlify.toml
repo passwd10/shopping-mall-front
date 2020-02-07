@@ -4,4 +4,11 @@ base = "/"
 [build.processing]
   skip_processing = false
 
-https://answer-shopping-mall.netlify.com/login https://shopping-mall-api.herokuapp.com/login 200
+
+[[redirects]]
+
+  from = "/login"
+  to = "https://shopping-mall-api.herokuapp.com/login"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
