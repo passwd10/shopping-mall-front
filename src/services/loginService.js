@@ -6,6 +6,7 @@ const URL = API_SERVER_URL + '/login';
 
 const getSession = async (userId, userPasswd) => {
   const { data } = await axios.post(URL, { userId, userPasswd });
+  console.log('login', data);
   return data;
 }
 
