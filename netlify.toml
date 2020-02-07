@@ -4,27 +4,4 @@ base = "/"
 [build.processing]
   skip_processing = false
 
-[[redirects]]
-
-  from = "/login"
-  to = "https://shopping-mall-api.herokuapp.com/login"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
-
-[[redirects]]
-
-  from = "/session-content"
-  to = "https://shopping-mall-api.herokuapp.com/session-content"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
-
-[[redirects]]
-
-  from = "/cartList"
-  to = "https://shopping-mall-api.herokuapp.com/cartList"
-  status = 200
-  force = true
-  headers = {X-From = "Netlify"}
-
+/https://answer-shopping-mall.netlify.com/login https://shopping-mall-api.herokuapp.com/login 200

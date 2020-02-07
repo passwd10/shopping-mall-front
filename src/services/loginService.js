@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { API_SERVER_URL } from './config';
+import SERVER_URL from './config';
 
-const URL = API_SERVER_URL + '/login';
+const URL = SERVER_URL + '/login';
 
 const getSession = async (userId, userPasswd) => {
   const { data } = await axios.post(URL, { userId, userPasswd }, { withCredentials: true});
