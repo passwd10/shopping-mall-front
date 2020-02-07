@@ -1,4 +1,4 @@
-# Online shopping mall front
+# Online Shopping Mall(front)
 
 ## Quck Start
 
