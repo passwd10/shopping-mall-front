@@ -7,7 +7,7 @@ base = "/"
 [[redirects]]
 
   from = "/login"
-  to = "https://shopping-mall-api.herokuapp.com"
+  to = "https://shopping-mall-api.herokuapp.com/login"
   status = 200
   force = true
   headers = {X-From = "Netlify"}
