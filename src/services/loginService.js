@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import API_SERVER_URL from './config';
+import { API_SERVER_URL } from './config';
 
 const URL = API_SERVER_URL + '/login';
 

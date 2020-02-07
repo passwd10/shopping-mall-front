@@ -78,10 +78,18 @@ function Login() {
                 <LoginHeader>로그인</LoginHeader>
                 <LoginForm id='Login-form' onSubmit={checkLogin}>
                     <div>
-                        <Input type='text' name='myId' onChange={v => setId(v.target.value)} value={id} placeholder='아이디를 입력하세요' />
+                        <Input type='text'
+                            name='myId'
+                            onChange={v => setId(v.target.value)}
+                            value={id}
+                            placeholder='아이디를 입력하세요' />
                     </div>
                     <div>
-                        <Input type='password' name='myPassword' onChange={v => setPassword(v.target.value)} value={password} placeholder='비밀번호를 입력하세요' />
+                        <Input type='password'
+                            name='myPassword'
+                            onChange={v => setPassword(v.target.value)}
+                            value={password}
+                          placeholder='비밀번호를 입력하세요' />
                     </div>
                     <div>
                         {warningState}
@@ -99,7 +107,6 @@ function Login() {
                 </LoginForm>
             </div> :
             <Redirect to='/' />
-        // history.pushState(null,'', '/')
     )
 }
 
