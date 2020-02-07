@@ -1,0 +1,9 @@
+[[redirects]]
+
+  from = "/login", "/session-content", "/cartList"
+  to = "https://shopping-mall-api.herokuapp.com"
+  status = 200
+  force = true
+  conditions = {Role = ["admin", "cms"]}
+  [redirects.headers]
+    X-From = "Netlify"
