@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { API_SERVER_URL } from './config';
+import SERVER_URL from './config';
 
-const URL = API_SERVER_URL + '/cartList';
+const URL = SERVER_URL + '/cartList';
 
 const getCarts = async () => {
   const { data } = await axios.get(URL);

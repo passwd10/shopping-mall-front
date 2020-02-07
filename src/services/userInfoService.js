@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { API_SERVER_URL } from './config';
+import SERVER_URL from './config';
 
-const URL = API_SERVER_URL + '/session-content';
+const URL = SERVER_URL + '/session-content';
 
 const getUserInfo = async () => {
   const { data } = await axios.get(URL);
