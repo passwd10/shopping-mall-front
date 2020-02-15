@@ -4,14 +4,6 @@
 
 온라인 쇼핑몰 Web Application을 제작하였습니다.
 
-## Quck Start
-
-```bash
-git clone https://github.com/passwd10/shopping-mall-front.git
-npm install
-npm start
-```
-
 ## 구현한 기능
 
 - 로그인
