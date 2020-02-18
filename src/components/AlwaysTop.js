@@ -8,8 +8,8 @@ import { deleteSession } from '../services/loginService';
 
 const Button = styled.li`
     display: inline-block;
-    font-size: 10px;
-    padding: 5px;
+    font-size: 15px;
+    padding: 10px;
     min-width: 70px;
     text-align: center;
     color: black;
