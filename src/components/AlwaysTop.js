@@ -30,7 +30,7 @@ const AllBtn = styled.div`
     text-align: right;
 `;
 
-const Title = styled.h1`
+const Title = styled.div`
     text-align: center;
     width: 100%;
     height: auto;
@@ -41,7 +41,7 @@ const Img = styled.img`
     width: auto;
     height: auto;
     max-width: 200px;
-     max-height: 150px;
+    max-height: 150px;
 `;
 
 const TopBar = styled.div`
