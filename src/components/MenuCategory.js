@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Span = styled.span`
     color: black;
-    font-size: 15px;
+    font-size: 20px;
 `;
 
 function MenuCategory({ categoryName, categoryId }) {

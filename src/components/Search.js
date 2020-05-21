@@ -10,20 +10,21 @@ const SearchForm = styled.form`
 
 const SearchInput = styled.input`
     display: inline-block;
-    width: 366px; height: 40px;
-    border: 3px solid #5f0080;
+    width: 400px; height: 40px;
+    border: 3px solid #6495ED;
+    border-radius: 5px 0 0 5px;
     background: white;
-    padding: 10px;
+    padding: 10px 12px;
 `;
 
 const SearchBtn = styled.button`
     width: 54px; height: 40px;
     margin: 0px; border: 0px;
-    background-color: #5f0080;
+    background-color: #6495ED;
   	color: white;
 	  vertical-align: top;
     font-weight: bold;
-    border-radius: 1px;
+    border-radius: 0 5px 5px 0;
     cursor: pointer;
 `;
 

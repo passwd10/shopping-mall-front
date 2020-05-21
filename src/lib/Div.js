@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const ModifyDivGrid = styled.div`
     display: grid;
     grid-template-columns: 200px 900px;
-    grid-template-rows: 70px;
+    grid-auto-rows: 70px;
     font-size: 20px;
     border: 1px solid #ddd;
 `;
@@ -33,7 +33,7 @@ export const BasicForm = styled.div`
 export const OrderProductCategory = styled.div`
     display: grid;
     grid-template-columns: 450px 150px 150px 150px;
-    grid-template-rows: 70px;
+    grid-auto-rows: 70px;
     font-size: 20px;
     border: 1px solid #ddd;
     justify-items: center;
@@ -43,7 +43,7 @@ export const OrderProductCategory = styled.div`
 export const OrderProductInfo = styled.div`
     display: grid;
     grid-template-columns: 450px 150px 150px 150px;
-    grid-template-rows: 70px;
+    grid-auto-rows: 70px;
     font-size: 20px;
     /* border: 1px solid #ddd; */
     justify-items: center;

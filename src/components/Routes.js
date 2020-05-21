@@ -18,7 +18,7 @@ import Login from '../pages/Login';
 import MyPage from '../pages/MyPage';
 import SignUp from '../pages/SignUp';
 import UserInfo from '../pages/UserInfo';
-import ServiceCenter from '../pages/ServiceCenter';
+import Footer from '../components/Footer';
 
 function Routes() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -66,15 +66,13 @@ function Routes() {
             <AlwaysTop searchCallBack={searchCallBack} />
             <MyPage />
           </Route>
-          <Route path='/mypage/qna'>
-            <AlwaysTop searchCallBack={searchCallBack} />
-            <ServiceCenter />
-          </Route>
           <Route path='/'>
             <AlwaysTop searchCallBack={searchCallBack} />
             <Home />
+            <ProductList />
           </Route>
         </Switch>
+        <Footer />
       </Router>
     </>
   )

@@ -64,7 +64,7 @@ function Login() {
         event.stopPropagation();
 
         getSession(id, password).then(v => {
-            if (v.length === 0) {
+            if (v === false) {
                 setWarningState('아이디 비밀번호가 일치하지 않습니다.');
             } else {
                 setLoginAvailable(true);

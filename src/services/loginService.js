@@ -5,8 +5,13 @@ import SERVER_URL from './config';
 const URL = SERVER_URL + '/login';
 
 const getSession = async (userId, userPasswd) => {
-  const { data } = await axios.post(URL, { userId, userPasswd }, { withCredentials: true});
-  return data;
+  try {
+    const { data } = await axios.post(URL, { userId, userPasswd }, {withCredentials : true});
+    return data;
+  } catch (error) {
+    console.error('login fail')
+    return false;
+  }
 }
 
 const deleteSession = async () => {

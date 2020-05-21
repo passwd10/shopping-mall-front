@@ -2,64 +2,91 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 
+import ProductItem from '../components/ProductItem';
+
 import { searchProducts } from '../services/searchService';
 
-const searchCompleted = {
-  items: [],
-}
+import styled from 'styled-components';
 
-function CantFind(props) {
+const SearchTitle = styled.h1`
+  text-align: center;
+  width: 100%;
+  margin: 20px;
+`
 
-  return (
-    <>
-      <h1>'{props.keyword}' 검색결과</h1>
-      <h2>해당 상품을 찾을 수 없습니다.</h2>
-    </>
-  )
-}
+const SearchBody = styled.div`
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
-function CanFind(props) {
-  const foundItems = props.items;
-  searchCompleted.items = [];
-  return (
-    <>
-      <h1>'{props.keyword}' 검색결과</h1>
-      {foundItems.map(item =>
-        <div key={item.id}>
-          <Link to={`/product/${item.id}`} id={`${item.id}`}>
-            <img
-              src={item.img} width='20%'
-              className='itemImg'
-              alt='이미지를 띄울 수 없습니다'
-            />
-          </Link>
-          <h2> {item.title} </h2>
-          <h3> {item.price} 원 </h3>
-        </div>
-      )}
-    </>
-  )
-}
+const SearchKeyword = styled.p`
+  width: 100%;
+  margin: 0;
+  margin-left: 100px;
+  font-size: 20px;
 
-function SearchResult(props, { locatoin }) {
+`
+const CntResult = styled.p`
+  width: 100%;
+  margin: 0;
+  margin-left: 100px;
+`
+
+const SearchResultBody = styled.div`
+  width: 500;
+  textAlign: center;
+`
+
+const DivGrid = styled.div`
+    display: grid;
+    grid-template-columns: 330px 330px 330px;
+    grid-auto-rows: 400px;
+    grid-auto-rows
+    width: 1000px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+`;
+
+const DivItem = styled.div`
+    display: grid;
+    grid-template-rows: '330px 100px 100px';
+    align-items: center;
+    justify-content: center;
+`;
+
+function SearchResult(props) {
   const [products, setProducts] = useState([]);
 
   const { q } = queryString.parse(location.search);
-  const keyword = q;
 
   useEffect(() => {
-    getProducts();
+    searchProducts(q).then(setProducts);
   }, [props.keyword])
 
-  const getProducts = () => {
-    searchProducts(q).then(setProducts);
-  }
-
-  const productsExist = () => products.length > 0;
-
-  return productsExist()
-    ? <CanFind keyword={keyword} items={products} />
-    : <CantFind keyword={keyword} />
+  return (
+    <SearchBody>
+      <SearchTitle>상품 검색</SearchTitle>
+      <SearchKeyword>'{q}' 검색결과</SearchKeyword>
+      <CntResult>총 {products.length}의 상품이 검색되었습니다.</CntResult>
+      <SearchResultBody>
+        <DivGrid>
+          {products.map(item =>
+            <DivItem key={item.id}>
+              <Link to={`/product/${item.id}`} id={`${item.id}`} style={{ color: '#333', textDecoration: 'none' }}>
+                <ProductItem item={item} />
+              </Link>
+            </DivItem>
+          )}
+        </DivGrid>
+      </SearchResultBody>
+    </SearchBody>
+  )
 }
 
 export default SearchResult;

@@ -8,26 +8,29 @@ import { deleteSession } from '../services/loginService';
 
 const Button = styled.li`
     display: inline-block;
-    font-size: 15px;
-    padding: 10px;
-    min-width: 70px;
+    font-size: 14px;
+    padding: 8px 12px;
     text-align: center;
-    color: black;
-    height: auto;
-    font-weight: 600;
+    color: #fff;
+    font-weight: 400;
     cursor: pointer;
     &:focus {
       outline: none;
     }
-    background-color: white; 
+    &:hover {
+      color: #6495ED;
+    }
 `;
 
 const AllBtn = styled.div`
-    width: 100%;
-    height: 0 auto; 
-    top: 0; left: 0; right: 0;
-    color: #2b23;
-    text-align: right;
+  display: flex;
+  justify-content: flex-end;  
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #123;
+  top: 0; left: 0; right: 0;
+  color: #2b23;
+  text-align: center;
 `;
 
 const Title = styled.div`
@@ -40,15 +43,15 @@ const Title = styled.div`
 const Img = styled.img`
     width: auto;
     height: auto;
-    max-width: 200px;
+    max-width: 170px;
     max-height: 150px;
 `;
 
 const TopBar = styled.div`
-    width: 1120px;
-    max-width: none !important;
-    height: 250px;
-    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
 
 function AlwaysTop(props) {
@@ -94,9 +97,6 @@ function AlwaysTop(props) {
             ? <Link to="/user/login"><Button>{loginBtn}</Button></Link>
             : <Button onClick={clearLoginState}>{loginBtn}</Button>
           }
-          <Link to="/mypage/qna">
-            <Button>고객센터</Button>
-          </Link>
           <Link to={myPageLink}>
             <Button>마이페이지</Button>
           </Link>
