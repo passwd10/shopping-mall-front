@@ -1,8 +1,9 @@
 # Online Shopping Mall(front)
 
-![shopping-mall-main](shopping-mall-main.png)
+![shopping-mall-1](shopping-mall-1.jpg)
+![shopping-mall-2](shopping-mall-2.jpg)
 
-온라인 쇼핑몰 Web Application을 제작하였습니다.
+온라인 쇼핑몰 Web Application
 
 ## 구현한 기능
 
@@ -33,4 +34,4 @@
 
 ## 주의
 
-- DB를 배포한 Atlas서버가 느려 처음 실행시 로딩시간이 5~6초정도 걸립니다.(서버 상황에 따라 달라질 수 있습니다)
+- Netlify에서 EC2로 배포환경 변경중입니다.
