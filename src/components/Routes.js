@@ -22,13 +22,17 @@ import Footer from '../components/Footer';
 
 function Routes() {
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [loginState, setLoginState] = useState('');
 
   let searchCallBack = (value) => setSearchKeyword(value);
-
+  const loginCallBack = (value) => setLoginState(value);
   return (
     <>
       <Router>
-        <AlwaysTop searchCallBack={searchCallBack} />
+        <AlwaysTop 
+          searchCallBack={searchCallBack}
+          loginState={loginState}
+          loginCallBack={loginCallBack} />
         <Switch>
           <Route path='/order/purchaseRequest/:productId'>
             <PurchaseProduct />
@@ -49,15 +53,13 @@ function Routes() {
             <SearchResult keyword={searchKeyword} />
           </Route>
           <Route path='/user/login'>
-            <Login />
+            <Login loginCallBack={loginCallBack} />
           </Route>
           <Route path='/user/join'>
             <SignUp />
           </Route>
           <Route path='/user/modify'>
             <UserInfo />
-          </Route>
-          <Route path='/mypage/buylist'>
             <MyPage />
           </Route>
           <Route path='/'>

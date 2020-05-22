@@ -60,7 +60,7 @@ function AlwaysTop(props) {
   const [myPageLink, setMyPageLink] = useState('');
 
   const linkToCart = '/cartList';
-  const linkToMyPage = '/mypage/buylist'
+  const linkToMyPage = '/user/modify'
   const linkToLogin = '/user/login';
 
   const clearLoginState = () => {
@@ -68,6 +68,8 @@ function AlwaysTop(props) {
     setCartLink(linkToLogin);
     setMyPageLink(linkToLogin);
     deleteSession();
+    localStorage.removeItem('isLogin');
+    props.loginCallBack('false');
   };
 
   const sendSearchKeywordToRoutes = (keyword) => {
@@ -75,16 +77,16 @@ function AlwaysTop(props) {
   };
 
   useEffect(() => {
-    if (document.cookie.length === 0) {
-      setLoginBtn('로그인');
-      setCartLink(linkToLogin);
-      setMyPageLink(linkToLogin);
-    } else {
+    if (props.loginState === 'true' || localStorage.getItem('isLogin') === 'true') {
       setLoginBtn('로그아웃');
       setCartLink(linkToCart);
       setMyPageLink(linkToMyPage);
+    } else {
+      setLoginBtn('로그인');
+      setCartLink(linkToLogin);
+      setMyPageLink(linkToLogin);      
     } 
-  }, [document.cookie]);
+  }, [props.loginState]);
 
   return (
     <>

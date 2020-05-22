@@ -6,7 +6,7 @@ const URL = SERVER_URL + '/login';
 
 const getSession = async (userId, userPasswd) => {
   try {
-    const { data } = await axios.post(URL, { userId, userPasswd }, {withCredentials : true});
+    const { data } = await axios.post(URL, { userId, userPasswd }, { withCredentials: true });
     return data;
   } catch (error) {
     console.error('login fail')

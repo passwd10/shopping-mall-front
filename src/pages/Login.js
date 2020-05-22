@@ -67,7 +67,7 @@ const SignUpBtn = styled.button`
   height: 50px;
 `;
 
-function Login() {
+function Login(props) {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [warningState, setWarningState] = useState('');
@@ -78,10 +78,14 @@ function Login() {
     event.stopPropagation();
 
     getSession(id, password).then(v => {
-      if (v === false) {
-        setWarningState('아이디 비밀번호가 일치하지 않습니다.');
-      } else {
+      if (v.isLogin === true) {
         setLoginAvailable(true);
+        localStorage.setItem('isLogin', v.isLogin);
+        props.loginCallBack('true');
+      } else {
+        console.log('v.isLogin === false')
+        setWarningState('아이디 비밀번호가 일치하지 않습니다.');
+        props.loginCallBack('false');
       }
     })
   };
