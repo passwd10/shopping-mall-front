@@ -28,6 +28,7 @@ function Routes() {
   return (
     <>
       <Router>
+        <AlwaysTop searchCallBack={searchCallBack} />
         <Switch>
           <Route path='/order/purchaseRequest/:productId'>
             <PurchaseProduct />
@@ -36,38 +37,30 @@ function Routes() {
             <ProductCartList />
           </Route>
           <Route path='/product/new'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <ProductNew />
           </Route>
           <Route path='/product/:productId'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <ProductDetail />
           </Route>
           <Route path='/category/group/:groupId'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <ProductList />
           </Route>
           <Route path='/products/search'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <SearchResult keyword={searchKeyword} />
           </Route>
           <Route path='/user/login'>
             <Login />
           </Route>
           <Route path='/user/join'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <SignUp />
           </Route>
           <Route path='/user/modify'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <UserInfo />
           </Route>
           <Route path='/mypage/buylist'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <MyPage />
           </Route>
           <Route path='/'>
-            <AlwaysTop searchCallBack={searchCallBack} />
             <Home />
             <ProductList />
           </Route>

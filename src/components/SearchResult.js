@@ -27,14 +27,13 @@ const SearchBody = styled.div`
 const SearchKeyword = styled.p`
   width: 100%;
   margin: 0;
-  margin-left: 100px;
+  margin-left: 200px;
   font-size: 20px;
-
 `
 const CntResult = styled.p`
   width: 100%;
   margin: 0;
-  margin-left: 100px;
+  margin-left: 200px;
 `
 
 const SearchResultBody = styled.div`
@@ -43,14 +42,15 @@ const SearchResultBody = styled.div`
 `
 
 const DivGrid = styled.div`
-    display: grid;
-    grid-template-columns: 330px 330px 330px;
-    grid-auto-rows: 400px;
-    grid-auto-rows
-    width: 1000px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+  display: grid;
+  min-height: 200px;
+  grid-template-columns: 330px 330px 330px;
+  grid-auto-rows: 400px;
+  grid-auto-rows
+  width: 1000px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const DivItem = styled.div`

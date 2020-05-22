@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
+import styled from 'styled-components'
+
+import { Form, Body, Input, NoticeForm } from '../lib/SignUpStyle';
+
+const TitleSpan = styled.span`
+  margin-right: 95px;
+`
+
 function UserName({ onHandleChange, userInfo, onHandleValid }) {
   const [notice, setNotice] = useState('');
 
@@ -23,19 +31,18 @@ function UserName({ onHandleChange, userInfo, onHandleValid }) {
   const handleChangeEvent = (event) => onHandleChange(event.target.value);
 
   return (
-      <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
-        <div>이름</div>
-        <div>
-          <input
-            style={{ width: '100%' }}
-            value={userInfo.name}
-            onChange={handleChangeEvent}
-            type="text"
-            name="user_name"
-          />
-          {notice}
-        </div>
-      </div>
+    <Form>
+      <Body>
+        <TitleSpan>이름 *</TitleSpan>
+        <Input
+          value={userInfo.name}
+          onChange={handleChangeEvent}
+          type="text"
+          name="user_name"
+        />
+      </Body>
+      <NoticeForm>{notice}</NoticeForm>
+    </Form>
   );
 }
 

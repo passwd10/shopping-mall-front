@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
+import styled from 'styled-components'
+
+import { Form, Body, Input, NoticeForm } from '../lib/SignUpStyle';
+
+const TitleSpan = styled.span`
+  margin-right: 67px;
+`
+
 function Birth({ onHandleChange, userInfo, onHandleValid }) {
   const [notice, setNotice] = useState('');
 
@@ -25,20 +33,19 @@ function Birth({ onHandleChange, userInfo, onHandleValid }) {
   const handleChangeEvent = (event) => onHandleChange(event.target.value);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
-      <div>생년월일</div>
-      <div>
-        <input
+    <Form>
+      <Body>
+      <TitleSpan>생년월일 *</TitleSpan>
+        <Input
           type="number"
           name="user_birth"
           placeholder="8자리 숫자로 입력 (ex. 19901201)"
-          style={{ width: '100%' }}
           value={userInfo.birth}
           onChange={handleChangeEvent}
         />
-        {notice}
-      </div>
-    </div>
+      </Body>
+      <NoticeForm>{notice}</NoticeForm>
+    </Form>
   );
 }
 

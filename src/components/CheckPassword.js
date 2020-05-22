@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
+import { Form, Body, Input, NoticeForm } from '../lib/SignUpStyle';
+
+import styled from 'styled-components';
+
+const TitleSpan = styled.span`
+  margin-right: 67px;
+`
+const ReTitleSpan = styled.span`
+  margin-right: 33px;
+`
+
 function CheckPassword({ onHandleChange, userInfo, onHandleValid }) {
   const [inspectPasswd, setInspectPasswd] = useState('');
   const [pwdNotice, setPwdNotice] = useState('');
@@ -60,11 +71,10 @@ function CheckPassword({ onHandleChange, userInfo, onHandleValid }) {
 
   return (
     <>
-      <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
-        <div>비밀번호</div>
-        <div>
-          <input
-            style={{ width: '100%' }}
+      <Form>
+        <Body>
+          <TitleSpan>비밀번호 *</TitleSpan>
+          <Input
             value={userInfo.password}
             onChange={handleChangeEvent}
             type="password"
@@ -72,14 +82,13 @@ function CheckPassword({ onHandleChange, userInfo, onHandleValid }) {
             placeholder="영문/숫자/특수문자 조합 6~15자"
             size="30"
           />
-          {pwdNotice}
-        </div>
-      </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '150px 250px ', paddingTop: '5px' }}>
-        <div>비밀번호 확인</div>
-        <div>
-          <input
-            style={{ width: '100%' }}
+        </Body>
+        <NoticeForm>{pwdNotice}</NoticeForm>
+      </Form>
+      <Form>
+        <Body>
+          <ReTitleSpan>비밀번호 확인 *</ReTitleSpan>
+          <Input
             value={inspectPasswd}
             onChange={(v) => setInspectPasswd(v.target.value)}
             type="password"
@@ -87,9 +96,9 @@ function CheckPassword({ onHandleChange, userInfo, onHandleValid }) {
             size="30"
             placeholder="비밀번호를 한번 더 입력해주세요"
           />
-          {inspNotice}
-        </div>
-      </div>
+        </Body>
+        <NoticeForm>{inspNotice}</NoticeForm>
+      </Form>
     </>
   );
 }

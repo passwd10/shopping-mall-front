@@ -20,7 +20,6 @@ const CustomerService = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   padding-left: 30%;
-  
 `
 
 const AboutMall = styled.div`
@@ -30,7 +29,6 @@ const AboutMall = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   padding-right: 20%;
-
 `
 
 const Title = styled.span`

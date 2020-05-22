@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { checkIdDuplicate } from '../services/signUpService';
+import { Form, Body, TitleSpan, Input, CheckBtn, NoticeForm } from '../lib/SignUpStyle';
 
 function CheckIdDuplicate({ onHandleChange, userInfo, onHandleValid }) {
   const [notice, setNotice] = useState('중복검사 버튼을 눌러주세요.');
@@ -21,25 +22,20 @@ function CheckIdDuplicate({ onHandleChange, userInfo, onHandleValid }) {
   const handleChangeEvent = (event) => onHandleChange(event.target.value);
 
   return (
-    <>
-      <div style={{ display: 'grid', gridTemplateColumns: '150px 160px 100px' }}>
-        <div>아이디</div>
-        <div>
-          <input
-            style={{ width: '100%' }}
-            onChange={handleChangeEvent}
-            value={userInfo.userId}
-            type="text"
-          />
-        </div>
-        <div>
-          <button onClick={checkDuplicate} type="button">
-            중복검사
-          </button>
-        </div>
-      </div>
-      <div>{notice}</div>
-    </>
+    <Form>
+      <Body>
+        <TitleSpan>아이디 *</TitleSpan>
+        <Input
+          onChange={handleChangeEvent}
+          value={userInfo.userId}
+          type="text"
+        />
+        <CheckBtn onClick={checkDuplicate} type="button">
+          중복검사
+      </CheckBtn>
+      </Body>
+      <NoticeForm>{notice}</NoticeForm>
+    </Form>
   );
 }
 
