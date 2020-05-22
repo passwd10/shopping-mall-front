@@ -13,7 +13,7 @@ function ModifyName() {
 
   useEffect(() => {
     (async () =>
-      await getUserInfo().then((v) => setName(v[0].name))
+      await getUserInfo().then((v) => setName(v.name))
     )();
   }, [])
 

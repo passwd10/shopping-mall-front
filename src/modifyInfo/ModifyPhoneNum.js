@@ -15,7 +15,7 @@ function ModifyPhoneNum() {
 
   useEffect(() => {
     (async () =>
-      await getUserInfo().then(v => setPhoneNum(v[0].phoneNum))
+      await getUserInfo().then(v => setPhoneNum(v.phoneNum))
     )();
   }, [])
 

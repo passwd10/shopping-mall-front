@@ -13,7 +13,7 @@ function UserInfo() {
     const [birth, setBirth] = useState('');
 
     (async () => 
-        await getUserInfo().then(v => setBirth(v[0].birth))
+        await getUserInfo().then(v => setBirth(v.birth))
     )();
 
     return (

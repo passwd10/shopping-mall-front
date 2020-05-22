@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const ModifyDivGrid = styled.div`
@@ -12,8 +11,8 @@ const ModifyDivGrid = styled.div`
 export const ModifyCategory = styled.div`
     display: flex ;
     /* background-color: #eef1f8; */
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: #F0FFFF;
+    border: 1px solid #F0FFFF;
     align-items: center;     
     justify-content: center;
 `;

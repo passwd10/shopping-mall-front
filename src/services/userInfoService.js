@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import SERVER_URL from './config';
 
-const URL = SERVER_URL + '/session-content';
+const URL = SERVER_URL + '/user';
 
 const getUserInfo = async () => {
   const { data } = await axios.get(URL);

@@ -13,7 +13,7 @@ function ModifyUserId() {
 
   useEffect(() => {
     (async () =>
-      await getUserInfo().then(v => setUserId(v[0].userId))
+      await getUserInfo().then(v => setUserId(v.userId))
     )();
   }, [])
 
