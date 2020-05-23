@@ -11,6 +11,7 @@ const getUserInfo = async () => {
 
 const patchUserInfo = async (updateInfo) => {
   const { data } = await axios.patch(URL, { updateInfo })
+  console.log('patchUserInfo', data)
   return data;
 }
 
