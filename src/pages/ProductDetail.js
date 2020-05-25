@@ -17,24 +17,23 @@ const Div = styled.div`
 `;
 
 const BuyButton = styled.button`
-	background-color: #5f0080;
+	background-color: #6495ED;
 	color: white;
 	padding: 10px;
 	padding-left: 40px;
 	padding-right: 40px;
 	border-radius: 5px;
-	border: 1px solid purple;
 	margin-right: 20px;
 `;
 
 const CartButton = styled.button`
-	color: purple;
+	color: #333;
 	background-color: white;
 	padding: 10px;
 	padding-left: 40px;
 	padding-right: 40px;
 	border-radius: 5px;
-	border: 1px solid #5f0080;
+	border: 1px solid #333;
 `;
 
 const DetailDiv = styled.div`

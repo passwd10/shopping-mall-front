@@ -17,7 +17,7 @@ const InCart = styled.div`
 const CartHeader = styled.span`
     display: block;
     margin-top: 20px;
-    background-color: #F9F9F9;
+    background-color: #F0FFFF;
     color: #333;
     font-size: 40px;
     padding: 20px;
@@ -62,8 +62,7 @@ const DivBtn = styled.div`
 const PurchaseButton = styled.button`
     color: white;
     border-radius: 5px;
-    background-color: #EE5555;
-    border: 1px solid #EE5555;
+    background-color: #6495ED;
     margin-left: 30px;
     font-size: 20px;
     padding: 10px;
@@ -98,8 +97,8 @@ function ProductCartList() {
 	const [products, setProducts] = useState([]);
 
 	let productsIdArr = [];
-
 	myCartList.forEach(v => productsIdArr = [...productsIdArr, v.productId])
+	console.log('productsIdArr', productsIdArr)
 
 	const fetchProducts = () => {
 		return Promise.all(
@@ -108,8 +107,6 @@ function ProductCartList() {
 			return products.map(first);
 		});
 	}
-
-	const promise = fetchProducts();
 
 	const deleteList = id => {
 		deleteCart(id).then(v => setMyCartList(v));
@@ -122,11 +119,11 @@ function ProductCartList() {
 	}
 
 	useEffect(() => {
-		getUserInfo().then(v => setMyCartList(v[0].cartList))
+		getUserInfo().then(v => setMyCartList(v.cartList))
 	}, [])
 
 	useEffect(() => {
-		promise.then(product => {
+		fetchProducts().then(product => {
 			setProducts(product);
 		})
 	}, [myCartList])

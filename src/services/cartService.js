@@ -5,6 +5,7 @@ import SERVER_URL from './config';
 const URL = SERVER_URL + '/cartList';
 
 const getCarts = async () => {
+  console.log('?')
   const { data } = await axios.get(URL);
   return data;
 };
