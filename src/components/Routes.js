@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
 } from 'react-router-dom';
 
 import Home from '../pages/Home';
@@ -19,6 +20,7 @@ import MyPage from '../pages/MyPage';
 import SignUp from '../pages/SignUp';
 import UserInfo from '../pages/UserInfo';
 import Footer from '../components/Footer';
+import NotFound from '../components/NotFound';
 
 function Routes() {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -62,9 +64,12 @@ function Routes() {
             <UserInfo />
             <MyPage />
           </Route>
-          <Route path='/'>
+          <Route exact path='/'>
             <Home />
             <ProductList />
+          </Route>
+          <Route>
+            <NotFound />
           </Route>
         </Switch>
         <Footer />
