@@ -64,6 +64,7 @@ function SignUp() {
     validPhoneNum: false,
     validBirth: false,
   })
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setIsValid(isValidForm());
@@ -85,17 +86,17 @@ function SignUp() {
     event.stopPropagation();
 
     signUpUser(userInfo);
-    alert('회원가입이 완료되었습니다.')
+    setShowModal(true);
   };
 
   const second = (arr) => arr[1];
-
   const isTrue = (value) => value === true;
 
   return (
     <SignUpDiv>
+      {showModal === true && <Modal name={userInfo.name} userId={userInfo.userId}/>}
       <SignUpHeader>회원가입</SignUpHeader>
-      <SignUpForm name="sign_up_form">
+      <SignUpForm>
         <CheckIdDuplicate
           userInfo={userInfo}
           onHandleChange={onHandleChange('userId')}
