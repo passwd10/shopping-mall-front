@@ -9,6 +9,7 @@ function CheckIdDuplicate({ onHandleChange, userInfo, onHandleValid }) {
   const checkDuplicate = async () => {
     try {
       const isDuplicate = await checkIdDuplicate(userInfo.userId);
+
       const message = isDuplicate === 1
         ? '중복된 아이디 입니다.'
         : '사용 가능한 아이디 입니다.';

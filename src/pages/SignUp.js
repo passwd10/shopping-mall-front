@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -8,6 +7,7 @@ import CheckPassword from '../components/CheckPassword';
 import PhoneNum from '../components/PhoneNum';
 import Birth from '../components/Birth';
 import UserName from '../components/UserName';
+import Modal from '../components/Modal';
 
 import { signUpUser } from '../services/signUpService';
 
@@ -43,6 +43,9 @@ const SignUpBtn = styled.input`
   font-size: 20px;
   width: 350px;
   height: 50px;
+  &: disabled {
+    background-color: gray;
+  }
 `;
 
 function SignUp() {
@@ -82,6 +85,7 @@ function SignUp() {
     event.stopPropagation();
 
     signUpUser(userInfo);
+    alert('회원가입이 완료되었습니다.')
   };
 
   const second = (arr) => arr[1];
