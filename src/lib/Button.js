@@ -7,13 +7,10 @@ const ModifyBtn = styled.button`
 `;
 
 export const OkBtn = styled.button`
-    background-color: #5f0080;
+    background-color: #6495ED;
     color: white;
-    padding: 10px;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 10px 80px;
     border-radius: 5px; 
-    border: 1px solid purple; 
     margin-right: 20px; 
 `;
 

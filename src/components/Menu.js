@@ -101,11 +101,6 @@ function Menu() {
           카테고리
           {showCategories &&
             <DropCategoryUl>
-              <DropCategoryLi>
-                <Link to="/product/new">
-                  상품 등록
-                </Link>
-              </DropCategoryLi>
               {productsCategoryArr.map((category, index) => (
                 <DropCategoryLi key={index}>
                   <MenuCategory categoryName={category.categoryName} categoryId={category.categoryId} />

@@ -27,15 +27,17 @@ function OrderInfo() {
     });
   }
 
-  const promise = fetchProducts();
+  const pay = () => {
+    alert('결제시스템을 준비중입니다')
+  }
 
   useEffect(() => {
-    getUserInfo().then(v => setMyCartList(v[0].cartList))
+    getUserInfo().then(v => setMyCartList(v.cartList))
   }, [])
 
   useEffect(() => {
     if (productId === '999') { // 장바구니에서 불러오기
-      promise.then(product => {
+      fetchProducts().then(product => {
         setProducts(product);
       })
     } else {
@@ -93,7 +95,7 @@ function OrderInfo() {
           </span>
         </div>
         <div style={{ textAlign: 'center', padding: '20px' }}>
-          <OkBtn>결제하기</OkBtn>
+          <OkBtn onClick={pay}>결제하기</OkBtn>
         </div>
       </div>
     </div>

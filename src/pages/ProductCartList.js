@@ -98,7 +98,6 @@ function ProductCartList() {
 
 	let productsIdArr = [];
 	myCartList.forEach(v => productsIdArr = [...productsIdArr, v.productId])
-	console.log('productsIdArr', productsIdArr)
 
 	const fetchProducts = () => {
 		return Promise.all(

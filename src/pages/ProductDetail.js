@@ -76,8 +76,8 @@ function ProductDetail() {
 
 	const linkToPurchase = `/order/purchaseRequest/${productId}`;
 	const linkToLogin = `/user/login`;
-	const link = document.cookie.length === 0 ? linkToLogin : linkToPurchase;
-
+	const link = localStorage.getItem('isLogin') === 'true' ? linkToPurchase : linkToLogin;
+	
 	const fetchMyApi = async () => {
 		try {
 			const saveData = await getProducts();

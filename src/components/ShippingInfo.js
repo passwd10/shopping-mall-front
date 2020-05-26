@@ -9,13 +9,13 @@ function ShippingInfo() {
 
   useEffect(() => {
     (async () =>
-      await getUserInfo().then((v) => setName(v[0].name))
+      await getUserInfo().then((v) => setName(v.name))
     )();
   }, [])
 
   useEffect(() => {
     (async () =>
-      await getUserInfo().then(v => setPhoneNum(v[0].phoneNum))
+      await getUserInfo().then(v => setPhoneNum(v.phoneNum))
     )();
   }, [])
 

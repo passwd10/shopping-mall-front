@@ -10,7 +10,7 @@ const DivTitle = styled.div`
 `;
 
 const DivLi = styled.div`
-  font-size: 13px;
+  font-size: 16px;
   padding-top: 2px;
   padding-bottom: 2px;
 `;
@@ -18,8 +18,8 @@ const DivLi = styled.div`
 const MyPageDiv = styled.div`
 	display: flex;
 	position: fixed;
-	top: 40%;
-	margin-left: 50px;
+	top: 45%;
+	left: 10%;
 	flex-direction: column;
   background-color: #F0FFFF;
   padding: 10px;
@@ -35,12 +35,11 @@ function MyPage() {
 				<DivTitle>
 					My 쇼핑
 						</DivTitle>
-				<DivLi>
-					주문목록/배송조회
+				<Link to="/product/new">
+					<DivLi>
+						상품 등록
 						</DivLi>
-				<DivLi>
-					취소/반품/교환/환불내역
-						</DivLi>
+				</Link>
 			</div>
 			<div style={{ paddingBottom: '20px' }}>
 				<DivTitle>
@@ -51,9 +50,6 @@ function MyPage() {
 						개인정보확인/수정
 							</DivLi>
 				</Link>
-				<DivLi>
-					배송지 관리
-						</DivLi>
 			</div>
 		</MyPageDiv>
 	)
