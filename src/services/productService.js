@@ -14,10 +14,4 @@ const getProduct = async (id) => {
   return data;
 }
 
-const addProduct = async (productInfo) => {
-  console.log('productInfo', productInfo);
-  const { data } = await axios.post(URL, productInfo);
-  return data;
-}
-
-export { getProducts, addProduct, getProduct };
+export { getProducts, getProduct };

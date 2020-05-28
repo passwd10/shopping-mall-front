@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 import ModifyDivGrid, { ModifyCategory, ModifyInfo, BasicForm } from '../lib/Div';
 import { OkBtn, CancelBtn } from '../lib/Button';
-import { addProduct } from '../services/productService';
-import { uploadImg } from '../services/uploadService';
+import { uploadFile } from '../services/uploadService';
 
 function ProductNew() {
   const [title, setTitle] = useState('');
@@ -29,14 +27,16 @@ function ProductNew() {
       price
     }
 
-    addProduct(newProduct);
-
     const formData = new FormData();
     formData.append('img', img);
-    for (var key of formData.entries()) {
-      console.log(key);
+    formData.append('productInfo', JSON.stringify(newProduct));
+    if (await uploadFile(formData) === 'Success upload img') {
+      alert('상품을 등록했습니다')
+      window.location = '/';
+    } else {
+      alert('상품 등록에 실패했습니다')
+      window.location = '/';
     }
-    uploadImg(formData);
   };
 
   const onCategoryChange = (event) => {
@@ -47,7 +47,6 @@ function ProductNew() {
   const onChangeFile = (event) => {
     if (event.target.files != null && event.target.files.length > 0) {
       setFileName(event.target.files[0].name);
-      console.log('event.target.files[0]', event.target.files[0]);
       setImg(event.target.files[0]);
     }
   };

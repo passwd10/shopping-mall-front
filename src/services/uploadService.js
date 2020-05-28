@@ -4,15 +4,15 @@ import { API_SERVER_URL } from './config';
 
 const URL = API_SERVER_URL + '/upload';
 
-const uploadImg = async (imgInfo) => {
-  console.log('imgInfo', imgInfo);
-  
-  const { data } = await axios.post(URL + '/img', imgInfo, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    },
-  });
-  return data;
+export const uploadFile = async (formData) => {
+  try {
+    const { data } = await axios.post(URL + '/img', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+    });
+    return data;      
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-export { uploadImg };
