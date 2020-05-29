@@ -12,6 +12,9 @@ export const OkBtn = styled.button`
     padding: 10px 80px;
     border-radius: 5px; 
     margin-right: 20px; 
+    &: disabled {
+        background-color: gray;
+    }
 `;
 
 export const CancelBtn = styled.button`
