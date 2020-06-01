@@ -25,7 +25,7 @@ module.exports = {
         hot: true,
         proxy: [{
             context: ['/login', '/session-content', '/cartList'],
-            target: 'http://localhost:3000',
+            target: 'http://ec2-3-34-137-176.ap-northeast-2.compute.amazonaws.com:3000',
             secure: false,
             changeOrigin: true,
         }]
