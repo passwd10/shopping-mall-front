@@ -31,7 +31,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "infinite-react-carousel": "^1.2.4",
     "nuka-carousel": "^4.5.13",
